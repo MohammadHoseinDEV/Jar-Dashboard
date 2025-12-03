@@ -1,0 +1,25 @@
+/* برای استفاده از متن */
+@font-face {
+  font-family: "IRANSans";
+  src: url("/src/assets/fonts/IranianSans.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BYekan";
+  src: url("/src/assets/fonts/BYekan+.ttf") format("truetype");
+}
+/* برای استفاده از دکمه ها در سایت */
+@font-face {
+  font-family: "SamimBold";
+  src: url("/src/assets/fonts/Samim-Bold-FD.ttf") format("truetype");
+}
+/* برای استفاده متن */
+@font-face {
+  font-family: "Samim";
+  src: url("/src/assets/fonts/Samim-FD.ttf") format("truetype");
+}
+/* برای استفاده متن */
+@font-face {
+  font-family: "VazirLight";
+  src: url("/src/assets/fonts/Vazir-Light-FD-WOL.ttf") format("truetype");
+}

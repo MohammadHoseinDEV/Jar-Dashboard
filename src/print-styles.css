@@ -1,0 +1,34 @@
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 2mm;
+  }
+
+  /* مخفی کردن همه چیز */
+  body > * {
+    display: none !important;
+  }
+
+  /* نمایش فقط wrapper فرم */
+  body > *:has(#form-a4-portrait) {
+    display: block !important;
+  }
+
+  #form-a4-portrait {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    transform: none !important;
+    scale: 1 !important;
+    position: static !important;
+    box-sizing: border-box !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

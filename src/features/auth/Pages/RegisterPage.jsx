@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
-import { data, Link, useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { lazy, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { logout, registerUser } from "../Slice/authSlice";
+import { logout, registerUser } from '../Slice/authSlice';
 
-import jalaali from "jalaali-js";
+import jalaali from 'jalaali-js';
 
-import RegisterPageJsx from "../components/RegisterPageJsx";
-import { validationInputsRegisterPage } from "../../../utils/helper";
-import { toast } from "react-toastify";
+const RegisterPageJsx = lazy(() => import('../components/RegisterPageJsx'));
+import { validationInputsRegisterPage } from '../../../utils/helper';
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    insuranceCode: "",
-    birthDate: "",
-    personnelCode: "",
-    password: "",
-    repeatPassword: "",
-    mobileNumber: "",
+    firstName: '',
+    lastName: '',
+    insuranceCode: '',
+    birthDate: '',
+    personnelCode: '',
+    password: '',
+    repeatPassword: '',
+    mobileNumber: '',
+    gender: 0,
   });
 
-  const convertToShamsi = (shamsiDateObject) => {
-    if (!shamsiDateObject) return null;
+  const convertJalaliToDateOnly = (jalali) => {
+    if (!jalali) return null;
 
-    const jy = shamsiDateObject.year;
-    const jm = shamsiDateObject.month.number;
-    const jd = shamsiDateObject.day;
+    const { gy, gm, gd } = jalaali.toGregorian(
+      jalali.year,
+      jalali.month,
+      jalali.day
+    );
 
-    const { gy, gm, gd } = jalaali.toGregorian(jy, jm, jd);
-    const date = new Date(gy, gm - 1, gd);
-    return date.toISOString();
+    return `${gy}-${String(gm).padStart(2, '0')}-${String(gd).padStart(2, '0')}`;
   };
 
   const dispatch = useDispatch();
@@ -42,31 +42,33 @@ function RegisterPage() {
     event.preventDefault();
 
     const Regex = validationInputsRegisterPage(formData);
-
     if (!Regex) return null;
 
-    const hireISO = new Date().toISOString();
+    const birthDate = convertJalaliToDateOnly(formData.birthDate);
 
-    const isoBirthDate = convertToShamsi(formData.birthDate);
+    const hireDate = new Date().toISOString().split('T')[0];
 
     const data = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       insuranceCode: formData.insuranceCode,
-      birthDate: isoBirthDate,
+      birthDate: formData.birthDate,
       personnelCode: formData.personnelCode,
       password: formData.password,
       mobileNumber: formData.mobileNumber,
-      faceCode: "",
-      hireDate: hireISO,
-      homePhoneNumber: "",
+      faceCode: '',
+      hireDate: formData.hireDate,
+      homePhoneNumber: '',
+      gender: formData.gender,
     };
 
-    const result = dispatch(registerUser(data));
+    dispatch(registerUser(formData));
   };
+
   useEffect(() => {
-    if (token) navigate("/dashboard");
-    toast.success("با موفقیت وارد شدید");
+    if (token) {
+      navigate('/dashboard');
+    }
   }, [token, navigate]);
 
   return (
@@ -74,6 +76,7 @@ function RegisterPage() {
       submitHandler={submitHandler}
       formData={formData}
       setFormData={setFormData}
+      loading={loading}
     />
   );
 }

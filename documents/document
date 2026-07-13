@@ -1,0 +1,7 @@
+// برای تبدیل تاریخ شمسی به میلادی برای ارسال به API
+// function convertJalaliToGregorian(date) {
+//   const g = toGregorian(date.year, date.month, date.day);
+
+//   return `${g.gy}-${String(g.gm).padStart(2, "0")}-${String(g.gd).padStart(2, "0")}`;
+// }
+// -------------------------------------------

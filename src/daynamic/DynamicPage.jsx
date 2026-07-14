@@ -109,6 +109,10 @@ const InternalDesignPhasePlanning = lazy(
   () =>
     import('../features/mold-design/Pages/internalDesign/InternalDesignPhasePlanning')
 );
+const DesignPhasePlanning = lazy(
+  () =>
+    import('../features/mold-design/Pages/designPhasePlanning/DesignPhasePlanning')
+);
 
 const pagesMap = {
   'admin-menus': AdminMenus,
@@ -153,6 +157,7 @@ const pagesMap = {
   'mold-drawing-verification-form': MoldDarwingForm,
   'product-weight-standard-form': ProductWeightStandardForm,
   'internal-design-phase-planning': InternalDesignPhasePlanning,
+  'design-phase-planning': DesignPhasePlanning,
 };
 
 export default function DynamicPage() {

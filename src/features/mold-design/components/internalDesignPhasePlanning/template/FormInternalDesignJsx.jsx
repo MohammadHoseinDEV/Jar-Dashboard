@@ -7,7 +7,6 @@ import { FcCheckmark } from 'react-icons/fc';
 function FormInternalDesignjsx({ selectedInternal }) {
   return (
     <div>
-      {' '}
       <div
         className="border bg-white text-black"
         style={{ width: '148mm', minHeight: '210mm' }}
@@ -55,137 +54,99 @@ function FormInternalDesignjsx({ selectedInternal }) {
             </span>
           </p>
         </div>
-        <div className="flex justify-around border-b text-[12px]">
+        <div className="flex items-center justify-around border-b py-1 text-[9px]">
           <p>
-            <span className="font-semibold">نام محصول / کدنمونه :</span>
-            <span className="font-[AvenirLTProMedium] text-[10px]">
+            <span className="font-bold">نام محصول / کد نمونه :</span>
+            <span className="font-[AvenirLTProHeavy]">
               {selectedInternal?.productNameOrSampleCode}
             </span>
           </p>
           <p>
-            <span className="font-semibold">تاریخ شروع برنامه ریزی شده :</span>
-            <span className="font-[AvenirLTProMedium] text-[10px]">
+            <span className="font-bold">تاریخ شروع برنامه ریزی شده :</span>
+            <span className="font-[AvenirLTProHeavy]">
               {toShamsi(selectedInternal?.plannedStartDate)}
             </span>
           </p>
           <p>
-            <span className="font-semibold">کل زمان پیش بینی :</span>
-            <span className="font-[AvenirLTProMedium] text-[10px]">
+            <span className="font-bold">کل زمان پیش بینی :</span>
+            <span className="font-[AvenirLTProHeavy]">
               {selectedInternal?.estimatedTotalHours}
             </span>
           </p>
         </div>
         <div>
-          <table className="w-full">
-            <thead className="h-25">
-              <tr className="border-b">
-                <th className="-rotate-90 border-l text-[12px]">ردیف</th>
-                <th className="border-l text-[15px]">فازهای طراحی</th>
-                <th className="-rotate-90 border-l text-[10px]">تولید</th>
-                <th className="-rotate-90 border-l text-[9px] whitespace-nowrap">
-                  مسئول طراحی
-                </th>
-                <th className="-rotate-90 border-l text-[9px] whitespace-nowrap">
-                  دفتر تهران طراحی
-                </th>
-                <th className="w-13 -rotate-90 border-l text-[9px]">
-                  کنترل کیفیت و بسته بندی
-                </th>
-                <th className="-rotate-90 border-l text-[12px]">تراشکاری</th>
-                <th className="-rotate-90 border-l text-[9px]">
-                  <span className="whitespace-nowrap">کارتن سازی</span>
-                </th>
-                <th className="-rotate-90 border-l text-[9px]">فروش</th>
-                <th className="-rotate-90 text-[9px] whitespace-nowrap">
-                  مدیر کارخانه
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {selectedInternal?.items?.map((s) => (
-                <tr key={s.id} className="">
-                  <td className="border-b border-l text-center font-[AvenirLTProMedium] text-[10px]">
-                    {s.rowNumber}
-                  </td>
-                  <td className="border-b border-l py-1 text-center text-[10px]">
-                    {s.designPhase}
-                  </td>
-                  <td className="border-b border-l">
-                    {s.production === true ? (
-                      <p className="flex items-center justify-center">
-                        <FcCheckmark />
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td className="border-b border-l">
-                    {s.designManager === true ? (
-                      <p className="flex items-center justify-center">
-                        <FcCheckmark />
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td className="border-b border-l">
-                    {s.tehranDesignOffice === true ? (
-                      <p className="flex items-center justify-center">
-                        <FcCheckmark />
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td className="border-b border-l">
-                    {s.qualityControlPackaging === true ? (
-                      <p className="flex items-center justify-center">
-                        <FcCheckmark />
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td className="border-b border-l">
-                    {s.machining === true ? (
-                      <p className="flex items-center justify-center">
-                        <FcCheckmark />
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td className="border-b border-l">
-                    {s.cartonmaking === true ? (
-                      <p className="flex items-center justify-center">
-                        <FcCheckmark />
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td className="border-b border-l">
-                    {s.sales === true ? (
-                      <p className="flex items-center justify-center">
-                        <FcCheckmark />
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td className="border-b">
-                    {s.factoryManager === true ? (
-                      <p className="flex items-center justify-center">
-                        <FcCheckmark />
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="grid grid-cols-[6%_50%_5%_5%_5%_9%_5%_5%_5%_5%] bg-[#D9D9D9] text-center text-[10px]">
+            <div className="flex min-h-[70px] items-center justify-center border-b border-black">
+              <span className="-rotate-90 whitespace-nowrap">ردیف</span>
+            </div>
+            <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+              فازهای طراحی
+            </div>
+            <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
+              <span className="-rotate-90 whitespace-nowrap">تولید</span>
+            </div>
+            <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
+              <span className="-rotate-90 whitespace-nowrap">مسئول طراحی</span>
+            </div>
+            <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black text-[9px]">
+              <span className="-rotate-90 whitespace-nowrap">
+                دفتر تهران طراحی
+              </span>
+            </div>
+            <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black text-[9px]">
+              <p className="-rotate-90">کنترل کیفیت و بسته بندی </p>
+            </div>
+            <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
+              <span className="-rotate-90 whitespace-nowrap">تراشکاری</span>
+            </div>
+            <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
+              <span className="-rotate-90 whitespace-nowrap">کارتن سازی</span>
+            </div>
+            <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
+              <span className="-rotate-90 whitespace-nowrap">فروش</span>
+            </div>
+            <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
+              <span className="-rotate-90 whitespace-nowrap">مدیر کارخانه</span>
+            </div>
+          </div>
+
+          {selectedInternal?.items?.map((s) => (
+            <div
+              key={s.id}
+              className="grid grid-cols-[6%_50%_5%_5%_5%_9%_5%_5%_5%_5%] text-center text-[10px]"
+            >
+              <div className="flex items-center justify-center border-b border-black py-2 font-[AvenirLTProHeavy]">
+                {s.rowNumber}
+              </div>
+              <div className="border-r border-b border-black px-1 py-1 text-center">
+                {s.designPhase}
+              </div>
+              <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+                {s.production ? <FcCheckmark /> : ''}
+              </div>
+              <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+                {s.designManager ? <FcCheckmark /> : ''}
+              </div>
+              <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+                {s.tehranDesignOffice ? <FcCheckmark /> : ''}
+              </div>
+              <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+                {s.qualityControlPackaging ? <FcCheckmark /> : ''}
+              </div>
+              <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+                {s.machining ? <FcCheckmark /> : ''}
+              </div>
+              <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+                {s.cartonmaking ? <FcCheckmark /> : ''}
+              </div>
+              <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+                {s.sales ? <FcCheckmark /> : ''}
+              </div>
+              <div className="flex items-center justify-center border-r border-b border-black text-[15px]">
+                {s.factoryManager ? <FcCheckmark /> : ''}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="flex items-center justify-center space-x-1 pt-2 text-[13px]">
           <p className="pr-1 font-bold">

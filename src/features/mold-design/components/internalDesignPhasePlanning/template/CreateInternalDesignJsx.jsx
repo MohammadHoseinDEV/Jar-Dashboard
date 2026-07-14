@@ -94,7 +94,7 @@ function CreateInternalDesignJsx({
           </label>
         </div>
         <p className="my-2 border-b-2 border-white/30"></p>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <label htmlFor="productNameOrSampleCode" className="5xl:text-[30px]">
             نام محصول
             <Combobox
@@ -237,7 +237,7 @@ function CreateInternalDesignJsx({
                 className="mt-1 rounded-xl bg-white/10 p-3 font-[Samim] text-white outline-none"
               />
             </label>
-            <div className="grid grid-cols-8 gap-4">
+            <div className="flex items-center justify-around gap-4">
               <label
                 onClick={() =>
                   handleItemChange(index, 'production', !item.production)

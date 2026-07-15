@@ -27,6 +27,7 @@ function EditInternalDesignJsx({
   selectedProducts,
   handleItemChange,
 }) {
+  
   return (
     <div>
       <div className="flex shrink-0 items-center justify-between">

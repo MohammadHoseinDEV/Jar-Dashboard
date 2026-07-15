@@ -58,3 +58,25 @@ export const useCreateDesignPhasePlanning = () => {
   });
   return createReport;
 };
+
+export const useUpdateDesignPhasePlanning = () => {
+  const { token } = useSelector((state) => state.auth);
+  const queryClient = useQueryClient();
+
+  const updateReport = useMutation({
+    mutationFn: async ({ id, form }) => {
+      const res = await axios.put(`${BASE_API}/${id}`, form, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return res.data;
+    },
+    onSuccess: () => {
+      toast.success('فرم با موفقیت ویرایش شد');
+      queryClient.invalidateQueries({ queryKey: ['phase', token] });
+    },
+    onError: (e) => {
+      toast.error(e.response.data.message || 'خطا در ویرایش فرم');
+    },
+  });
+  return updateReport;
+};

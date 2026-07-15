@@ -6,6 +6,8 @@ import { useGetDesignPhasePlanning } from '../../Api/designPhasePlanning';
 import { HashLoader } from 'react-spinners';
 import CreateDesignPhasePlanning from '../../components/designPhasePlanning/module/CreateDesignPhasePlanning';
 import Pagination from '../../../../pagination/Pagination';
+import EditDesignPhasePlanning from '../../components/designPhasePlanning/module/EditDesignPhasePlanning';
+import TableReport from '../../components/designPhasePlanning/template/TableReport';
 
 function DesignPhasePlanning() {
   const { menus: userMenus } = useSelector((s) => s.auth);
@@ -77,7 +79,17 @@ function DesignPhasePlanning() {
           </div>
         ) : (
           <div className="no-scrollbar 5xl:mt-5 flex min-h-0 w-full overflow-x-hidden overflow-y-auto">
-            <div className="mx-3 w-full max-md:hidden">Table</div>
+            <div className="mx-3 w-full max-md:hidden">
+              <TableReport
+                phase={phase}
+                openEdit={openEdit}
+                canEdit={canEdit}
+                canDelete={canDelete}
+                askDelete={askDelete}
+                setOpenFormReport={setOpenForm}
+                setSelectedReport={setSelectedDesign}
+              />
+            </div>
           </div>
         )}
         <div className={`w-full shrink-0`}>
@@ -87,6 +99,12 @@ function DesignPhasePlanning() {
       <CreateDesignPhasePlanning
         openCreateModal={openCreateModal}
         setOpenCreateModal={setOpenCreateModal}
+      />
+      <EditDesignPhasePlanning
+        openEditModal={openEditModal}
+        setOpenEditModal={setOpenEditModal}
+        selectedDesign={selectedDesign}
+        setSelectedDesign={setSelectedDesign}
       />
     </div>
   );

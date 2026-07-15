@@ -6,18 +6,23 @@ import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 
-function CreateDesignPhasePlanningJsx({
+function EditDesignPhasePlanningJsx({
   closeHandler,
-  handleItemChange,
   submitHandler,
   form,
+  selectedDesign,
+  handleItemChange,
   setForm,
 }) {
+  console.log(selectedDesign);
   return (
     <div>
       <div className="flex shrink-0 items-center justify-between">
-        <p className="5xl:text-[30px] pr-1.5 font-[SamimBold] text-[20px] max-2xl:text-[15px]">
-          ایجاد فرم جدید
+        <p className="5xl:text-[30px] space-x-1 pr-1.5 text-[20px] max-2xl:text-[15px]">
+          <span>ویرایش فرم</span>
+          <span className="font-[AvenirLTProMedium]">
+            {selectedDesign?.productNameOrSampleCode}
+          </span>
         </p>
         <button
           onClick={closeHandler}
@@ -55,6 +60,7 @@ function CreateDesignPhasePlanningJsx({
                       : '',
                   })
                 }
+                value={form.startTime ? new Date(form.startTime) : ''}
                 className="5xl:scale-125"
                 inputClass="rounded-xl w-full 5xl:text-[25px] max-2xl:text-[14px]  bg-white/10 p-3 my-2 font-[Samim] text-[18px] text-white outline-none"
               />
@@ -76,6 +82,7 @@ function CreateDesignPhasePlanningJsx({
                       : '',
                   })
                 }
+                value={form.endTime ? new Date(form.endTime) : ''}
                 className="5xl:scale-125"
                 inputClass="rounded-xl w-full 5xl:text-[25px] max-2xl:text-[14px]  bg-white/10 p-3 my-2 font-[Samim] text-[18px] text-white outline-none"
               />
@@ -212,4 +219,4 @@ function CreateDesignPhasePlanningJsx({
   );
 }
 
-export default CreateDesignPhasePlanningJsx;
+export default EditDesignPhasePlanningJsx;

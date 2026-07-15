@@ -126,6 +126,7 @@ function InternalDesignPhasePlanning() {
                 setSelectedReport={setSelectedInternal}
               />
             </div>
+            
           </div>
         )}
         <div className={`w-full shrink-0`}>

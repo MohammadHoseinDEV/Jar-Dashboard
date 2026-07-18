@@ -80,3 +80,25 @@ export const useUpdateDesignPhasePlanning = () => {
   });
   return updateReport;
 };
+
+export const useDeleteDesignPhasePlanning = () => {
+  const { token } = useSelector((state) => state.auth);
+  const queryClient = useQueryClient();
+
+  const deleteReport = useMutation({
+    mutationFn: async (id) => {
+      const res = await axios.delete(`${BASE_API}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return res.data;
+    },
+    onSuccess: () => {
+      toast.success('فرم با موفقیت حذف شد');
+      queryClient.invalidateQueries({ queryKey: ['phase', token] });
+    },
+    onError: (e) => {
+      toast.error(e.response.data.message || 'خطا در حذف فرم');
+    },
+  });
+  return deleteReport;
+};

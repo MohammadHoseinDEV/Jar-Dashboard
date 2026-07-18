@@ -14,7 +14,6 @@ function EditDesignPhasePlanningJsx({
   handleItemChange,
   setForm,
 }) {
-  console.log(selectedDesign);
   return (
     <div>
       <div className="flex shrink-0 items-center justify-between">
@@ -38,7 +37,7 @@ function EditDesignPhasePlanningJsx({
       </div>
       <form
         onSubmit={submitHandler}
-        id="phase"
+        id="phases"
         className="no-scrollbar flex max-h-[70vh] flex-col overflow-x-hidden overflow-y-auto max-md:max-h-[70vh]"
       >
         <div>
@@ -209,7 +208,7 @@ function EditDesignPhasePlanningJsx({
       <div className="flex items-center justify-end">
         <button
           type="submit"
-          form="phase"
+          form="phases"
           className="5xl:text-[25px] cursor-pointer rounded-xl bg-linear-to-tl from-green-900 to-green-500 px-4 py-3 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-[1.01]"
         >
           ثبت گزارش

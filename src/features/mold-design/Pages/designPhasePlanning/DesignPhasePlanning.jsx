@@ -8,6 +8,7 @@ import CreateDesignPhasePlanning from '../../components/designPhasePlanning/modu
 import Pagination from '../../../../pagination/Pagination';
 import EditDesignPhasePlanning from '../../components/designPhasePlanning/module/EditDesignPhasePlanning';
 import TableReport from '../../components/designPhasePlanning/template/TableReport';
+import DeleteDesignPhasePlanning from '../../components/designPhasePlanning/module/DeleteDesignPhasePlanning';
 
 function DesignPhasePlanning() {
   const { menus: userMenus } = useSelector((s) => s.auth);
@@ -105,6 +106,11 @@ function DesignPhasePlanning() {
         setOpenEditModal={setOpenEditModal}
         selectedDesign={selectedDesign}
         setSelectedDesign={setSelectedDesign}
+      />
+      <DeleteDesignPhasePlanning
+        openDeleteModal={openDeleteModal}
+        setOpenDeleteModal={setOpenDeleteModal}
+        selectedDesign={selectedDesign}
       />
     </div>
   );

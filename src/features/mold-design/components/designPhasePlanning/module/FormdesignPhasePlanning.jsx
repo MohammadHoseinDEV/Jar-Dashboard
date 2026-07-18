@@ -1,19 +1,16 @@
 import React from 'react';
+import FormDesignPhasePlanningJsx from '../template/FormDesignPhasePlanningJsx';
 
-import { FcCheckmark } from 'react-icons/fc';
-import FormInternalDesignjsx from '../template/FormInternalDesignjsx';
-
-function FormDesignIntenal({
+function FormdesignPhasePlanning({
   openForm,
   setOpenForm,
-  selectedInternal,
-  setSelectedInternal,
+  selectedDesign,
+  setSelectedDesign,
 }) {
   const closeHandler = () => {
     setOpenForm(false);
-    setSelectedInternal(null);
+    setSelectedDesign(null);
   };
-  
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${
@@ -33,10 +30,10 @@ function FormDesignIntenal({
             : '-translate-y-10 scale-0 opacity-0'
         }`}
       >
-        <FormInternalDesignjsx selectedInternal={selectedInternal} />
+        <FormDesignPhasePlanningJsx selectedDesign={selectedDesign} />
       </div>
     </div>
   );
 }
 
-export default FormDesignIntenal;
+export default FormdesignPhasePlanning;

@@ -159,8 +159,10 @@ function CreateMoldDarwingJsx({
           </label>
         </div>
         <p className="my-2 border-b-2 border-white/30"></p>
-        <div className="flex items-center gap-4 max-md:grid-cols-1">
-          <p>تصدیق نقشه ها و متعاقات نیاز به ساخت نمونه</p>
+        <div className="flex items-center gap-4 max-md:grid max-md:grid-cols-1">
+          <p className="max-md:text-center">
+            تصدیق نقشه ها و متعاقات نیاز به ساخت نمونه
+          </p>
 
           <label
             className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-5 py-1 transition-all select-none max-2xl:text-[14px] ${
@@ -220,7 +222,7 @@ function CreateMoldDarwingJsx({
           />
         </div>
         <p className="my-2 border-b-2 border-white/30"></p>
-        <div className="flex items-center gap-4 max-md:grid-cols-1">
+        <div className="flex items-center gap-4 max-md:grid max-md:grid-cols-1 max-md:text-center">
           <p>
             با توجه به کنترل های انجام شده مطابق داده های به طراحی نقشه ها مورد
             تایید
@@ -271,7 +273,7 @@ function CreateMoldDarwingJsx({
         <p className="my-2 border-t-2 border-white/30 py-2">
           کنترل های انجام شده
         </p>
-        <div className="flex items-center justify-around space-y-5 max-md:grid-cols-1">
+        <div className="flex items-center justify-around space-y-5 max-md:grid max-md:grid-cols-1 max-md:text-center">
           <div className="flex items-center space-x-2 max-md:grid max-md:gap-3">
             <p className="5xl:text-[25px] max-2xl:text-[12px]">
               ران و ضخامت کف دیواره ها ( نقشه Layout )
@@ -414,7 +416,7 @@ function CreateMoldDarwingJsx({
             </label>
           </div>
         </div>
-        <div className="flex items-center justify-around space-y-5 max-md:grid-cols-1">
+        <div className="flex items-center justify-around space-y-5 max-md:grid max-md:grid-cols-1 max-md:text-center">
           <div className="flex items-center space-x-2 max-md:grid max-md:gap-3">
             <p className="5xl:text-[25px] max-2xl:text-[12px]">
               میزان shrinkage
@@ -557,7 +559,7 @@ function CreateMoldDarwingJsx({
             </label>
           </div>
         </div>
-        <div className="flex items-center justify-around space-y-5 max-md:grid-cols-1">
+        <div className="flex items-center justify-around space-y-5 max-md:grid max-md:grid-cols-1 max-md:text-center">
           <div className="flex items-center space-x-2 max-md:grid max-md:gap-3">
             <p className="5xl:text-[25px] max-2xl:text-[12px]">
               اینورت و H قالب
@@ -710,7 +712,7 @@ function CreateMoldDarwingJsx({
               [e.target.name]: e.target.value,
             }));
           }}
-          className="5xl:text-[25px] my-2 rounded-xl bg-white/10 p-3 text-white outline-none"
+          className="5xl:text-[25px] my-2 rounded-xl bg-white/10 p-3 text-white outline-none max-md:min-h-20"
         />
       </form>
       <div>

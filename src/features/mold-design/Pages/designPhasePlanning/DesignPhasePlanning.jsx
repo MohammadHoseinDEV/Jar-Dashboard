@@ -10,6 +10,7 @@ import EditDesignPhasePlanning from '../../components/designPhasePlanning/module
 import TableReport from '../../components/designPhasePlanning/template/TableReport';
 import DeleteDesignPhasePlanning from '../../components/designPhasePlanning/module/DeleteDesignPhasePlanning';
 import FormdesignPhasePlanning from '../../components/designPhasePlanning/module/FormdesignPhasePlanning';
+import MobilePage from '../../components/designPhasePlanning/template/MobilePage';
 
 function DesignPhasePlanning() {
   const { menus: userMenus } = useSelector((s) => s.auth);
@@ -92,6 +93,15 @@ function DesignPhasePlanning() {
                 setSelectedReport={setSelectedDesign}
               />
             </div>
+            <MobilePage
+              phase={phase}
+              openEdit={openEdit}
+              canEdit={canEdit}
+              canDelete={canDelete}
+              askDelete={askDelete}
+              setOpenFormReport={setOpenForm}
+              setSelectedReport={setSelectedDesign}
+            />
           </div>
         )}
         <div className={`w-full shrink-0`}>

@@ -49,13 +49,13 @@ function DeleteInternalDesign({
           </button>
         </div>
         <div>
-          <h4 className="pt-5 font-[SamimBold]">
-            آیا از حذف محصول
-            <span className="px-2 font-[AvenirLTProMedium]" dir="ltr">
+          <div className="flex flex-wrap items-center gap-x-1 text-start text-[14px]">
+            <span>آیا از حذف محصول</span>
+            <span className="font-[AvenirLTProMedium]">
               {selectedInternal?.productNameOrSampleCode}
             </span>
-            مطمئن هستید؟
-          </h4>
+            <span> مطمئن هستید؟</span>
+          </div>
           <div
             className="mt-6 flex justify-end gap-2"
             onClick={() => {

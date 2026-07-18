@@ -13,6 +13,7 @@ import CreateProductWeightStandard from '../../components/productWeightStandardF
 import EditProductionWeightStandard from '../../components/productWeightStandardForm/module/EditProductionWeightStandard';
 import DeleteProductionWeight from '../../components/productWeightStandardForm/module/DeleteProductionWeight';
 import FormProductionWeightStandard from '../../components/productWeightStandardForm/module/FormProductionWeightStandard';
+import MobilePage from '../../components/productWeightStandardForm/template/MobilePage';
 
 function ProductWeightStandardForm() {
   const { menus: userMenus } = useSelector((s) => s.auth);
@@ -161,7 +162,6 @@ function ProductWeightStandardForm() {
           setOpenFilterMobile={setOpenFilterMobile}
         />
 
-
         {isLoading ? (
           <div className="flex min-h-0 flex-1 flex-col items-center justify-center space-y-5">
             <HashLoader color="#ffffff" size={80} speedMultiplier={1.5} />
@@ -184,6 +184,18 @@ function ProductWeightStandardForm() {
                 setSelectedProductWeigth={setSelectedProductWeigth}
               />
             </div>
+            <MobilePage
+              filteredData={filteredData}
+              canEdit={canEdit}
+              profile={profile}
+              isDesignManager={isDesignManager}
+              isSuperAdmin={isSuperAdmin}
+              canDelete={canDelete}
+              askDelete={askDelete}
+              openEdit={openEdit}
+              setOpenForm={setOpenForm}
+              setSelectedProductWeigth={setSelectedProductWeigth}
+            />
           </div>
         )}
       </div>

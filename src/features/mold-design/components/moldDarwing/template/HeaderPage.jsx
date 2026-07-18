@@ -338,7 +338,7 @@ function HeaderPage({
             <p>فیلتر</p>
 
             {openFilterMobile && (
-              <div className="absolute top-1 left-11 flex h-45 w-65 flex-col justify-center space-y-2 overflow-auto rounded-[10px] border border-[#3a35a0] bg-linear-to-l from-[#201c66] to-[#1d1952] pr-1">
+              <div className="absolute top-1 left-11 flex w-65 flex-col justify-center space-y-2 overflow-auto rounded-[10px] border border-[#3a35a0] bg-linear-to-l from-[#201c66] to-[#1d1952] p-1">
                 <p
                   onClick={() => {
                     setFilterStatus('all');

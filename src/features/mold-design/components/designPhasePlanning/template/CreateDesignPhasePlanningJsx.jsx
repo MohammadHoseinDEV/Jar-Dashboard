@@ -37,7 +37,7 @@ function CreateDesignPhasePlanningJsx({
         className="no-scrollbar flex max-h-[70vh] flex-col overflow-x-hidden overflow-y-auto max-md:max-h-[70vh]"
       >
         <div>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 gap-5 max-md:grid max-md:grid-cols-1">
             <label htmlFor="startTime" className="flex flex-col">
               زمان شروع
               <DatePicker
@@ -96,7 +96,7 @@ function CreateDesignPhasePlanningJsx({
                   className="mt-1 w-full rounded-xl bg-white/10 p-3 font-[Samim] text-white outline-none"
                 />
               </label>
-              <div className="flex items-center justify-around gap-4">
+              <div className="flex items-center justify-around gap-4 max-md:grid max-md:grid-cols-1">
                 <label
                   htmlFor="production"
                   onClick={() =>

@@ -42,7 +42,7 @@ function HeaderPage({ openCreate, canCreate, search, setSearch, countReport }) {
             </p>
             <p className="5xl:text-[20px] space-x-1 text-[12px] max-2xl:text-[10px]">
               <span className="font-[SamimBold]">شماره ویرایش :</span>
-              <span className="font-[AvenirLTProMedium]">0</span>
+              <span className="font-[AvenirLTProMedium]">00</span>
             </p>
             <p className="5xl:text-[20px] space-x-1 text-[12px] max-2xl:text-[10px]">
               <span className="font-[SamimBold]">کد سند :</span>

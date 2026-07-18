@@ -49,7 +49,7 @@ function CreateInternalDesignJsx({
         id="internal"
         className="no-scrollbar flex h-[70vh] flex-col overflow-x-hidden overflow-y-auto max-md:max-h-[70vh]"
       >
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-5 max-md:grid max-md:grid-cols-1">
           <label htmlFor="startTime" className="flex flex-col">
             زمان شروع
             <DatePicker
@@ -94,7 +94,7 @@ function CreateInternalDesignJsx({
           </label>
         </div>
         <p className="my-2 border-b-2 border-white/30"></p>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 max-md:grid max-md:grid-cols-1">
           <label htmlFor="productNameOrSampleCode" className="5xl:text-[30px]">
             نام محصول
             <Combobox
@@ -199,7 +199,7 @@ function CreateInternalDesignJsx({
           </label>
           <label
             htmlFor="actualEndDate"
-            className="5xl:text-[30px] flex flex-col"
+            className="5xl:text-[30px] flex flex-col max-md:text-[14px]"
           >
             تاریخ پایان واقعی (صحه گذاری محصول)
             <DatePicker
@@ -237,7 +237,7 @@ function CreateInternalDesignJsx({
                 className="mt-1 rounded-xl bg-white/10 p-3 font-[Samim] text-white outline-none"
               />
             </label>
-            <div className="flex items-center justify-around gap-4">
+            <div className="flex items-center justify-around gap-4 max-md:grid max-md:grid-cols-1">
               <label
                 onClick={() =>
                   handleItemChange(index, 'production', !item.production)

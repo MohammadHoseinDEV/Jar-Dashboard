@@ -43,7 +43,7 @@ function HeaderPage({
               </span>
             </p>
             <p className="hidden w-3 opacity-0 max-md:block"></p>
-            <p className="5xl:text-[25px] font-[SamimBold] text-[20px] max-2xl:text-[13px] max-md:flex max-md:items-center max-md:justify-center max-md:text-[14px]">
+            <p className="5xl:text-[25px] font-[SamimBold] text-[20px] max-2xl:text-[13px] max-md:flex max-md:items-center max-md:justify-center max-md:text-center max-md:text-[14px]">
               فرم تعیین استاندارد وزنی محصول و انتخاب خطوط تولید
             </p>
             <p className="hidden max-md:block max-md:pt-1 max-md:text-[20px]">

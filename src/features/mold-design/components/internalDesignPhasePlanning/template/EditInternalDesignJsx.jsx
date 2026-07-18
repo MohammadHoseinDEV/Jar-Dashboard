@@ -27,7 +27,6 @@ function EditInternalDesignJsx({
   selectedProducts,
   handleItemChange,
 }) {
-  
   return (
     <div>
       <div className="flex shrink-0 items-center justify-between">
@@ -54,7 +53,7 @@ function EditInternalDesignJsx({
         id="internals"
         className="no-scrollbar flex h-[70vh] flex-col overflow-x-hidden overflow-y-auto max-md:max-h-[70vh]"
       >
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-5 max-md:grid max-md:grid-cols-1">
           <label htmlFor="startTime" className="flex flex-col">
             زمان شروع
             <DatePicker
@@ -101,7 +100,7 @@ function EditInternalDesignJsx({
           </label>
         </div>
         <p className="my-2 border-b-2 border-white/30"></p>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 max-md:grid max-md:grid-cols-1">
           <label htmlFor="productNameOrSampleCode" className="5xl:text-[30px]">
             نام محصول
             <Combobox
@@ -249,7 +248,7 @@ function EditInternalDesignJsx({
                 className="mt-1 rounded-xl bg-white/10 p-3 font-[Samim] text-white outline-none"
               />
             </label>
-            <div className="grid grid-cols-8 gap-4">
+            <div className="grid grid-cols-8 gap-4 max-md:grid max-md:grid-cols-1">
               <label
                 onClick={() =>
                   handleItemChange(index, 'production', !item.production)

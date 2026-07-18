@@ -1,15 +1,14 @@
 import React from 'react';
-
-import edit from '../../../../../assets/images/edit.png';
-import form from '../../../../../assets/images/form.png';
-import deleteIcon from '../../../../../assets/images/delete.png';
-
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
 import { IoTimeOutline } from 'react-icons/io5';
 import { toShamsi } from '../../../../../Time/date';
 import { HiHashtag } from 'react-icons/hi';
 
-function MobileMoldDarwing({
+import edit from '../../../../../assets/images/edit.png';
+import form from '../../../../../assets/images/form.png';
+import deleteIcon from '../../../../../assets/images/delete.png';
+
+function MobilePage({
   filteredData,
   canEdit,
   profile,
@@ -18,13 +17,11 @@ function MobileMoldDarwing({
   canDelete,
   openEdit,
   setOpenForm,
-  setOpenEditModal,
-  setSelectedMoldDarwing,
   askDelete,
+  setSelectedProductWeigth,
 }) {
   return (
     <div>
-      {/* Mobile design */}
       <div className="hidden max-md:block print:hidden">
         {filteredData?.map((e, index) => (
           <div
@@ -37,7 +34,7 @@ function MobileMoldDarwing({
                   <FiUser />
                 </p>
                 <p className="flex flex-col space-y-0.5">
-                  <span className="font-[AvenirLTProMedium] text-[11px] font-bold">
+                  <span className="font-[AvenirLTProMedium] text-[10px] font-bold">
                     {e?.productName}
                   </span>
                   <span className="font-[AvenirLTProMedium] text-[13px] text-white/60">
@@ -49,22 +46,35 @@ function MobileMoldDarwing({
                 {(() => {
                   if (e?.isFactoryManagerSigned === true) {
                     return (
-                      <p className="rounded-[10px] bg-[#1b4025]/50 p-1 text-[#3cbb30]">
+                      <p className="rounded-[10px] bg-[#1b4025]/50 py-1 text-[#3cbb30]">
                         تکمیل شده
+                      </p>
+                    );
+                  }
+                  if (e?.isProductionSupervisorSigned === false) {
+                    return (
+                      <p className="5xl:py-2 5xl:text-[20px] rounded-[5px] bg-[#262627]/70 p-1 text-[10px] text-[#f9e2af]">
+                        درانتظار امضاء تولید
+                      </p>
+                    );
+                  }
+                  if (e?.isProductionPlannerSigned === false) {
+                    return (
+                      <p className="5xl:py-2 5xl:text-[20px] rounded-[10px] border bg-[#262627]/70 py-1 text-[#f9e2af]">
+                        در انتظار امضاء برنامه ریزی
                       </p>
                     );
                   }
                   if (e?.isDesignerSigned === false) {
                     return (
-                      <p className="rounded-[10px] border bg-[#262627]/70 p-1 text-[#f9e2af] max-md:text-[9px]">
+                      <p className="5xl:py-2 5xl:text-[20px] rounded-[10px] border bg-[#262627]/70 py-1 text-[#f9e2af]">
                         درانتظار امضاء طراحی
                       </p>
                     );
                   }
-
                   if (e?.isFactoryManagerSigned === false) {
                     return (
-                      <p className="rounded-[10px] bg-[#262627]/70 p-1 text-[#f9e2af] max-md:text-[9px]">
+                      <p className="5xl:py-2 5xl:text-[20px] rounded-[10px] bg-[#262627]/70 py-1 text-[#f9e2af]">
                         درانتظار امضاء مدیریت
                       </p>
                     );
@@ -101,9 +111,9 @@ function MobileMoldDarwing({
                   <FiClock />
                 </p>
                 <p className="flex flex-col">
-                  <span className="text-white/50">امضاء سرپرست</span>
+                  <span className="text-white/50">امضاء مدیریت</span>
                   <span className="font-[AvenirLTProMedium]">
-                    {toShamsi(e?.supervisorSignedAt)}
+                    {toShamsi(e?.factoryManagerSignedAt)}
                   </span>
                 </p>
               </div>
@@ -138,7 +148,7 @@ function MobileMoldDarwing({
               <button
                 onClick={() => {
                   setOpenForm(true);
-                  setSelectedMoldDarwing(e);
+                  setSelectedProductWeigth(e);
                 }}
                 className="col-span-3 mb-2 flex cursor-pointer items-center justify-center rounded-[10px] bg-linear-to-bl from-white/30 to-white/70 p-1 px-7 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-106"
               >
@@ -163,4 +173,4 @@ function MobileMoldDarwing({
   );
 }
 
-export default MobileMoldDarwing;
+export default MobilePage;

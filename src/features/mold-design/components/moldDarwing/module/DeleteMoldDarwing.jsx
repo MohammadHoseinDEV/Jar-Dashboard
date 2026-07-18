@@ -50,17 +50,10 @@ function DeleteMoldDarwing({
           </button>
         </div>
         <div>
-          <h4 className="5xl:text-[25px] flex pt-5 font-[SamimBold]">
-            آیا از حذف فرم شماره
-            <span className="px-2 font-[AvenirLTProMedium]" dir="ltr">
-              {selectedMoldDarwing?.formNumber}
-            </span>
-            با کد محصول
-            <span className="px-2 font-[AvenirLTProMedium]">
-              {selectedMoldDarwing?.productCode}
-            </span>
-            مطمئن هستید؟
-          </h4>
+          <div className="5xl:text-[25px] flex items-center pt-5 font-[SamimBold] max-md:text-justify">
+            {`آیا از حذف فرم شماره ${selectedMoldDarwing?.formNumber} با کد محصول ${selectedMoldDarwing?.productCode} مطمئن هستید`}
+          </div>
+
           <div
             className="mt-6 flex justify-end gap-2"
             onClick={() => {

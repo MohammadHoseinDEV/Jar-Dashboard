@@ -109,7 +109,7 @@ function FormMoldDarwingJsx({
               )}
             </p>
           </div>
-          <div>
+          <div className="flex items-center">
             <p>امضاء مدیر کارخانه :</p>
             <p>
               {selectedSignFactoryManager ? (

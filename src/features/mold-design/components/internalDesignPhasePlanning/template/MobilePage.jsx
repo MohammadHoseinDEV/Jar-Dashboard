@@ -1,32 +1,27 @@
 import React from 'react';
-
-import edit from '../../../../../assets/images/edit.png';
-import form from '../../../../../assets/images/form.png';
-import deleteIcon from '../../../../../assets/images/delete.png';
-
 import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
 import { IoTimeOutline } from 'react-icons/io5';
 import { toShamsi } from '../../../../../Time/date';
 import { HiHashtag } from 'react-icons/hi';
 
-function MobileMoldDarwing({
-  filteredData,
-  canEdit,
-  profile,
-  isDesignManager,
-  isSuperAdmin,
-  canDelete,
+import edit from '../../../../../assets/images/edit.png';
+import deleteIcon from '../../../../../assets/images/delete.png';
+import form from '../../../../../assets/images/form.png';
+
+function MobilePage({
+  internal,
   openEdit,
-  setOpenForm,
-  setOpenEditModal,
-  setSelectedMoldDarwing,
+  canEdit,
+  canDelete,
   askDelete,
+  setOpenForm,
+  setSelectedReport,
 }) {
   return (
     <div>
       {/* Mobile design */}
       <div className="hidden max-md:block print:hidden">
-        {filteredData?.map((e, index) => (
+        {internal?.data?.items?.map((e, index) => (
           <div
             key={e.id}
             className="mx-2 my-2 rounded-[10px] border border-white/30"
@@ -38,52 +33,12 @@ function MobileMoldDarwing({
                 </p>
                 <p className="flex flex-col space-y-0.5">
                   <span className="font-[AvenirLTProMedium] text-[11px] font-bold">
-                    {e?.productName}
-                  </span>
-                  <span className="font-[AvenirLTProMedium] text-[13px] text-white/60">
-                    {e?.productCode}
+                    {e?.productNameOrSampleCode}
                   </span>
                 </p>
-              </div>
-              <div className="flex items-center">
-                {(() => {
-                  if (e?.isFactoryManagerSigned === true) {
-                    return (
-                      <p className="rounded-[10px] bg-[#1b4025]/50 p-1 text-[#3cbb30]">
-                        تکمیل شده
-                      </p>
-                    );
-                  }
-                  if (e?.isDesignerSigned === false) {
-                    return (
-                      <p className="rounded-[10px] border bg-[#262627]/70 p-1 text-[#f9e2af] max-md:text-[9px]">
-                        درانتظار امضاء طراحی
-                      </p>
-                    );
-                  }
-
-                  if (e?.isFactoryManagerSigned === false) {
-                    return (
-                      <p className="rounded-[10px] bg-[#262627]/70 p-1 text-[#f9e2af] max-md:text-[9px]">
-                        درانتظار امضاء مدیریت
-                      </p>
-                    );
-                  }
-                })()}
               </div>
             </div>
             <div className="mx-1 mb-2 grid grid-cols-2 gap-2">
-              <div className="flex items-center space-x-2">
-                <p className="text-[22px] text-white/50">
-                  <IoTimeOutline />
-                </p>
-                <p className="flex flex-col">
-                  <span className="text-white/50">کد محصول</span>
-                  <span className="font-[AvenirLTProMedium]">
-                    {e?.productCode}
-                  </span>
-                </p>
-              </div>
               <div className="flex items-center space-x-2">
                 <p className="text-[22px] text-white/50">
                   <FiCalendar />
@@ -95,26 +50,36 @@ function MobileMoldDarwing({
                   </span>
                 </p>
               </div>
-
               <div className="flex items-center space-x-2">
                 <p className="text-[22px] text-white/50">
                   <FiClock />
                 </p>
                 <p className="flex flex-col">
-                  <span className="text-white/50">امضاء سرپرست</span>
+                  <span className="text-white/50">زمان شروع</span>
                   <span className="font-[AvenirLTProMedium]">
-                    {toShamsi(e?.supervisorSignedAt)}
+                    {toShamsi(e?.startTime)}
                   </span>
                 </p>
               </div>
               <div className="flex items-center space-x-2">
                 <p className="text-[22px] text-white/50">
-                  <HiHashtag />
+                  <FiClock />
                 </p>
                 <p className="flex flex-col">
-                  <span className="text-white/50">شماره گزارش</span>
+                  <span className="text-white/50">زمان پایان</span>
                   <span className="font-[AvenirLTProMedium]">
-                    {e?.formNumber}
+                    {toShamsi(e?.endTime)}
+                  </span>
+                </p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <p className="text-[22px] text-white/50">
+                  <FiClock />
+                </p>
+                <p className="flex flex-col">
+                  <span className="text-white/50"> کل زمان پیش بینی</span>
+                  <span className="font-[AvenirLTProMedium]">
+                    {e?.estimatedTotalHours}
                   </span>
                 </p>
               </div>
@@ -123,11 +88,7 @@ function MobileMoldDarwing({
               <button
                 onClick={() => openEdit(e)}
                 className={`col-span-3 mb-2 flex cursor-pointer items-center justify-center rounded-[10px] p-1 font-[Samim] ${
-                  (canEdit &&
-                    profile?.data?.id === e?.createdBy &&
-                    e?.isFactoryManagerSigned === false) ||
-                  (canEdit && isDesignManager) ||
-                  isSuperAdmin
+                  canEdit
                     ? 'cursor-pointer bg-linear-to-bl from-green-500/10 to-green-800/50 transition-all delay-100 duration-150 ease-in-out hover:scale-106'
                     : 'hidden bg-white/5 opacity-50'
                 }`}
@@ -138,7 +99,7 @@ function MobileMoldDarwing({
               <button
                 onClick={() => {
                   setOpenForm(true);
-                  setSelectedMoldDarwing(e);
+                  setSelectedReport(e);
                 }}
                 className="col-span-3 mb-2 flex cursor-pointer items-center justify-center rounded-[10px] bg-linear-to-bl from-white/30 to-white/70 p-1 px-7 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-106"
               >
@@ -163,4 +124,4 @@ function MobileMoldDarwing({
   );
 }
 
-export default MobileMoldDarwing;
+export default MobilePage;

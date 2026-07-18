@@ -8,6 +8,7 @@ import {
 } from '../../Api/internalDesignPhasePlanning';
 import { HashLoader } from 'react-spinners';
 import FormDesignIntenal from '../../components/internalDesignPhasePlanning/module/FormDesignIntenal';
+import MobilePage from '../../components/internalDesignPhasePlanning/template/MobilePage';
 
 const HeaderPage = lazy(
   () =>
@@ -92,7 +93,6 @@ function InternalDesignPhasePlanning() {
   const countReport = internal?.data?.items?.length;
   const totalPages = internal?.data?.totalPages ?? 1;
 
-  
   return (
     <div className="h-screen overflow-hidden rounded-[15px] bg-[#0F090C]/30 text-white">
       <div className="flex h-full flex-col overflow-hidden rounded-[15px] bg-black/70">
@@ -126,7 +126,15 @@ function InternalDesignPhasePlanning() {
                 setSelectedReport={setSelectedInternal}
               />
             </div>
-            
+            <MobilePage
+              internal={internal}
+              openEdit={openEdit}
+              canEdit={canEdit}
+              canDelete={canDelete}
+              askDelete={askDelete}
+              setOpenForm={setOpenForm}
+              setSelectedReport={setSelectedInternal}
+            />
           </div>
         )}
         <div className={`w-full shrink-0`}>

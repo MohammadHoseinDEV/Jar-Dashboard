@@ -82,7 +82,7 @@ function EditDesignPhasePlanning({
             sales: e.sales,
             factoryManager: e.factoryManager,
           }))
-        : DesignPhase.map((d) => ({
+        : designPhase.map((d) => ({
             id: '',
             rowNumber: d.id,
             designPhase: d.name,

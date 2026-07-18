@@ -12,6 +12,7 @@ function TableDesignData({
   setOpenFormReport,
   setSelectedReport,
 }) {
+  
   return (
     <div>
       <table className="w-full border-separate border-spacing-y-0 max-md:hidden">

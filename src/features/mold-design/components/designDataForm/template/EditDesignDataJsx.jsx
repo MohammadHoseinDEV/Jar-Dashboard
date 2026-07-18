@@ -27,6 +27,7 @@ function EditDesignDataJsx({
   selectedProducts,
   selectedDesign,
 }) {
+  
   return (
     <>
       <div className="flex shrink-0 items-center justify-between">

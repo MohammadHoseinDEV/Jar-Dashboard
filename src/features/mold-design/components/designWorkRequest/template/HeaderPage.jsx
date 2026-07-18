@@ -1,32 +1,23 @@
 import React from 'react';
-import {
-  FaCheck,
-  FaClipboardList,
-  FaDownload,
-  FaExclamationCircle,
-  FaFilter,
-  FaPlus,
-} from 'react-icons/fa';
+import { FaCheck, FaClipboardList, FaDownload, FaFilter } from 'react-icons/fa';
 import { FaXmark } from 'react-icons/fa6';
-
-import { FiBell, FiCalendar, FiSearch } from 'react-icons/fi';
+import { FiBell, FiCalendar } from 'react-icons/fi';
 import { MdNoteAdd, MdNumbers } from 'react-icons/md';
-import { SiAltiumdesigner } from 'react-icons/si';
 import { TbReport } from 'react-icons/tb';
 
-
-function HeaderDesktop({
-  openCreate,
+function HeaderPage({
   canCreate,
+  openCreate,
   allReport,
   allConfirmed,
-  allPendingDesigner,
-  allProductionManager,
-  allFactoryManager,
+  allPendingRequerst,
+  allPendingfactoryManager,
+  allpendingDesigner,
+  allPendingReceiver,
   filterStatus,
+  setFilterStatus,
   search,
   setSearch,
-  setFilterStatus,
   countReport,
   openFilterMobile,
   setOpenFilterMobile,
@@ -46,7 +37,7 @@ function HeaderDesktop({
             </p>
             <p className="hidden w-3 opacity-0 max-md:block"></p>
             <p className="5xl:text-[25px] font-[SamimBold] text-[20px] max-2xl:text-[13px] max-md:flex max-md:items-center max-md:justify-center max-md:text-[14px]">
-              فرم داده های به طراحی و تصدیق نقشه نمونه
+              فرم در خواست کار واحد طراحی
             </p>
             <p className="hidden max-md:block max-md:pt-1 max-md:text-[20px]">
               <FiBell />
@@ -62,16 +53,16 @@ function HeaderDesktop({
                 تاریخ ویرایش :
               </span>
               <span className="5xl:text-[20px] font-[AvenirLTProMedium] text-[12px] max-2xl:text-[10px]">
-                1402/06/28
+                1401/05/01
               </span>
             </p>
             <p className="5xl:text-[20px] space-x-1 text-[12px] max-2xl:text-[10px]">
               <span className="font-[SamimBold]">شماره ویرایش :</span>
-              <span className="font-[AvenirLTProMedium]">02</span>
+              <span className="font-[AvenirLTProMedium]">00</span>
             </p>
             <p className="5xl:text-[20px] space-x-1 text-[12px] max-2xl:text-[10px]">
               <span className="font-[SamimBold]">کد سند :</span>
-              <span className="font-[AvenirLTProMedium]">F1007</span>
+              <span className="font-[AvenirLTProMedium]">F1002</span>
             </p>
           </div>
         </div>
@@ -107,7 +98,7 @@ function HeaderDesktop({
         </div>
       </div>
       {/* data reports */}
-      <div className="mx-10 mt-1 grid grid-cols-5 gap-6 space-x-2 max-2xl:mx-5 max-2xl:gap-0 max-md:hidden">
+      <div className="mx-5 mt-1 grid grid-cols-6 gap-3 space-x-2 max-2xl:mx-5 max-2xl:gap-0 max-md:hidden">
         <div
           onClick={() => setFilterStatus('all')}
           className="col-span-1 flex cursor-pointer rounded-[10px] border border-[#be4615]/50 py-2 transition-all delay-100 duration-200 ease-in-out hover:scale-105 max-2xl:py-1"
@@ -122,7 +113,7 @@ function HeaderDesktop({
             <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white max-2xl:text-[20px]">
               {allReport}
             </p>
-            <p className="5xl:text-[20px] text-[15px] text-white/60 max-2xl:text-[12px] max-lg:pb-2 max-lg:text-[10px]">
+            <p className="5xl:text-[20px] text-[11px] text-white/60 max-2xl:text-[12px] max-lg:pb-2 max-lg:text-[10px]">
               کل فرم ها
             </p>
           </div>
@@ -141,51 +132,13 @@ function HeaderDesktop({
             <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
               {allConfirmed}
             </p>
-            <p className="5xl:text-[20px] text-[15px] text-white/60 max-2xl:text-[12px] max-lg:pb-2 max-lg:text-[10px]">
+            <p className="5xl:text-[20px] text-[11px] text-white/60 max-2xl:text-[12px] max-lg:pb-2 max-lg:text-[10px]">
               فرم های تایید شده
             </p>
           </div>
         </div>
         <div
-          onClick={() => setFilterStatus('pendingDesigner')}
-          className="flex cursor-pointer rounded-[10px] border border-amber-300 py-2 transition-all delay-100 duration-200 ease-in-out hover:scale-105 max-2xl:py-1"
-        >
-          <div className="5xl:p-3 5xl:text-[30px] my-auto p-2 text-[20px] max-lg:p-2 max-lg:text-[15px]">
-            <p className="5xl:size-15 flex size-11 items-center justify-center rounded-[10px] bg-[#262627]/25 text-amber-300 max-2xl:size-8 max-lg:size-8">
-              <FaXmark />
-            </p>
-          </div>
-          <p className="my-auto h-13 border-l-2 border-amber-300 max-2xl:h-10"></p>
-          <div className="my-auto px-2">
-            <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
-              {allPendingDesigner}
-            </p>
-            <p className="5xl:text-[20px] text-[14px] text-white/60 max-2xl:text-center max-2xl:text-[10px] max-lg:pb-2 max-lg:text-[10px]">
-              فرم های بدون امضاء مسئول طراحی
-            </p>
-          </div>
-        </div>
-        <div
-          onClick={() => setFilterStatus('productionManager')}
-          className="flex cursor-pointer rounded-[10px] border border-white py-2 transition-all delay-100 duration-200 ease-in-out hover:scale-105 max-2xl:py-1"
-        >
-          <div className="5xl:p-3 5xl:text-[30px] my-auto p-2 text-[20px] max-lg:p-2 max-lg:text-[15px]">
-            <p className="flex size-11 items-center justify-center rounded-[10px] bg-[#251d26]/25 text-white max-2xl:size-8 max-lg:size-8">
-              <FaXmark />
-            </p>
-          </div>
-          <p className="my-auto h-13 border-l-2 border-white max-2xl:h-10"></p>
-          <div className="my-auto px-2">
-            <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
-              {allProductionManager}
-            </p>
-            <p className="5xl:text-[20px] text-[15px] text-white/60 max-2xl:text-center max-2xl:text-[10px] max-lg:pb-2 max-lg:text-[10px]">
-              فرم های بدون امضاء مدیر تولید
-            </p>
-          </div>
-        </div>
-        <div
-          onClick={() => setFilterStatus('factoryManager')}
+          onClick={() => setFilterStatus('request')}
           className="flex cursor-pointer rounded-[10px] border border-red-500 py-2 transition-all delay-100 duration-200 ease-in-out hover:scale-105 max-2xl:py-1"
         >
           <div className="5xl:p-3 5xl:text-[30px] my-auto p-2 text-[20px] max-lg:p-2 max-lg:text-[15px]">
@@ -196,10 +149,67 @@ function HeaderDesktop({
           <p className="my-auto h-13 border-l-2 border-red-500 max-2xl:h-10"></p>
           <div className="my-auto px-2">
             <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
-              {allFactoryManager}
+              {allPendingRequerst}
             </p>
-            <p className="5xl:text-[20px] text-[15px] text-white/60 max-2xl:text-center max-2xl:text-[10px] max-lg:pb-2 max-lg:text-[10px]">
+            <p className="5xl:text-[18px] text-[11px] text-white/60 max-2xl:text-center max-2xl:text-[10px] max-lg:pb-2 max-lg:text-[10px]">
+              فرم های بدون امضاء درخواست کننده
+            </p>
+          </div>
+        </div>
+        <div
+          onClick={() => setFilterStatus('manager')}
+          className="flex cursor-pointer rounded-[10px] border border-red-500 py-2 transition-all delay-100 duration-200 ease-in-out hover:scale-105 max-2xl:py-1"
+        >
+          <div className="5xl:p-3 5xl:text-[30px] my-auto p-2 text-[20px] max-lg:p-2 max-lg:text-[15px]">
+            <p className="flex size-11 items-center justify-center rounded-[10px] bg-[#251d26]/25 text-red-500 max-2xl:size-8 max-lg:size-8">
+              <FaXmark />
+            </p>
+          </div>
+          <p className="my-auto h-13 border-l-2 border-red-500 max-2xl:h-10"></p>
+          <div className="my-auto px-2">
+            <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
+              {allPendingfactoryManager}
+            </p>
+            <p className="5xl:text-[18px] text-[11px] text-white/60 max-2xl:text-center max-2xl:text-[10px] max-lg:pb-2 max-lg:text-[10px]">
               فرم های بدون امضاء مدیر کارخانه
+            </p>
+          </div>
+        </div>
+        <div
+          onClick={() => setFilterStatus('designer')}
+          className="flex cursor-pointer rounded-[10px] border border-amber-300 py-2 transition-all delay-100 duration-200 ease-in-out hover:scale-105 max-2xl:py-1"
+        >
+          <div className="5xl:p-3 5xl:text-[30px] my-auto p-2 text-[20px] max-lg:p-2 max-lg:text-[15px]">
+            <p className="5xl:size-15 flex size-11 items-center justify-center rounded-[10px] bg-[#262627]/25 text-amber-300 max-2xl:size-8 max-lg:size-8">
+              <FaXmark />
+            </p>
+          </div>
+          <p className="my-auto h-13 border-l-2 border-amber-300 max-2xl:h-10"></p>
+          <div className="my-auto px-2">
+            <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
+              {allpendingDesigner}
+            </p>
+            <p className="5xl:text-[16px] text-[11px] text-white/60 max-2xl:text-center max-2xl:text-[10px] max-lg:pb-2 max-lg:text-[10px]">
+              فرم های بدون امضاء سرپرست طراحی
+            </p>
+          </div>
+        </div>
+        <div
+          onClick={() => setFilterStatus('receiver')}
+          className="flex cursor-pointer rounded-[10px] border border-white py-2 transition-all delay-100 duration-200 ease-in-out hover:scale-105 max-2xl:py-1"
+        >
+          <div className="5xl:p-3 5xl:text-[30px] my-auto p-2 text-[20px] max-lg:p-2 max-lg:text-[15px]">
+            <p className="flex size-11 items-center justify-center rounded-[10px] bg-[#251d26]/25 text-white max-2xl:size-8 max-lg:size-8">
+              <FaXmark />
+            </p>
+          </div>
+          <p className="my-auto h-13 border-l-2 border-white max-2xl:h-10"></p>
+          <div className="my-auto px-2">
+            <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
+              {allPendingReceiver}
+            </p>
+            <p className="5xl:text-[18px] text-[11px] text-white/60 max-2xl:text-center max-2xl:text-[10px] max-lg:pb-2 max-lg:text-[10px]">
+              فرم های بدون امضاء تحویل گیرنده
             </p>
           </div>
         </div>
@@ -211,7 +221,7 @@ function HeaderDesktop({
             <TbReport />
           </p>
           <p className="5xl:text-[25px] font-[SamimBold] text-[20px] text-white max-2xl:text-[15px]">
-            لیست گزارشات
+            لیست فرم ها
           </p>
         </div>
         <div className="col-span-2 flex items-center justify-center space-x-2 py-2 max-2xl:py-1">
@@ -240,39 +250,51 @@ function HeaderDesktop({
             </p>
             <p
               onClick={() => {
-                setFilterStatus('pendingDesigner');
+                setFilterStatus('request');
               }}
               className={`5xl:text-[20px] my-1.5 cursor-pointer rounded-[10px] px-4 py-1 transition-all duration-200 ease-out max-2xl:my-1 max-2xl:text-[12px] ${
-                filterStatus === 'pendingDesigner'
+                filterStatus === 'request'
                   ? 'scale-108 bg-[#f35714] text-white'
                   : 'scale-100 hover:text-white'
               } `}
             >
-              مسئول طراحی
+              درخواست کننده
             </p>
             <p
               onClick={() => {
-                setFilterStatus('productionManager');
+                setFilterStatus('manager');
               }}
               className={`5xl:text-[20px] my-1.5 cursor-pointer rounded-[10px] px-4 py-1 transition-all duration-200 ease-out max-2xl:my-1 max-2xl:text-[12px] ${
-                filterStatus === 'productionManager'
-                  ? 'scale-108 bg-[#f35714] text-white'
-                  : 'scale-100 hover:text-white'
-              } `}
-            >
-              مدیر تولید
-            </p>
-            <p
-              onClick={() => {
-                setFilterStatus('factoryManager');
-              }}
-              className={`5xl:text-[20px] my-1.5 cursor-pointer rounded-[10px] px-4 py-1 transition-all duration-200 ease-out max-2xl:my-1 max-2xl:text-[12px] ${
-                filterStatus === 'factoryManager'
+                filterStatus === 'manager'
                   ? 'scale-108 bg-[#f35714] text-white'
                   : 'scale-100 hover:text-white'
               } `}
             >
               مدیریت کارخانه
+            </p>
+            <p
+              onClick={() => {
+                setFilterStatus('designer');
+              }}
+              className={`5xl:text-[20px] my-1.5 cursor-pointer rounded-[10px] px-4 py-1 transition-all duration-200 ease-out max-2xl:my-1 max-2xl:text-[12px] ${
+                filterStatus === 'designer'
+                  ? 'scale-108 bg-[#f35714] text-white'
+                  : 'scale-100 hover:text-white'
+              } `}
+            >
+              سرپرست طراحی
+            </p>
+            <p
+              onClick={() => {
+                setFilterStatus('receiver');
+              }}
+              className={`5xl:text-[20px] my-1.5 cursor-pointer rounded-[10px] px-4 py-1 transition-all duration-200 ease-out max-2xl:my-1 max-2xl:text-[12px] ${
+                filterStatus === 'receiver'
+                  ? 'scale-108 bg-[#f35714] text-white'
+                  : 'scale-100 hover:text-white'
+              } `}
+            >
+              تحویل گیرنده
             </p>
           </div>
           <div className="5xl:mx-2">
@@ -288,132 +310,8 @@ function HeaderDesktop({
           </div>
         </div>
       </div>
-
-      <div className="mx-2 hidden max-md:block">
-        <div className="my-3 rounded-[10px] border border-[#3a35a0] bg-linear-to-l from-[#201c66] to-[#1d1952] p-2">
-          {/* Logo & Title Mobile */}
-          <div className="flex items-center space-x-2">
-            <p className="rounded-[10px] bg-[#4f46e5] p-2">
-              <SiAltiumdesigner />
-            </p>
-            <p className="text-[15px] font-bold">
-              فرم داده های به طراحی و تصدیق نقشه نمونه
-            </p>
-          </div>
-          {/* Details Report */}
-          <div className="mt-2 grid grid-cols-3 gap-3">
-            <p className="flex flex-col items-center justify-center rounded-[10px] bg-[#343181] py-2">
-              <span className="text-[11px] font-bold text-[#5e7ef8]">
-                کد سند
-              </span>
-              <span className="text-[] font-[AvenirLTProMedium]">F1007</span>
-            </p>
-            <p className="flex flex-col items-center justify-center rounded-[10px] bg-[#343181] py-2">
-              <span className="text-[11px] font-bold text-[#5e7ef8]">
-                شماره ویرایش
-              </span>
-              <span className="font-[AvenirLTProMedium]">02</span>
-            </p>
-            <p className="flex flex-col items-center justify-center rounded-[10px] bg-[#343181] py-2">
-              <span className="text-[11px] font-bold text-[#5e7ef8]">
-                تاریخ ویرایش
-              </span>
-              <span className="font-[AvenirLTProMedium]">1402/06/28</span>
-            </p>
-          </div>
-        </div>
-        {/* Search input */}
-        <div className="relative flex w-full justify-between gap-1">
-          <div>
-            <input
-              type="text"
-              value={search}
-              placeholder="جستجو در گزارش ها ..."
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-              className="mb-3 h-11 rounded-[10px] border border-[#2c3050] bg-[#22263a] pr-8 font-bold"
-            />
-            <p className="absolute top-3 right-2 text-white/50">
-              <FiSearch />
-            </p>
-          </div>
-          <div
-            onClick={openCreate}
-            className={`flex h-11 items-center gap-1 rounded-xl px-3 whitespace-nowrap ${
-              canCreate
-                ? 'cursor-pointer bg-white/10 hover:bg-white/15'
-                : 'cursor-not-allowed bg-white/5 opacity-50'
-            }`}
-          >
-            <p className="font-[SamimBold] text-[13px]">افزودن فرم</p>
-            <p className="text-[10px]">
-              <FaPlus />
-            </p>
-          </div>
-        </div>
-        {/* Filters */}
-        <div className="mb-2 flex items-center justify-between">
-          <div className="flex items-center space-x-1 text-[#6b75a0]">
-            <p className="font-[AvenirLTProMedium]">
-              {filterStatus === 'all' && countReport}
-              {filterStatus === 'confirmed' && allConfirmed}
-              {filterStatus === 'pendingDesigner' && allPendingDesigner}
-              {filterStatus === 'productionManager' && allProductionManager}
-              {filterStatus === 'factoryManager' && allFactoryManager}
-            </p>
-            <p className="font-semibold">گزارش یافت شد</p>
-          </div>
-
-          <div
-            onClick={() => {
-              setOpenFilterMobile(!openFilterMobile);
-            }}
-            className="relative pl-2 text-[#6b75a0]"
-          >
-            <p>فیلتر</p>
-
-            {openFilterMobile && (
-              <div className="absolute top-1 left-11 flex h-45 w-65 flex-col justify-center space-y-2 overflow-auto rounded-[10px] border border-[#3a35a0] bg-linear-to-l from-[#201c66] to-[#1d1952] pr-1">
-                <p
-                  onClick={() => {
-                    setFilterStatus('all');
-                  }}
-                  className={`ml-1 rounded-[10px] ${filterStatus === 'all' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
-                >
-                  کل فرم ها
-                </p>
-                <p
-                  onClick={() => setFilterStatus('confirmed')}
-                  className={`ml-1 rounded-[10px] ${filterStatus === 'confirmed' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
-                >
-                  فرم های امضاء شده
-                </p>
-                <p
-                  onClick={() => setFilterStatus('pendingDesigner')}
-                  className={`ml-1 rounded-[10px] ${filterStatus === 'pendingDesigner' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
-                >
-                  فرم های امضاء نشده مسئول طراحی
-                </p>
-                <p
-                  onClick={() => setFilterStatus('productionManager')}
-                  className={`ml-1 rounded-[10px] ${filterStatus === 'productionManager' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
-                >
-                  فرم های امضاء نشده مدیرتولید
-                </p>
-                <p
-                  onClick={() => setFilterStatus('factoryManager')}
-                  className={`ml-1 rounded-[10px] ${filterStatus === 'factoryManager' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
-                >
-                  فرم های امضاء نشده مدیرکارخانه
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
 
-export default HeaderDesktop;
+export default HeaderPage;

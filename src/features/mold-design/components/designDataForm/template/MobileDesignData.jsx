@@ -16,6 +16,7 @@ function MobileDesignData({
   isSuperAdmin,
   canDelete,
 }) {
+  
   return (
     <div>
       {/* Mobile design */}

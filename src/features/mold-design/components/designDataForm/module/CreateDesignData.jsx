@@ -43,6 +43,7 @@ function CreateDesignData({ openCreateModal, setOpenCreateModal }) {
     drawingNotes: '',
   });
 
+  
   const closeHandler = () => {
     setOpenCreateModal(false);
   };

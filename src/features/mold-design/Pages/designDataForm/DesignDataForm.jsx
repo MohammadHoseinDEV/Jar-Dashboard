@@ -207,8 +207,6 @@ function DesignDataForm() {
               setSelectedDesign={setSelectedDesign}
               setOpenForm={setOpenForm}
             />
-            
-            
           </div>
         )}
         <div

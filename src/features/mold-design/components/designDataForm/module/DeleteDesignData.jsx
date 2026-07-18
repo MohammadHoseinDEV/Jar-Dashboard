@@ -10,6 +10,7 @@ function DeleteDesignData({
   const closeHandler = () => {
     setOpenDeleteModal(false);
   };
+  
 
   const deleteReports = useDeleteDesignData();
   return (

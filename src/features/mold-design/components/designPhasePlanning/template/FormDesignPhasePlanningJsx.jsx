@@ -79,7 +79,7 @@ function FormDesignPhasePlanningJsx({ selectedDesign }) {
         <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
           <span className="-rotate-90 whitespace-nowrap">فروش</span>
         </div>
-        <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
+        <div className="flex min-h-[70px] items-center justify-center border-r border-l border-b border-black">
           <span className="-rotate-90 whitespace-nowrap">مدیر کارخانه</span>
         </div>
       </div>

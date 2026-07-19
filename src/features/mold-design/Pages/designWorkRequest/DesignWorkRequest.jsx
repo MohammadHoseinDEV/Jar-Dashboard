@@ -6,6 +6,14 @@ import {
   useGetAllDesignWorkRequest,
   useGetDesignWorkRequest,
 } from '../../Api/designWorkRequest';
+import { HashLoader } from 'react-spinners';
+import Table from '../../components/designWorkRequest/template/Table';
+import MobileDesignWorkRequest from '../../components/designWorkRequest/template/MobileDesignWorkRequest';
+import { useGetProfile } from '../../../../hooks/profile/profile';
+import Pagination from '../../../../pagination/Pagination';
+import CreateDesignWorkRequest from '../../components/designWorkRequest/module/CreateDesignWorkRequest';
+import FormDesignWorkRequest from '../../components/designWorkRequest/module/Formdesignworkrequest';
+import DeleteDesignWorkrequest from '../../components/designWorkRequest/module/DeleteDesignWorkrequest';
 
 function DesignWorkRequest() {
   const { menus: userMenus } = useSelector((s) => s.auth);
@@ -20,8 +28,17 @@ function DesignWorkRequest() {
   const [openFilterMobile, setOpenFilterMobile] = useState(false);
   const [selectedWorkRequest, setSelectedWorkRequest] = useState(null);
 
+  const { data: profile } = useGetProfile();
+  const isSuperAdmin = profile?.data?.identityRoles?.some(
+    (p) => p.roleId === 'cfa79204-d797-4241-8630-55fcc1b2f721'
+  );
+
+  const isDesignManager = profile?.data?.companyRoles?.some(
+    (p) => p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e'
+  );
+
   const perm = useMemo(
-    () => getPerm(userMenus, 'design-data-and-drawing-verification-form'),
+    () => getPerm(userMenus, 'design-work-request-form'),
     [userMenus]
   );
 
@@ -55,7 +72,6 @@ function DesignWorkRequest() {
     isError,
   } = useGetDesignWorkRequest({ search, page, pageSize });
   const { data: workAll } = useGetAllDesignWorkRequest();
-  console.log(workAll);
 
   const allReport = work?.data?.totalCount;
   const allConfirmed = workAll?.data?.filter(
@@ -143,7 +159,64 @@ function DesignWorkRequest() {
           openFilterMobile={openFilterMobile}
           setOpenFilterMobile={setOpenFilterMobile}
         />
+        {isLoading ? (
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center space-y-5">
+            <HashLoader color="#ffffff" size={80} speedMultiplier={1.5} />
+            <p className="pt-10 text-[20px]">لطفا منتظر بمانید😎</p>
+          </div>
+        ) : isError ? (
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center space-y-5 text-[30px]">
+            خطا در دریافت اطلاعات 😟
+          </div>
+        ) : (
+          <div className="no-scrollbar 5xl:mt-5 flex min-h-0 w-full overflow-x-hidden overflow-y-auto">
+            <div className="mx-3 w-full max-md:hidden">
+              <Table
+                filteredData={filteredData}
+                canEdit={canEdit}
+                canDelete={canDelete}
+                openEdit={openEdit}
+                askDelete={askDelete}
+                setOpenFormReport={setOpenForm}
+                setSelectedReport={setSelectedWorkRequest}
+              />
+            </div>
+            <MobileDesignWorkRequest
+              filteredData={filteredData}
+              canEdit={canEdit}
+              canDelete={canDelete}
+              askDelete={askDelete}
+              openEdit={openEdit}
+              setOpenEditModal={setOpenEditModal}
+              setOpenForm={setOpenForm}
+              profile={profile}
+              isSuperAdmin={isSuperAdmin}
+              isDesignManager={isDesignManager}
+              setSelectedWorkRequest={setSelectedWorkRequest}
+            />
+          </div>
+        )}
+        <div
+          className={`w-full shrink-0 ${filterStatus === 'confirmed' || filterStatus === 'request' || filterStatus === 'manager' || filterStatus === 'designer' || filterStatus === 'receiver' ? 'opacity-0' : ''}`}
+        >
+          <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+        </div>
       </div>
+      <CreateDesignWorkRequest
+        openCreateModal={openCreateModal}
+        setOpenCreateModal={setOpenCreateModal}
+      />
+
+      <FormDesignWorkRequest
+        openForm={openForm}
+        setOpenForm={setOpenForm}
+        selectedWorkRequest={selectedWorkRequest}
+      />
+      <DeleteDesignWorkrequest
+        openDeleteModal={openDeleteModal}
+        setOpenDeleteModal={setOpenDeleteModal}
+        selectedWorkRequest={selectedWorkRequest}
+      />
     </div>
   );
 }

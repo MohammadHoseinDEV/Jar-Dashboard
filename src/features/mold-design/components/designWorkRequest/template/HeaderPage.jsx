@@ -1,8 +1,15 @@
 import React from 'react';
-import { FaCheck, FaClipboardList, FaDownload, FaFilter } from 'react-icons/fa';
+import {
+  FaCheck,
+  FaClipboardList,
+  FaDownload,
+  FaFilter,
+  FaPlus,
+} from 'react-icons/fa';
 import { FaXmark } from 'react-icons/fa6';
-import { FiBell, FiCalendar } from 'react-icons/fi';
+import { FiBell, FiCalendar, FiSearch } from 'react-icons/fi';
 import { MdNoteAdd, MdNumbers } from 'react-icons/md';
+import { SiAltiumdesigner } from 'react-icons/si';
 import { TbReport } from 'react-icons/tb';
 
 function HeaderPage({
@@ -307,6 +314,135 @@ function HeaderPage({
               }}
               className="5xl:py-3.5 5xl:placeholder:text-[20px] 5xl:w-[40vh] w-[30vh] rounded-[10px] border border-white/20 bg-[#07090f] py-3 placeholder:pr-2 placeholder:text-white/50 max-2xl:text-[12px]"
             />
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-2 hidden max-md:block">
+        <div className="my-3 rounded-[10px] border border-[#3a35a0] bg-linear-to-l from-[#201c66] to-[#1d1952] p-2">
+          {/* Logo & Title Mobile */}
+          <div className="flex items-center space-x-2">
+            <p className="rounded-[10px] bg-[#4f46e5] p-2">
+              <SiAltiumdesigner />
+            </p>
+            <p className="text-[15px] font-bold">فرم درخواست کار واحد طراحی </p>
+          </div>
+          {/* Details Report */}
+          <div className="mt-2 grid grid-cols-3 gap-3">
+            <p className="flex flex-col items-center justify-center rounded-[10px] bg-[#343181] py-2">
+              <span className="text-[11px] font-bold text-[#5e7ef8]">
+                کد سند
+              </span>
+              <span className="text-[] font-[AvenirLTProMedium]">F1002</span>
+            </p>
+            <p className="flex flex-col items-center justify-center rounded-[10px] bg-[#343181] py-2">
+              <span className="text-[11px] font-bold text-[#5e7ef8]">
+                شماره ویرایش
+              </span>
+              <span className="font-[AvenirLTProMedium]">00</span>
+            </p>
+            <p className="flex flex-col items-center justify-center rounded-[10px] bg-[#343181] py-2">
+              <span className="text-[11px] font-bold text-[#5e7ef8]">
+                تاریخ ویرایش
+              </span>
+              <span className="font-[AvenirLTProMedium]">1401/05/01</span>
+            </p>
+          </div>
+        </div>
+        {/* Search input */}
+        <div className="relative flex w-full justify-between gap-1">
+          <div>
+            <input
+              type="text"
+              value={search}
+              placeholder="جستجو در گزارش ها ..."
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              className="mb-3 h-11 rounded-[10px] border border-[#2c3050] bg-[#22263a] pr-8 font-bold"
+            />
+            <p className="absolute top-3 right-2 text-white/50">
+              <FiSearch />
+            </p>
+          </div>
+          <div
+            onClick={openCreate}
+            className={`flex h-11 items-center gap-1 rounded-xl px-3 whitespace-nowrap ${
+              canCreate
+                ? 'cursor-pointer bg-white/10 hover:bg-white/15'
+                : 'cursor-not-allowed bg-white/5 opacity-50'
+            }`}
+          >
+            <p className="font-[SamimBold] text-[13px]">افزودن فرم</p>
+            <p className="text-[10px]">
+              <FaPlus />
+            </p>
+          </div>
+        </div>
+        {/* Filters */}
+        <div className="mb-2 flex items-center justify-between">
+          <div className="flex items-center space-x-1 text-[#6b75a0]">
+            <p className="font-[AvenirLTProMedium]">
+              {filterStatus === 'all' && countReport}
+              {filterStatus === 'confirmed' && allConfirmed}
+              {filterStatus === 'request' && allPendingRequerst}
+              {filterStatus === 'manager' && allPendingfactoryManager}
+              {filterStatus === 'designer' && allpendingDesigner}
+              {filterStatus === 'receiver' && allPendingReceiver}
+            </p>
+            <p className="font-semibold">گزارش یافت شد</p>
+          </div>
+
+          <div
+            onClick={() => {
+              setOpenFilterMobile(!openFilterMobile);
+            }}
+            className="relative pl-2 text-[#6b75a0]"
+          >
+            <p>فیلتر</p>
+
+            {openFilterMobile && (
+              <div className="absolute top-1 left-11 flex flex-col space-y-2 overflow-auto rounded-[10px] border border-[#3a35a0] bg-linear-to-l from-[#201c66] to-[#1d1952] p-1 pr-1 whitespace-nowrap">
+                <p
+                  onClick={() => {
+                    setFilterStatus('all');
+                  }}
+                  className={`ml-1 rounded-[10px] ${filterStatus === 'all' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
+                >
+                  کل فرم ها
+                </p>
+                <p
+                  onClick={() => setFilterStatus('confirmed')}
+                  className={`ml-1 rounded-[10px] ${filterStatus === 'confirmed' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
+                >
+                  فرم های امضاء شده
+                </p>
+                <p
+                  onClick={() => setFilterStatus('request')}
+                  className={`ml-1 rounded-[10px] text-[14px] ${filterStatus === 'request' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
+                >
+                  فرم های امضاء نشده درخواست کننده
+                </p>
+                <p
+                  onClick={() => setFilterStatus('manager')}
+                  className={`ml-1 rounded-[10px] text-[14px] ${filterStatus === 'manager' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
+                >
+                  فرم های امضاء نشده مدیرکارخانه
+                </p>
+                <p
+                  onClick={() => setFilterStatus('designer')}
+                  className={`ml-1 rounded-[10px] text-[14px] ${filterStatus === 'designer' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
+                >
+                  فرم های امضاء نشده سرپرست طراحی
+                </p>
+                <p
+                  onClick={() => setFilterStatus('receiver')}
+                  className={`ml-1 rounded-[10px] text-[14px] ${filterStatus === 'receiver' ? 'bg-gray-200/10 p-1.5 text-white ' : ''}`}
+                >
+                  فرم های امضاء نشده تحویل گیرنده
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

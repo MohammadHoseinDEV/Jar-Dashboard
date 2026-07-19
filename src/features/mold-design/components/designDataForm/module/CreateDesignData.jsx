@@ -43,11 +43,9 @@ function CreateDesignData({ openCreateModal, setOpenCreateModal }) {
     drawingNotes: '',
   });
 
-  
   const closeHandler = () => {
     setOpenCreateModal(false);
   };
-
 
   const { data: product } = useGetProducts();
   const [searchProducts, setSearchProducts] = useState('');
@@ -119,12 +117,9 @@ function CreateDesignData({ openCreateModal, setOpenCreateModal }) {
             filterProducts={filterProducts}
             selectedProducts={selectedProducts}
           />
-          
         </Suspense>
-        
       </div>
     </div>
-
   );
 }
 

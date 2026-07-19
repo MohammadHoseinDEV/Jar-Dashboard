@@ -118,6 +118,9 @@ const DesignWorkRequest = lazy(
   () =>
     import('../features/mold-design/Pages/designWorkRequest/DesignWorkRequest')
 );
+const DesignMeeting = lazy(
+  () => import('../features/mold-design/Pages/designMeeting/Designmeeting')
+);
 
 const pagesMap = {
   'admin-menus': AdminMenus,
@@ -164,6 +167,7 @@ const pagesMap = {
   'internal-design-phase-planning': InternalDesignPhasePlanning,
   'design-phase-planning': DesignPhasePlanning,
   'design-work-request-form': DesignWorkRequest,
+  'design-meeting': DesignMeeting,
 };
 
 export default function DynamicPage() {

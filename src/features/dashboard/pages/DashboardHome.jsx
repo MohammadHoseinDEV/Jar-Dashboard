@@ -6,16 +6,16 @@ import { useGetProfile } from '../../../hooks/profile/profile';
 import { useGetElectricalReports } from '../../work-Report/Api/Electrical/electrical';
 import { toShamsi } from '../../../Time/date';
 
-const Profile = lazy(() => import('../components/Profile/Profile'));
-
-import profile from '../../../assets/images/profile.gif';
-import exit from '../../../assets/images/logout.gif';
 import electrical from '../../../assets/images/electrical.png';
 import com from '../../../assets/images/com.png';
-import { CiClock1 } from 'react-icons/ci';
+import { CiClock1, CiLogout } from 'react-icons/ci';
 import { GiElectric } from 'react-icons/gi';
 import { FcElectricalSensor } from 'react-icons/fc';
+import { TbLogout } from 'react-icons/tb';
+import { CgProfile } from 'react-icons/cg';
+import { FiLogOut } from 'react-icons/fi';
 
+const Profile = lazy(() => import('../components/Profile/Profile'));
 const Gauge = lazy(() => import('../components/Apex/Gauge.jsx'));
 
 function DashboardHome() {
@@ -47,7 +47,7 @@ function DashboardHome() {
   )
     return <Navigate to="/no-access" replace />;
 
-  const isSuperAdmin = profile?.data?.identityRoles?.some(
+  const isSuperAdmin = profiles?.data?.identityRoles?.some(
     (p) => p.roleId === 'cfa79204-d797-4241-8630-55fcc1b2f721'
   );
 
@@ -57,7 +57,16 @@ function DashboardHome() {
 
   return (
     <div className="flex justify-between">
-      {managerWidget === true && (
+      <style>{`
+        @keyframes wiggle {
+          0%, 90%, 100% { transform: rotate(0deg); }
+          92% { transform: rotate(-10deg); }
+          94% { transform: rotate(10deg); }
+          96% { transform: rotate(-6deg); }
+          98% { transform: rotate(6deg); }
+        }
+      `}</style>
+      {/* {managerWidget === true && (
         <div className="mt-5 flex gap-5 max-md:hidden">
           <div className="flex flex-wrap gap-4">
             {lastReport ? (
@@ -279,27 +288,24 @@ function DashboardHome() {
             )}
           </div>
         </div>
-      )}
+      )} */}
 
       <div></div>
       <div className="flex justify-end rounded-2xl">
-        <div className="flex space-x-2 pl-5">
-          <span onClick={() => setOpenProfile(true)}>
-            <img
-              src={profile}
-              alt="profile"
-              width={45}
-              className="cursor-pointer rounded-full transition-all delay-75 duration-200 ease-in-out hover:scale-110"
-            />
+        <div className="flex space-x-2 pl-5 text-white">
+          <span
+            onClick={() => setOpenProfile(true)}
+            className="animate-wiggle-inline cursor-pointer rounded-full bg-white p-1 transition-all delay-100 duration-200 ease-in-out hover:scale-110"
+            style={{ animation: 'wiggle 3s ease-in-out infinite' }}
+          >
+            <CgProfile className="size-9 text-black" />
           </span>
-          <span>
-            <img
-              src={exit}
-              alt="exit"
-              width={45}
-              className="cursor-pointer rounded-full transition-all delay-100 duration-200 ease-in-out hover:scale-110 hover:rotate-10"
-              onClick={() => setOpenExit(true)}
-            />
+          <span
+            onClick={() => setOpenExit(true)}
+            className="animate-wiggle-inline flex cursor-pointer items-center justify-center rounded-full bg-white p-1 transition-all delay-100 duration-200 ease-in-out hover:scale-110"
+            style={{ animation: 'wiggle 3s ease-in-out infinite' }}
+          >
+            <FiLogOut className="flex size-9 text-center text-black" />
           </span>
         </div>
 

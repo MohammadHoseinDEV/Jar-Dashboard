@@ -6,6 +6,12 @@ import { useGetDesignMeeting } from '../../Api/designMeeting';
 import HeaderPage from '../../components/designMeeting/template/HeaderPage';
 import { HashLoader } from 'react-spinners';
 import TableDesignMeeting from '../../components/designMeeting/template/TableDesignMeeting';
+import MobileDesignMeeting from '../../components/designMeeting/template/MobileDesignMeeting';
+import Pagination from '../../../../pagination/Pagination';
+import FormDesignMeeting from '../../components/designMeeting/module/FormDesignMeeting';
+import DeletedesignMeeting from '../../components/designMeeting/module/DeletedesignMeeting';
+import CreateDesignMeeting from '../../components/designMeeting/module/CreateDesignMeeting';
+import EditdesignMeeting from '../../components/designMeeting/module/EditdesignMeeting';
 
 function DesignMeeting() {
   const { menus: userMenus } = useSelector((s) => s.auth);
@@ -84,9 +90,41 @@ function DesignMeeting() {
                 setSelectedReport={setSelectedDesignMeeting}
               />
             </div>
+            <MobileDesignMeeting
+              meting={meting}
+              canEdit={canEdit}
+              canDelete={canDelete}
+              openEdit={openEdit}
+              askDelete={askDelete}
+              setOpenFormReport={setOpenForm}
+              setSelectedReport={setSelectedDesignMeeting}
+            />
           </div>
         )}
+        <div className={`w-full shrink-0`}>
+          <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+        </div>
       </div>
+      <CreateDesignMeeting
+        openCreateModal={openCreateModal}
+        setOpenCreateModal={setOpenCreateModal}
+      />
+      <EditdesignMeeting
+        openEditModal={openEditModal}
+        setOpenEditModal={setOpenEditModal}
+        selectedDesignMeeting={selectedDesignMeeting}
+        setSelectedDesignMeeting={setSelectedDesignMeeting}
+      />
+      <DeletedesignMeeting
+        openDeleteModal={openDeleteModal}
+        setOpenDeleteModal={setOpenDeleteModal}
+        selectedDesignMeeting={selectedDesignMeeting}
+      />
+      <FormDesignMeeting
+        openForm={openForm}
+        setOpenForm={setOpenForm}
+        selectedDesignMeeting={selectedDesignMeeting}
+      />
     </div>
   );
 }

@@ -3,6 +3,127 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { MENU_ICON_MAP } from '../../../../icons/icons';
 
+function buildPath(url) {
+  if (!url) return '/dashboard';
+  if (url.startsWith('/')) return url;
+  return `/dashboard/${url}`;
+}
+
+function MenuItem({
+  item,
+  isOpen,
+  mobile,
+  onClose,
+  currentPath,
+  isDropdownOpen,
+  toggleDropdown,
+  hoveredItem,
+  setHoveredItem,
+  setFlyoutPosition,
+}) {
+  const hasChildren = item.subMenus?.length > 0;
+  const itemRef = useRef(null);
+
+  const isActive = currentPath === buildPath(item.url);
+
+  const handleMouseEnter = () => {
+    if (!isOpen && hasChildren && itemRef.current) {
+      const rect = itemRef.current.getBoundingClientRect();
+      setFlyoutPosition({
+        top: rect.top,
+        right: window.innerWidth - rect.left + 1,
+      });
+      setHoveredItem(item?.id);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
+  };
+
+  const content = (
+    <div
+      className={`relative mb-2 flex items-center rounded-xl px-3 py-2 font-[Samim] text-[200px] transition-all duration-200 ${
+        isActive ? 'text-white' : 'text-white/50 hover:text-white'
+      }`}
+      onClick={() => {
+        if (hasChildren && isOpen) toggleDropdown(item.id);
+      }}
+    >
+      {MENU_ICON_MAP[item?.icon] ? (
+        typeof MENU_ICON_MAP[item?.icon] === 'function' ? (
+          <span className="flex justify-center text-xl text-[25px] text-white">
+            {React.createElement(MENU_ICON_MAP[item?.icon])}
+          </span>
+        ) : (
+          <img
+            src={MENU_ICON_MAP[item?.icon]}
+            alt={item?.icon}
+            className="h-8 w-8 object-contain"
+          />
+        )
+      ) : (
+        <span className="text-white/50"></span>
+      )}
+
+      {isOpen && (
+        <p className="pr-2 text-[15px] opacity-100 transition-all delay-150 duration-200 max-xl:text-[12px] max-sm:text-[15px]">
+          {item?.title}
+        </p>
+      )}
+    </div>
+  );
+
+  return (
+    <div
+      ref={itemRef}
+      className="relative flex w-full cursor-pointer flex-col pr-3 transition-all delay-75 duration-100 hover:border-r-2 hover:border-r-white"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {item.url ? (
+        <Link
+          to={buildPath(item.url)}
+          className="translate-y-2 transition-all delay-75 duration-100"
+          onClick={() => onClose?.()}
+        >
+          {content}
+        </Link>
+      ) : (
+        content
+      )}
+
+      {isOpen && (
+        <div
+          className={`mt-1 overflow-hidden transition-all delay-150 duration-300 ease-in-out ${
+            isDropdownOpen(item.id)
+              ? 'max-h-[2000px] opacity-100'
+              : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div onClick={() => mobile && onClose?.()}>
+            {item.subMenus.map((child) => (
+              <MenuItem
+                key={child.id}
+                item={child}
+                isOpen={isOpen}
+                mobile={mobile}
+                onClose={onClose}
+                currentPath={currentPath}
+                isDropdownOpen={isDropdownOpen}
+                toggleDropdown={toggleDropdown}
+                hoveredItem={hoveredItem}
+                setHoveredItem={setHoveredItem}
+                setFlyoutPosition={setFlyoutPosition}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SidebarHome({ isOpen, onClose, mobile, setMobile }) {
   const [dropdownStates, setDropdownStates] = useState({});
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -44,110 +165,24 @@ function SidebarHome({ isOpen, onClose, mobile, setMobile }) {
     return roots;
   }, [menusFlat]);
 
-  const buildPath = (url) => {
-    if (!url) return '/dashboard';
-    if (url.startsWith('/')) return url;
-    return `/dashboard/${url}`;
-  };
-
-  const isActive = (url) => location.pathname === buildPath(url);
-
-  const MenuItem = ({ item }) => {
-    const hasChildren = item.subMenus?.length > 0;
-    const itemRef = useRef(null);
-
-    const handleMouseEnter = () => {
-      if (!isOpen && hasChildren && itemRef.current) {
-        const rect = itemRef.current.getBoundingClientRect();
-        setFlyoutPosition({
-          top: rect.top,
-          right: window.innerWidth - rect.left + 1,
-        });
-        setHoveredItem(item?.id);
-      }
-    };
-
-    const handleMouseLeave = () => {
-      setHoveredItem(null);
-    };
-
-    const content = (
-      <div
-        className={`relative mb-2 flex items-center rounded-xl px-3 py-2 font-[Samim] text-[200px] transition-all duration-200 ${
-          isActive(item.url) ? 'text-white' : 'text-white/50 hover:text-white'
-        }`}
-        onClick={() => {
-          if (hasChildren && isOpen) toggleDropdown(item.id);
-        }}
-      >
-        {MENU_ICON_MAP[item?.icon] ? (
-          typeof MENU_ICON_MAP[item?.icon] === 'function' ? (
-            <span className="flex justify-center text-xl text-[25px] text-white">
-              {React.createElement(MENU_ICON_MAP[item?.icon])}
-            </span>
-          ) : (
-            <img
-              src={MENU_ICON_MAP[item?.icon]}
-              alt={item?.icon}
-              className="h-8 w-8 object-contain"
-            />
-          )
-        ) : (
-          <span className="text-white/50"></span>
-        )}
-
-        {isOpen && (
-          <p className="pr-2 text-[15px] opacity-100 transition-all delay-150 duration-200 max-xl:text-[12px] max-sm:text-[15px]">
-            {item?.title}
-          </p>
-        )}
-      </div>
-    );
-
-    return (
-      <div
-        ref={itemRef}
-        className="relative flex w-full cursor-pointer flex-col pr-3 transition-all delay-75 duration-100 hover:border-r-2 hover:border-r-white"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        {item.url ? (
-          <Link
-            to={buildPath(item.url)}
-            className="translate-y-2 transition-all delay-75 duration-100"
-            onClick={() => onClose?.()}
-          >
-            {content}
-          </Link>
-        ) : (
-          content
-        )}
-
-        {isOpen && (
-          <div
-            className={`mt-1 overflow-hidden transition-all duration-300 ease-in-out ${
-              isDropdownOpen(item.id)
-                ? 'max-h-[500px] opacity-100'
-                : 'max-h-0 opacity-0'
-            }`}
-          >
-            <div onClick={() => mobile && onClose?.()}>
-              {item.subMenus.map((child) => (
-                <MenuItem key={child.id} item={child} />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
     <div
       className={`no-scrollbar mt-2 flex flex-col items-center justify-center space-y-2 overflow-auto ${isOpen ? 'flex items-center justify-center ' : 'px-0'}`}
     >
       {menusTree.map((m) => (
-        <MenuItem key={m.id} item={m} />
+        <MenuItem
+          key={m.id}
+          item={m}
+          isOpen={isOpen}
+          mobile={mobile}
+          onClose={onClose}
+          currentPath={location.pathname}
+          isDropdownOpen={isDropdownOpen}
+          toggleDropdown={toggleDropdown}
+          hoveredItem={hoveredItem}
+          setHoveredItem={setHoveredItem}
+          setFlyoutPosition={setFlyoutPosition}
+        />
       ))}
       {menusTree.length === 0 && isOpen && (
         <p className="mt-6 text-center font-[Samim] text-white/60">

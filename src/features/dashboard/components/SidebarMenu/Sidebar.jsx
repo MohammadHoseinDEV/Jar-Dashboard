@@ -62,10 +62,10 @@ function Sidebar() {
 
         {/* Welcome text */}
         <p
-          className={`mt-4 pb-4 text-center font-[SamimBold] text-[15px] text-[#ffffffc9] transition-all duration-500 ease-in-out max-xl:text-[10px] max-sm:text-[20px] ${
+          className={`mt-4 pb-2 text-center font-[SamimBold] text-[15px] text-[#ffffffc9] transition-all ease-in-out max-xl:text-[10px] max-sm:text-[20px] ${
             isOpen
               ? 'translate-y-0 border-b border-gray-500 opacity-100 delay-800 duration-100'
-              : 'pointer-events-none hidden -translate-x-20 opacity-0'
+              : 'pointer-events-none h-0 translate-x-20 opacity-0'
           }`}
         >
           {userInfo?.gender === 0

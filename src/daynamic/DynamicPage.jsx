@@ -122,6 +122,11 @@ const DesignMeeting = lazy(
   () => import('../features/mold-design/Pages/designMeeting/Designmeeting')
 );
 
+const MoldFieldValidation = lazy(
+  () =>
+    import('../features/mold-design/Pages/moldFieldValidation/MoldFieldValidation')
+);
+
 const pagesMap = {
   'admin-menus': AdminMenus,
   'admin-units': AdminUnits,
@@ -168,6 +173,7 @@ const pagesMap = {
   'design-phase-planning': DesignPhasePlanning,
   'design-work-request-form': DesignWorkRequest,
   'design-meeting': DesignMeeting,
+  'mold-field-validation-form': MoldFieldValidation,
 };
 
 export default function DynamicPage() {

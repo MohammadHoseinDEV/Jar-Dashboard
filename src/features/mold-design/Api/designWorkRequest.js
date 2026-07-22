@@ -37,6 +37,28 @@ export const useGetAllDesignWorkRequest = () => {
   return getReport;
 };
 
+export const useCreateDesignWorkRequest = () => {
+  const { token } = useSelector((state) => state.auth);
+  const queryClient = useQueryClient();
+
+  const createReport = useMutation({
+    mutationFn: async (form) => {
+      const res = await axios.post(`${BASE_API}`, form, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return res.data;
+    },
+    onSuccess: () => {
+      toast.success('درخواست کار با موفقیت ایجاد شد');
+      queryClient.invalidateQueries({ queryKey: ['work', token] });
+    },
+    onError: (e) => {
+      toast.error(e.response.data.message || 'خطا در ثبت درخواست کار');
+    },
+  });
+  return createReport;
+};
+
 export const useDeleteDesignWorkRequest = () => {
   const { token } = useSelector((state) => state.auth);
   const queryclient = useQueryClient();

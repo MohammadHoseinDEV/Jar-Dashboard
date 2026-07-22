@@ -38,7 +38,7 @@ function CreateDesignWorkRequestJsx({
         id="workRequest"
         className="no-scrollbar flex min-h-90 flex-col overflow-x-hidden overflow-y-auto max-md:max-h-[70vh]"
       >
-        <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+        <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
           <label
             htmlFor="requestDate"
             className="5xl:text-[30px] flex flex-col"
@@ -72,19 +72,37 @@ function CreateDesignWorkRequestJsx({
               type="text"
               name="requestingUnit"
               readOnly
-              value={form.requestingUnit || 'بدون واحد'}
+              value={profile?.data?.units?.[0]?.unitName || 'بدون واحد'}
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 text-[18px] text-white outline-none max-2xl:text-[14px]"
             />
           </label>
           <label htmlFor="requestTime">
+            <p className="pb-2"> ساعت ثبت درخواست</p>
             <TimePickerInput
-              value={form.requestTime}
+              value={form.requestTime || ''}
               onChange={(e) => {
                 setForm((p) => ({
                   ...p,
                   requestTime: e,
                 }));
               }}
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="requestDescription">
+            شرح درخواست
+            <input
+              type="text"
+              name="requestDescription"
+              placeholder="شرح درخواست کار"
+              onChange={(e) => {
+                setForm((p) => ({
+                  ...p,
+                  [e.target.name]: e.target.value,
+                }));
+              }}
+              className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 text-[18px] text-white outline-none max-2xl:text-[14px]"
             />
           </label>
         </div>

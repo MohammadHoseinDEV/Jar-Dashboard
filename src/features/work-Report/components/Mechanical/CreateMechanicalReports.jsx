@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import close from '../../../../assets/images/close.png';
 
@@ -10,40 +10,23 @@ import TimePickerInput from '../../../../Time/TimePickerInput';
 import { toast } from 'react-toastify';
 import { useCreateMechanicalReports } from '../../Api/Mechanical/mechanical';
 
+const initialForm = {
+  reportDate: '',
+  operations: [
+    {
+      operationDescription: '',
+      requestingUnit: '',
+      startTime: '',
+      endTime: '',
+      operationExecutor: '',
+      consumedPartsInShift: '',
+      warehouseDeliveredItems: '',
+    },
+  ],
+};
+
 function CreateMechanicalReports({ openCreateReport, setOpenCreateReport }) {
-  const [form, setForm] = useState({
-    reportDate: '',
-    shiftType: '',
-    personnelName: '',
-    operations: [
-      {
-        operationDescription: '',
-        requestingUnit: '',
-        startTime: '',
-        endTime: '',
-        operationExecutor: '',
-        consumedPartsInShift: '',
-        warehouseDeliveredItems: '',
-      },
-    ],
-  });
-
-  const { data: profile } = useGetProfile();
-
-  useEffect(() => {
-    if (profile?.data?.currentShift?.shiftName) {
-      setForm((p) => ({
-        ...p,
-        shiftType: profile?.data?.currentShift?.shiftName,
-      }));
-    }
-    if (profile?.data?.fullName) {
-      setForm((p) => ({
-        ...p,
-        personnelName: profile?.data?.fullName,
-      }));
-    }
-  }, [profile]);
+  const [form, setForm] = useState(initialForm);
 
   const addItems = () => {
     if (form.operations.length >= 12) {
@@ -98,13 +81,26 @@ function CreateMechanicalReports({ openCreateReport, setOpenCreateReport }) {
   };
 
   const createReports = useCreateMechanicalReports();
+  const { data: profile, isLoading: profileLoading } = useGetProfile();
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    createReports.mutate(form, {
+    if (profileLoading || !profile?.data) {
+      toast.warning('اطلاعات پروفایل هنوز بارگذاری نشده، لطفاً صبر کنید.');
+      return;
+    }
+
+    const payload = {
+      ...form,
+      shiftType: profile?.data?.currentShift?.shiftName || '',
+      personnelName: profile?.data?.fullName || '',
+    };
+
+    createReports.mutate(payload, {
       onSuccess: () => {
         setOpenCreateReport(!openCreateReport);
+        setForm(initialForm);
       },
     });
   };
@@ -132,6 +128,7 @@ function CreateMechanicalReports({ openCreateReport, setOpenCreateReport }) {
           <button
             onClick={() => {
               setOpenCreateReport(!openCreateReport);
+              setForm(initialForm);
             }}
             className="cursor-pointer rounded-[10px] bg-white/80 p-1.5 text-[30px] text-red-500 transition-all delay-100 duration-75 ease-in-out hover:bg-black"
           >
@@ -174,7 +171,7 @@ function CreateMechanicalReports({ openCreateReport, setOpenCreateReport }) {
                 type="text"
                 name="shiftType"
                 readOnly
-                value={profile?.data?.currentShift?.shiftName}
+                value={profile?.data?.currentShift?.shiftName || ''}
                 className="w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none"
               />
             </label>
@@ -184,7 +181,7 @@ function CreateMechanicalReports({ openCreateReport, setOpenCreateReport }) {
                 type="text"
                 name="personnelName"
                 readOnly
-                value={profile?.data?.fullName}
+                value={profile?.data?.fullName || ''}
                 className="w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none"
               />
             </label>

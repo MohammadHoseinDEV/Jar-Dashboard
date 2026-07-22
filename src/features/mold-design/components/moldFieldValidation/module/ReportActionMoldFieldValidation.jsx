@@ -22,7 +22,7 @@ import deleteIcon from '../../../../../assets/images/delete.png';
 import form from '../../../../../assets/images/form.png';
 import { useGetProfile } from '../../../../../hooks/profile/profile';
 
-function ReportAction({
+function ReportActionMoldFieldValidation({
   report,
   canEdit,
   canDelete,
@@ -31,11 +31,16 @@ function ReportAction({
   setOpenFormReport,
   setSelectedReport,
 }) {
+  console.log(report);
   if (!report) return null;
 
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: profile } = useGetProfile();
+
+  const isSuperAdmin = profile?.data?.identityRoles?.some(
+    (p) => p.roleId === 'cfa79204-d797-4241-8630-55fcc1b2f721'
+  );
 
   const { refs, floatingStyles, context } = useFloating({
     placement: 'bottom-start',
@@ -88,7 +93,8 @@ function ReportAction({
                 <p>{report?.productName}</p>
               </div>
 
-              {canEdit && (
+              {((canEdit && report?.isDesignerSigned === false) ||
+                isSuperAdmin) && (
                 <div
                   {...getItemProps({
                     onClick: (e) => {
@@ -109,7 +115,8 @@ function ReportAction({
                 </div>
               )}
 
-              {canDelete && (
+              {((canDelete && report?.isDesignerSigned === false) ||
+                isSuperAdmin) && (
                 <div
                   {...getItemProps({
                     onClick: (e) => {
@@ -157,4 +164,4 @@ function ReportAction({
   );
 }
 
-export default ReportAction;
+export default ReportActionMoldFieldValidation;

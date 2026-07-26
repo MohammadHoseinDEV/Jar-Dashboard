@@ -58,7 +58,7 @@ function FormInternalDesignjsx({ selectedInternal }) {
           <p>
             <span className="font-bold">نام محصول / کد نمونه :</span>
             <span className="font-[AvenirLTProHeavy]">
-              {selectedInternal?.productNameOrSampleCode}
+              {selectedInternal?.productName}
             </span>
           </p>
           <p>

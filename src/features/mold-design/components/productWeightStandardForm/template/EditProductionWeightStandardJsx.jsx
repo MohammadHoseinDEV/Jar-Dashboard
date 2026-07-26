@@ -159,9 +159,11 @@ function EditProductionWeightStandardJsx({
             />
           </label>
         </div>
-        <p className="my-2 border-t-2 border-white/30 py-2">وزن محصول </p>
+        <p className="5xl:text-[30px] my-2 border-t-2 border-white/30 py-2">
+          وزن محصول
+        </p>
         <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
-          <label htmlFor="productWeightLine1">
+          <label htmlFor="productWeightLine1" className="5xl:text-[25px]">
             وزن محصول خط 1
             <input
               type="text"
@@ -170,13 +172,13 @@ function EditProductionWeightStandardJsx({
               onChange={(e) => {
                 setForm((p) => ({
                   ...p,
-                  [e.target.name]: e.target.value,
+                  [e.target.name]: Number(e.target.value),
                 }));
               }}
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[AvenirLTProMedium] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
             />
           </label>
-          <label htmlFor="productWeightLine2">
+          <label htmlFor="productWeightLine2" className="5xl:text-[25px]">
             وزن محصول خط 2
             <input
               type="text"
@@ -185,13 +187,13 @@ function EditProductionWeightStandardJsx({
               onChange={(e) => {
                 setForm((p) => ({
                   ...p,
-                  [e.target.name]: e.target.value,
+                  [e.target.name]: Number(e.target.value),
                 }));
               }}
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[AvenirLTProMedium] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
             />
           </label>
-          <label htmlFor="productWeightLine3">
+          <label htmlFor="productWeightLine3" className="5xl:text-[25px]">
             وزن محصول خط 3
             <input
               type="text"
@@ -200,16 +202,18 @@ function EditProductionWeightStandardJsx({
               onChange={(e) => {
                 setForm((p) => ({
                   ...p,
-                  [e.target.name]: e.target.value,
+                  [e.target.name]: Number(e.target.value),
                 }));
               }}
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[AvenirLTProMedium] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
             />
           </label>
         </div>
-        <p className="my-2 border-t-2 border-white/30 py-2">تلرانس وزنی</p>
+        <p className="5xl:text-[30px] my-2 border-t-2 border-white/30 py-2">
+          تلرانس وزنی
+        </p>
         <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
-          <label htmlFor="weightToleranceLine1">
+          <label htmlFor="weightToleranceLine1" className="5xl:text-[25px]">
             تلرانس وزنی خط 1
             <input
               type="text"
@@ -224,7 +228,7 @@ function EditProductionWeightStandardJsx({
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
             />
           </label>
-          <label htmlFor="weightToleranceLine2">
+          <label htmlFor="weightToleranceLine2" className="5xl:text-[25px]">
             تلرانس وزنی خط 2
             <input
               type="text"
@@ -239,7 +243,7 @@ function EditProductionWeightStandardJsx({
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
             />
           </label>
-          <label htmlFor="weightToleranceLine3">
+          <label htmlFor="weightToleranceLine3" className="5xl:text-[25px]">
             تلرانس وزنی خط 3
             <input
               type="text"
@@ -255,11 +259,11 @@ function EditProductionWeightStandardJsx({
             />
           </label>
         </div>
-        <p className="my-2 border-t-2 border-white/30 py-2">
+        <p className="5xl:text-[30px] my-2 border-t-2 border-white/30 py-2">
           خطوط توصیه شده با توجه به ملاحظات اقتصادی
         </p>
         <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
-          <label htmlFor="recommendedLine1">
+          <label htmlFor="recommendedLine1" className="5xl:text-[25px]">
             ملاحظات خط 1
             <input
               type="text"
@@ -274,7 +278,7 @@ function EditProductionWeightStandardJsx({
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
             />
           </label>
-          <label htmlFor="recommendedLine2">
+          <label htmlFor="recommendedLine2" className="5xl:text-[25px]">
             ملاحظات خط 2
             <input
               type="text"
@@ -289,7 +293,7 @@ function EditProductionWeightStandardJsx({
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
             />
           </label>
-          <label htmlFor="recommendedLine3">
+          <label htmlFor="recommendedLine3" className="5xl:text-[25px]">
             ملاحظات خط 3
             <input
               type="text"
@@ -305,7 +309,9 @@ function EditProductionWeightStandardJsx({
             />
           </label>
         </div>
-        <p className="my-2 border-t-2 border-white/30 py-2">توضیحات</p>
+        <p className="5xl:text-[30px] my-2 border-t-2 border-white/30 py-2">
+          توضیحات
+        </p>
         <label htmlFor="drawingNotes" className="5xl:text-[30px] flex flex-col">
           <textarea
             name="notes"

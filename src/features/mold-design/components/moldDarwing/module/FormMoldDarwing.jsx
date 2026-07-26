@@ -61,21 +61,24 @@ function FormMoldDarwing({
   const isDesigner = profile?.data?.companyRoles?.some(
     (p) =>
       p.roleId === '7a0bcb84-1e92-4184-91ee-cda1b47a890a' ||
-      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e'
+      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e' ||
+      p.roleId === 'e8d691c5-827c-4c65-9d1a-14def8620ade'
   );
   const canSignDesigner = canSign && isDesigner;
 
   const isSignFactoryManager = profile?.data?.companyRoles?.some(
     (p) =>
       p.roleId === '8132dd4b-2e30-458d-a9f4-7e3bb4c344db' ||
-      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e'
+      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e' ||
+      p.roleId === 'e8d691c5-827c-4c65-9d1a-14def8620ade'
   );
   const canSignFactoryManager = canSign && isSignFactoryManager;
 
   const isSignDesignerS2 = profile?.data?.companyRoles?.some(
     (p) =>
       p.roleId === '7a0bcb84-1e92-4184-91ee-cda1b47a890a' ||
-      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e'
+      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e' ||
+      p.roleId === 'e8d691c5-827c-4c65-9d1a-14def8620ade'
   );
   const canSignDesignerS2 = canSign && isSignDesignerS2;
 
@@ -195,7 +198,7 @@ function FormMoldDarwing({
         onClick={closeHandler}
       />
       <div
-        className={`relative transform rounded-[15px] bg-white p-2 text-white shadow-2xl transition-all duration-300 max-2xl:pb-0 print:scale-86! ${
+        className={`relative transform rounded-[15px] bg-white p-2 text-white shadow-2xl transition-all duration-300 print:scale-86! ${
           openForm
             ? '5xl:scale-138 translate-y-0 scale-112 opacity-100 max-2xl:scale-78 max-xl:scale-75 max-md:scale-60 print:shadow-none '
             : '-translate-y-10 scale-0 opacity-0'
@@ -213,6 +216,7 @@ function FormMoldDarwing({
           setOpenCode={setOpenCode}
           handleSubmitSign={handleSubmitSign}
           setPassword={setPassword}
+          handleOpenSignatureModal={handleOpenSignatureModal}
         />
       </div>
     </div>

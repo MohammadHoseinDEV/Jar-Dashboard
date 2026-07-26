@@ -16,7 +16,6 @@ import { CgProfile } from 'react-icons/cg';
 import { FiLogOut } from 'react-icons/fi';
 
 const Profile = lazy(() => import('../components/Profile/Profile'));
-const Gauge = lazy(() => import('../components/Apex/Gauge.jsx'));
 
 function DashboardHome() {
   const { token, userInfo } = useSelector((state) => state.auth);
@@ -291,21 +290,21 @@ function DashboardHome() {
       )} */}
 
       <div></div>
-      <div className="flex justify-end rounded-2xl">
+      <div className="5xl:pt-2 flex justify-end rounded-2xl">
         <div className="flex space-x-2 pl-5 text-white">
           <span
             onClick={() => setOpenProfile(true)}
             className="animate-wiggle-inline cursor-pointer rounded-full bg-white p-1 transition-all delay-100 duration-200 ease-in-out hover:scale-110"
             style={{ animation: 'wiggle 3s ease-in-out infinite' }}
           >
-            <CgProfile className="size-9 text-black" />
+            <CgProfile className="5xl:size-15 size-9 text-black" />
           </span>
           <span
             onClick={() => setOpenExit(true)}
             className="animate-wiggle-inline flex cursor-pointer items-center justify-center rounded-full bg-white p-1 transition-all delay-100 duration-200 ease-in-out hover:scale-110"
             style={{ animation: 'wiggle 3s ease-in-out infinite' }}
           >
-            <FiLogOut className="flex size-9 text-center text-black" />
+            <FiLogOut className="5xl:size-15 flex size-9 text-center text-black" />
           </span>
         </div>
 
@@ -315,7 +314,12 @@ function DashboardHome() {
             openExit ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
         >
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"
+            onClick={() => {
+              setOpenExit(false);
+            }}
+          />
           <div
             className={`relative transform rounded-[15px] bg-[#0F090C] p-6 text-white shadow-2xl transition-all duration-300 ${
               openExit
@@ -323,13 +327,15 @@ function DashboardHome() {
                 : '-translate-y-10 scale-95 opacity-0'
             }`}
           >
-            <h1 className="font-[SamimBold] text-lg">خروج از حساب کاربری</h1>
-            <p className="mt-4 font-[Samim] text-white/80">
+            <h1 className="5xl:text-[25px] font-[SamimBold] text-lg">
+              خروج از حساب کاربری
+            </h1>
+            <p className="5xl:text-[25px] mt-4 font-[Samim] text-white/80">
               {userInfo?.gender === 0
                 ? `آقای ${userInfo?.firstName} ${userInfo?.lastName}، آیا از خروج از حساب کاربری خود اطمینان دارید؟`
                 : `خانم ${userInfo?.firstName} ${userInfo?.lastName}، آیا از خروج از حساب کاربری خود اطمینان دارید؟`}
             </p>
-            <div className="mt-6 flex justify-end gap-2">
+            <div className="5xl:text-[25px] mt-6 flex justify-end gap-2">
               <button
                 onClick={() => setOpenExit(false)}
                 className="cursor-pointer rounded-xl bg-white/10 px-4 py-2 font-[Samim] transition-all delay-75 duration-150 ease-in-out hover:scale-110 hover:bg-white/15 active:scale-95"

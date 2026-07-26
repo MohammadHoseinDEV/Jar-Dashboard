@@ -43,23 +43,23 @@ function MenuItem({
 
   const content = (
     <div
-      className={`relative mb-2 flex items-center rounded-xl px-3 py-2 font-[Samim] text-[200px] transition-all duration-200 ${
-        isActive ? 'text-white' : 'text-white/50 hover:text-white'
-      }`}
+      className={`relative mb-2 flex items-center rounded-xl py-2 font-[Samim] text-[200px] transition-all duration-200 ${
+        isOpen ? 'justify-start px-3' : 'justify-center px-0'
+      } ${isActive ? 'text-white' : 'text-white/50 hover:text-white'}`}
       onClick={() => {
         if (hasChildren && isOpen) toggleDropdown(item.id);
       }}
     >
       {MENU_ICON_MAP[item?.icon] ? (
         typeof MENU_ICON_MAP[item?.icon] === 'function' ? (
-          <span className="flex justify-center text-xl text-[25px] text-white">
+          <span className="5xl:text-[40px] flex items-center justify-center text-xl text-[25px] text-white">
             {React.createElement(MENU_ICON_MAP[item?.icon])}
           </span>
         ) : (
           <img
             src={MENU_ICON_MAP[item?.icon]}
             alt={item?.icon}
-            className="h-8 w-8 object-contain"
+            className="5xl:size-13 flex h-8 w-8 object-contain"
           />
         )
       ) : (
@@ -67,7 +67,7 @@ function MenuItem({
       )}
 
       {isOpen && (
-        <p className="pr-2 text-[15px] opacity-100 transition-all delay-150 duration-200 max-xl:text-[12px] max-sm:text-[15px]">
+        <p className="5xl:text-[20px] pr-2 text-[15px] opacity-100 transition-all delay-150 duration-200 max-xl:text-[12px] max-sm:text-[15px]">
           {item?.title}
         </p>
       )}
@@ -77,7 +77,9 @@ function MenuItem({
   return (
     <div
       ref={itemRef}
-      className="relative flex w-full cursor-pointer flex-col pr-3 transition-all delay-75 duration-100 hover:border-r-2 hover:border-r-white"
+      className={`relative flex w-full cursor-pointer flex-col transition-all delay-75 duration-100 hover:border-r-2 hover:border-r-white ${
+        isOpen ? 'pr-3' : ''
+      }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -192,7 +194,7 @@ function SidebarHome({ isOpen, onClose, mobile, setMobile }) {
 
       {!isOpen && hoveredItem && (
         <div
-          className="fixed z-999 min-w-[200px] rounded-lg bg-[#0F090C]/95 shadow-xl"
+          className="fixed z-999 min-w-[200px] rounded-lg bg-linear-to-bl from-black to-gray-900 shadow-xl"
           style={{
             top: `${flyoutPosition.top}px`,
             right: `${flyoutPosition.right}px`,
@@ -207,7 +209,7 @@ function SidebarHome({ isOpen, onClose, mobile, setMobile }) {
                 <Link
                   key={sub.id}
                   to={buildPath(sub.url)}
-                  className="block rounded px-3 py-2 text-sm text-white/80 transition-colors hover:bg-gray-700"
+                  className="5xl:text-[25px] block rounded px-3 py-2 text-sm text-white/80 transition-colors hover:bg-gray-700"
                   onClick={() => mobile && onClose?.()}
                 >
                   {sub.title}

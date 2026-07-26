@@ -16,6 +16,7 @@ function FormMoldDarwingJsx({
   handleSubmitSign,
   setOpenCode,
   setPassword,
+  handleOpenSignatureModal,
 }) {
   return (
     <div
@@ -77,61 +78,62 @@ function FormMoldDarwingJsx({
           </p>
         </div>
       </div>
-      <div className="flex h-50 flex-col border-b px-1 text-[13px]">
+      <div className="flex h-40 px-1 text-[13px]">
         <div>
           <p className="font-bold">{`تصدیق نقشه ها و متعلقات نیاز به ساخت نمونه ${selectedMoldDarwing?.needsSampleProduction === 1 ? 'دارد' : 'ندارد'} .`}</p>
-          <p className="flex flex-col">
+          <p className="flex h-30 flex-col">
             <span className="font-bold">ملاحظات</span>
             <span>{selectedMoldDarwing?.notes}</span>
           </p>
         </div>
-        <div className="justify- flex items-center space-x-50 pt-28">
-          <div className="flex items-center">
-            <p>امضاء مسئول طراحی :</p>
-            <p>
-              {selectedSignDesigner ? (
-                <img
-                  src={`data:image/png;base64,${selectedSignDesigner}`}
-                  alt="signature"
-                  className="fixed top-55 right-33 h-20 w-25"
-                />
-              ) : canSignDesigner ? (
-                <button
-                  onClick={() => handleOpenSignatureModal('designer')}
-                  className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
-                >
-                  ثبت امضاء
-                </button>
-              ) : (
-                <span className="rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
-                  عدم دسترسی
-                </span>
-              )}
-            </p>
-          </div>
-          <div className="flex items-center">
-            <p>امضاء مدیر کارخانه :</p>
-            <p>
-              {selectedSignFactoryManager ? (
-                <img
-                  src={`data:image/png;base64,${selectedSignFactoryManager}`}
-                  alt="signature"
-                  className="fixed top-55 left-10 h-20 w-25"
-                />
-              ) : canSignFactoryManager ? (
-                <button
-                  onClick={() => handleOpenSignatureModal('factoryManager')}
-                  className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
-                >
-                  ثبت امضاء
-                </button>
-              ) : (
-                <span className="rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
-                  عدم دسترسی
-                </span>
-              )}
-            </p>
-          </div>
+      </div>
+      <div className="grid grid-cols-2 border-b pr-1 pb-2">
+        <div className="flex items-center">
+          <p>امضاء مسئول طراحی :</p>
+          <p>
+            {selectedSignDesigner ? (
+              <img
+                src={`data:image/png;base64,${selectedSignDesigner}`}
+                alt="signature"
+                className="fixed top-53 right-39 h-20 w-25"
+              />
+            ) : canSignDesigner ? (
+              <button
+                onClick={() => handleOpenSignatureModal('designer')}
+                className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
+              >
+                ثبت امضاء
+              </button>
+              
+            ) : (
+              <span className="rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
+                عدم دسترسی
+              </span>
+            )}
+          </p>
+        </div>
+        <div className="flex items-center">
+          <p>امضاء مدیر کارخانه :</p>
+          <p>
+            {selectedSignFactoryManager ? (
+              <img
+                src={`data:image/png;base64,${selectedSignFactoryManager}`}
+                alt="signature"
+                className="fixed top-53 left-10 h-20 w-25"
+              />
+            ) : canSignFactoryManager ? (
+              <button
+                onClick={() => handleOpenSignatureModal('factoryManager')}
+                className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
+              >
+                ثبت امضاء
+              </button>
+            ) : (
+              <span className="rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
+                عدم دسترسی
+              </span>
+            )}
+          </p>
         </div>
       </div>
       <div className="flex items-center pr-1 text-[13px]">
@@ -219,7 +221,7 @@ function FormMoldDarwingJsx({
               <img
                 src={`data:image/png;base64,${selectedSignDesignerS2}`}
                 alt="signature"
-                className="fixed bottom-3 left-5 h-21 w-30"
+                className="fixed bottom-3 left-4 h-21 w-30"
               />
             ) : canSignDesignerS2 ? (
               <button
@@ -234,6 +236,54 @@ function FormMoldDarwingJsx({
               </span>
             )}
           </p>
+        </div>
+      </div>
+      {/* open Code */}
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${
+          openCode ? 'opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+      >
+        <div
+          className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"
+          onClick={() => {
+            setOpenCode(false);
+          }}
+        />
+        <div
+          className={`relative transform rounded-[15px] bg-linear-to-br from-black to-gray-600 p-6 text-white shadow-2xl transition-all duration-300 ${
+            openCode
+              ? 'translate-y-0 scale-100 opacity-100'
+              : '-translate-y-10 scale-0 opacity-0'
+          }`}
+        >
+          <div className="flex items-center justify-between pb-5">
+            <h1>کد امضاء</h1>
+            <span
+              onClick={() => {
+                setOpenCode(false);
+              }}
+              className="cursor-pointer rounded-[10px] bg-white/80 p-1.5 text-[30px] text-red-500 transition-all delay-100 duration-75 ease-in-out hover:bg-black"
+            >
+              <img src={close} alt="close" width={20} />
+            </span>
+          </div>
+          <input
+            type="text"
+            placeholder="ثبت کدامضاء"
+            autoComplete="off"
+            name="signaturePassword"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            className="m-2 w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none"
+          />
+          <button
+            onClick={handleSubmitSign}
+            className="float-left mt-2 cursor-pointer rounded-[10px] bg-green-500 p-2 transition-all delay-75 duration-100 hover:bg-green-700"
+          >
+            تایید
+          </button>
         </div>
       </div>
       {/* open Code */}

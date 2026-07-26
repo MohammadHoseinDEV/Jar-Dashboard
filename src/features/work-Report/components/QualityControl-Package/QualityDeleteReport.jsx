@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDeleteQualityReport } from '../../Api/QualityControl & Package/quality';
+import { useDeleteQualityReport } from '../../Api/QualityControl-Package/quality';
 
 import close from '../../../../assets/images/close.png';
 

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   useGetAllQualityReports,
   useGetQualityReports,
-} from '../../Api/QualityControl & Package/quality';
+} from '../../Api/QualityControl-Package/quality';
 import { useGetProfile } from '../../../../hooks/profile/profile';
 import { can, getPerm } from '../../../../utils/rbac';
 
@@ -32,19 +32,19 @@ import { IoTimeOutline } from 'react-icons/io5';
 import { HiHashtag } from 'react-icons/hi';
 
 const QualityCreateReports = lazy(
-  () => import('../../components/QualityControl & Package/QualityCreateReports')
+  () => import('../../components/QualityControl-Package/QualityCreateReports')
 );
 const QualityEditReport = lazy(
-  () => import('../../components/QualityControl & Package/QualityEditReport')
+  () => import('../../components/QualityControl-Package/QualityEditReport')
 );
 const QualityDeleteReport = lazy(
-  () => import('../../components/QualityControl & Package/QualityDeleteReport')
+  () => import('../../components/QualityControl-Package/QualityDeleteReport')
 );
 const FormReport = lazy(
-  () => import('../../components/QualityControl & Package/FormReport')
+  () => import('../../components/QualityControl-Package/FormReport')
 );
 import Pagination from '../../../../pagination/Pagination';
-import { ReportActionQualityControl } from '../../components/QualityControl & Package/ReportActionQualityControl';
+import { ReportActionQualityControl } from '../../components/QualityControl-Package/ReportActionQualityControl';
 
 function QualityControl() {
   const { menus: userMenus } = useSelector((state) => state.auth);

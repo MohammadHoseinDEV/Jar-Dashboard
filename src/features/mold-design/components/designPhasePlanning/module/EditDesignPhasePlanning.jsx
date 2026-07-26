@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import EditDesignPhasePlanningJsx from '../template/EditDesignPhasePlanningJsx';
 import { useUpdateDesignPhasePlanning } from '../../../Api/designPhasePlanning';
+import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 
 const designPhase = [
   {
@@ -44,6 +45,9 @@ function EditDesignPhasePlanning({
     id: '',
     startTime: '',
     endTime: '',
+    productName: '',
+    productCode: '',
+    formNumber: '',
     items: designPhase.map((d) => ({
       id: '',
       rowNumber: d.id,
@@ -64,6 +68,9 @@ function EditDesignPhasePlanning({
       id: selectedDesign?.id,
       startTime: selectedDesign?.startTime,
       endTime: selectedDesign?.endTime,
+      productName: selectedDesign?.productName,
+      productCode: selectedDesign?.productCode,
+      formNumber: selectedDesign?.formNumber,
       productNameOrSampleCode: selectedDesign?.productNameOrSampleCode,
       plannedStartDate: selectedDesign?.plannedStartDate,
       estimatedTotalHours: selectedDesign?.estimatedTotalHours,
@@ -110,6 +117,36 @@ function EditDesignPhasePlanning({
     setSelectedDesign(null);
   };
 
+  const { data: product } = useGetProducts();
+  const [searchProducts, setSearchProducts] = useState('');
+
+  const getProducts = useMemo(() => {
+    const none = { id: '', name: 'انتخاب  محصول' };
+    return [
+      none,
+      ...(product ?? []).map((p) => ({
+        id: p.id,
+        name: p.productName,
+        code: p.productCode,
+      })),
+    ];
+  }, [product]);
+
+  const filterProducts = useMemo(() => {
+    const q = searchProducts.trim().toLowerCase();
+    if (!q) return getProducts;
+
+    return getProducts.filter((p) => (p?.name || '').toLowerCase().includes(q));
+  }, [searchProducts, getProducts]);
+
+  const selectedProducts = useMemo(() => {
+    return (
+      getProducts.find(
+        (p) => p.id === form.productId || p.code === form.productCode
+      ) || getProducts[0]
+    );
+  }, [getProducts, form.productId, form.productCode]);
+
   const updateReport = useUpdateDesignPhasePlanning();
 
   const submitHandler = (e) => {
@@ -154,6 +191,12 @@ function EditDesignPhasePlanning({
           selectedDesign={selectedDesign}
           handleItemChange={handleItemChange}
           setForm={setForm}
+          product={product}
+          searchProducts={searchProducts}
+          setSearchProducts={setSearchProducts}
+          getProducts={getProducts}
+          filterProducts={filterProducts}
+          selectedProducts={selectedProducts}
         />
       </div>
     </div>

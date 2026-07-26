@@ -21,6 +21,7 @@ function MobileMoldFieldValidation({
   setSelectedMold,
   setOpenForm,
 }) {
+  
   return (
     <div>
       {/* Mobile design */}

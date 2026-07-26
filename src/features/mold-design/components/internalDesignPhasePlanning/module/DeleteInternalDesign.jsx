@@ -33,8 +33,10 @@ function DeleteInternalDesign({
             : '-translate-y-10 scale-0 opacity-0'
         }`}
       >
-        <div className="flex items-center justify-between">
-          <h2 className="font-[SamimBold] text-[20px]">حذف گزارش</h2>
+        <div className="flex items-center justify-between pb-5">
+          <h2 className="5xl:text-[25px] font-[SamimBold] text-[20px]">
+            حذف گزارش
+          </h2>
 
           <button
             onClick={closeHandler}
@@ -49,10 +51,10 @@ function DeleteInternalDesign({
           </button>
         </div>
         <div>
-          <div className="flex flex-wrap items-center gap-x-1 text-start text-[14px]">
+          <div className="5xl:text-[30px] flex flex-wrap items-center gap-x-1 text-start text-[14px]">
             <span>آیا از حذف محصول</span>
             <span className="font-[AvenirLTProMedium]">
-              {selectedInternal?.productNameOrSampleCode}
+              {selectedInternal?.productName}
             </span>
             <span> مطمئن هستید؟</span>
           </div>
@@ -66,7 +68,7 @@ function DeleteInternalDesign({
               });
             }}
           >
-            <button className="cursor-pointer rounded-xl bg-linear-to-bl from-red-500 to-red-800 px-4 py-2 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-105 hover:bg-red-500/60">
+            <button className="5xl:text-[25px] cursor-pointer rounded-xl bg-linear-to-bl from-red-500 to-red-800 px-4 py-2 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-105 hover:bg-red-500/60">
               حذف
             </button>
           </div>

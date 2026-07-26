@@ -209,6 +209,7 @@ function DesignDataForm() {
               setOpenForm={setOpenForm}
             />
           </div>
+          
         )}
         <div
           className={`w-full shrink-0 ${filterStatus === 'confirmed' || filterStatus === 'pending' || filterStatus === 'pendingDesigner' || filterStatus === 'productionManager' || filterStatus === 'factoryManager' ? 'opacity-0' : ''}`}

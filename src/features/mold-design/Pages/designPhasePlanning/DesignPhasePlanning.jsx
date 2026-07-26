@@ -11,6 +11,7 @@ import TableReport from '../../components/designPhasePlanning/template/TableRepo
 import DeleteDesignPhasePlanning from '../../components/designPhasePlanning/module/DeleteDesignPhasePlanning';
 import FormdesignPhasePlanning from '../../components/designPhasePlanning/module/FormdesignPhasePlanning';
 import MobilePage from '../../components/designPhasePlanning/template/MobilePage';
+import { toast } from 'react-toastify';
 
 function DesignPhasePlanning() {
   const { menus: userMenus } = useSelector((s) => s.auth);
@@ -26,7 +27,7 @@ function DesignPhasePlanning() {
   const [selectedDesign, setSelectedDesign] = useState(null);
 
   const perm = useMemo(
-    () => getPerm(userMenus, 'internal-design-phase-planning'),
+    () => getPerm(userMenus, 'design-phase-planning'),
     [userMenus]
   );
 

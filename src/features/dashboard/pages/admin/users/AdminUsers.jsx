@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { useEducationDegrees } from '../../../../../hooks/education/education';
 import { useJobPositions } from '../../../../../hooks/jobPosition/jobPosition';
@@ -8,11 +9,10 @@ import {
   useDeleteUser,
 } from '../../../../../hooks/user/userApi';
 
-import CreateModal from './modal/CreateModal';
-
 import { TbSignature } from 'react-icons/tb';
 import { CgSync } from 'react-icons/cg';
 
+import { can, getPerm } from '../../../../../utils/rbac';
 import deleteIcon from '../../../../../assets/images/delete.png';
 import edit from '../../../../../assets/images/edit.png';
 import plus from '../../../../../assets/images/plus.png';
@@ -21,26 +21,29 @@ import company from '../../../../../assets/images/factory.png';
 import shift from '../../../../../assets/images/shift.png';
 import role from '../../../../../assets/images/role.png';
 import office from '../../../../../assets/images/office.png';
+import { toast } from 'react-toastify';
 
 import { HashLoader } from 'react-spinners';
 import { useGetRoles } from '../../../../../hooks/role/role';
-import AssignRoleToUser from './modal/AssignRoleToUser';
-import DeleteModal from './modal/DeleteModal';
-import AssignRoleToUserInCompany from './modal/AssignRoleToUserInCompany';
-import AssignRoleToUserInUnit from './modal/AssignRoleToUserInUnit';
-import ShiftModal from './modal/ShiftModal';
-import DetailsModal from './modal/DetailsModal';
-import EditModal from './modal/EditModal';
-import { can, getPerm } from '../../../../../utils/rbac';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import Pagination from '../../../../../pagination/Pagination';
-import SignatureModal from './modal/SignatureModal';
-import ScheduleModal from './modal/scheduleModal';
+
+const CreateModal = lazy(() => import('./modal/CreateModal'));
+const AssignRoleToUser = lazy(() => import('./modal/AssignRoleToUser'));
+const DeleteModal = lazy(() => import('./modal/DeleteModal'));
+const AssignRoleToUserInCompany = lazy(
+  () => import('./modal/AssignRoleToUserInCompany')
+);
+const AssignRoleToUserInUnit = lazy(
+  () => import('./modal/AssignRoleToUserInUnit')
+);
+const ShiftModal = lazy(() => import('./modal/ShiftModal'));
+const DetailsModal = lazy(() => import('./modal/DetailsModal'));
+const EditModal = lazy(() => import('./modal/EditModal'));
+const Pagination = lazy(() => import('../../../../../pagination/Pagination'));
+const SignatureModal = lazy(() => import('./modal/SignatureModal'));
+const ScheduleModal = lazy(() => import('./modal/scheduleModal'));
 
 function AdminUsers() {
   const { menus: userMenus } = useSelector((s) => s.auth);
-
   const [search, setSearch] = useState('');
   const [unitName, setUnitName] = useState('');
   const [page, setPage] = useState(1);
@@ -656,7 +659,7 @@ function AdminUsers() {
                                     setOpenSchedule(true);
                                     setSelectedUser(user);
                                   }}
-                                  className="mb-2 cursor-pointer  rounded-[10px] py-2 font-[Samim] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
+                                  className="mb-2 cursor-pointer rounded-[10px] py-2 font-[Samim] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
                                 >
                                   <CgSync size={31} />
                                 </button>

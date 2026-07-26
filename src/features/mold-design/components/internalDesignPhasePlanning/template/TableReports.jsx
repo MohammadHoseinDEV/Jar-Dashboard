@@ -20,6 +20,7 @@ function TableReports({
             <th className="5xl:py-5 rounded-tr-[10px] border-t border-r border-b border-white/30 py-3 pr-5 max-2xl:py-2">
               ردیف
             </th>
+            <th className="border-t border-b border-white/30">کد محصول</th>
             <th className="border-t border-b border-white/30">نام محصول</th>
 
             <th className="border-t border-b border-white/30">شماره فرم</th>
@@ -40,9 +41,13 @@ function TableReports({
                   {index + 1}
                 </p>
               </td>
-
+              <td className="5xl:text-[28px] border-b border-white/20 max-2xl:text-[12px]">
+                <p className="mx-1 rounded-[10px] border border-[#32a3de]/40 bg-[#182228] font-[AvenirLTProBook] text-[#32a3de]">
+                  {e?.productCode}
+                </p>
+              </td>
               <td className="5xl:text-[28px] border-b border-white/20 font-[AvenirLTProBook] text-white max-2xl:text-[12px]">
-                {e?.productNameOrSampleCode}
+                {e?.productName}
               </td>
 
               <td className="5xl:text-[28px] border-b border-white/20 max-2xl:text-[12px]">

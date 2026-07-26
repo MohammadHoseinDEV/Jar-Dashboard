@@ -53,6 +53,26 @@ function FormDesignPhasePlanningJsx({ selectedDesign }) {
           </span>
         </p>
       </div>
+      <div className="flex items-center justify-around gap-4 border-b text-[12px]">
+        <div className="flex items-center space-x-1">
+          <p className="font-bold">نام محصول :</p>
+          <p className="font-[AvenirLTProMedium]">
+            {selectedDesign?.productName}
+          </p>
+        </div>
+        <div className="flex items-center space-x-1">
+          <p className="font-bold">کد محصول :</p>
+          <p className="font-[AvenirLTProMedium]">
+            {selectedDesign?.productCode}
+          </p>
+        </div>
+        <div className="flex items-center space-x-1">
+          <p className="font-bold">شماره فرم :</p>
+          <p className="font-[AvenirLTProMedium]">
+            {selectedDesign?.formNumber}
+          </p>
+        </div>
+      </div>
       <div className="grid grid-cols-[6%_55%_5%_5%_5%_9%_5%_5%_5%] bg-[#D9D9D9] text-center text-[10px]">
         <div className="flex min-h-[70px] items-center justify-center border-b border-black">
           <span className="-rotate-90 whitespace-nowrap">ردیف</span>
@@ -79,7 +99,7 @@ function FormDesignPhasePlanningJsx({ selectedDesign }) {
         <div className="flex min-h-[70px] items-center justify-center border-r border-b border-black">
           <span className="-rotate-90 whitespace-nowrap">فروش</span>
         </div>
-        <div className="flex min-h-[70px] items-center justify-center border-r border-l border-b border-black">
+        <div className="flex min-h-[70px] items-center justify-center border-r border-b border-l border-black">
           <span className="-rotate-90 whitespace-nowrap">مدیر کارخانه</span>
         </div>
       </div>
@@ -89,7 +109,7 @@ function FormDesignPhasePlanningJsx({ selectedDesign }) {
           key={s.id}
           className="grid grid-cols-[6%_55%_5%_5%_5%_9%_5%_5%_5%] text-center text-[13px]"
         >
-          <div className="flex items-center justify-center border-b border-black py-2 font-[AvenirLTProHeavy]">
+          <div className="flex items-center justify-center border-b border-black font-[AvenirLTProHeavy]">
             {s.rowNumber}
           </div>
           <div className="border-r border-b border-black px-1 py-2 text-center">

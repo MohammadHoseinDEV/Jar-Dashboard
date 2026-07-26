@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useCreateDesignPhasePlanning } from '../../../Api/designPhasePlanning';
 import CreateDesignPhasePlanningJsx from '../template/CreateDesignPhasePlanningJsx';
+import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 
 const designPhase = [
   {
@@ -34,22 +35,27 @@ const designPhase = [
   { id: 14, name: 'تهیه شناسنامه محصول' },
 ];
 
+const initialState = {
+  startTime: '',
+  endTime: '',
+  productName: '',
+  productCode: '',
+  formNumber: '',
+  items: designPhase.map((d) => ({
+    rowNumber: d.id,
+    designPhase: d.name,
+    production: true,
+    design: false,
+    supplier: true,
+    qualityControlPackaging: false,
+    machining: true,
+    sales: false,
+    factoryManager: true,
+  })),
+};
+
 function CreateDesignPhasePlanning({ openCreateModal, setOpenCreateModal }) {
-  const [form, setForm] = useState({
-    startTime: '',
-    endTime: '',
-    items: designPhase.map((d) => ({
-      rowNumber: d.id,
-      designPhase: d.name,
-      production: true,
-      design: false,
-      supplier: true,
-      qualityControlPackaging: false,
-      machining: true,
-      sales: false,
-      factoryManager: true,
-    })),
-  });
+  const [form, setForm] = useState(initialState);
 
   const handleItemChange = (index, field, value) => {
     setForm((prev) => {
@@ -61,14 +67,41 @@ function CreateDesignPhasePlanning({ openCreateModal, setOpenCreateModal }) {
 
   const closeHandler = () => {
     setOpenCreateModal(false);
+    setForm(initialState);
   };
+
+  const { data: product } = useGetProducts();
+  const [searchProducts, setSearchProducts] = useState('');
+
+  const getProducts = useMemo(() => {
+    const none = { id: '', name: 'انتخاب  محصول' };
+    return [
+      none,
+      ...(product ?? []).map((p) => ({
+        id: p.id,
+        name: p.productName,
+        code: p.productCode,
+      })),
+    ];
+  }, [product]);
+
+  const filterProducts = useMemo(() => {
+    const q = searchProducts.trim().toLowerCase();
+    if (!q) return getProducts;
+
+    return getProducts.filter((p) => (p?.name || '').toLowerCase().includes(q));
+  }, [searchProducts, getProducts]);
+
+  const selectedProducts = useMemo(() => {
+    return getProducts.find((p) => p.id === (form.id || '')) || getProducts[0];
+  }, [getProducts, form.id]);
   const createReport = useCreateDesignPhasePlanning();
 
   const submitHandler = (e) => {
     e.preventDefault();
     createReport.mutate(form, {
       onSuccess: () => {
-        setOpenCreateModal(false);
+        closeHandler();
       },
     });
   };
@@ -97,6 +130,12 @@ function CreateDesignPhasePlanning({ openCreateModal, setOpenCreateModal }) {
           submitHandler={submitHandler}
           form={form}
           setForm={setForm}
+          product={product}
+          searchProducts={searchProducts}
+          setSearchProducts={setSearchProducts}
+          getProducts={getProducts}
+          filterProducts={filterProducts}
+          selectedProducts={selectedProducts}
         />
       </div>
     </div>

@@ -10,7 +10,6 @@ function DeleteDesignData({
   const closeHandler = () => {
     setOpenDeleteModal(false);
   };
-  
 
   const deleteReports = useDeleteDesignData();
   return (
@@ -50,7 +49,7 @@ function DeleteDesignData({
           </button>
         </div>
         <div>
-          <h4 className="5xl:text-[25px] flex pt-5 font-[SamimBold]">
+          <h4 className="5xl:text-[25px] flex flex-wrap pt-5 font-[SamimBold]">
             آیا از حذف فرم شماره
             <span className="px-2 font-[AvenirLTProMedium]" dir="ltr">
               {selectedDesign?.formNumber}

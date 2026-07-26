@@ -54,7 +54,7 @@ const PolishingReport = lazy(
 );
 const QualityControl = lazy(
   () =>
-    import('../features/work-Report/pages/QualityControl & Package/QualityControl')
+    import('../features/work-Report/pages/QualityControl-Package/QualityControl')
 );
 
 // Advanced Reports

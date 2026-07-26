@@ -15,6 +15,7 @@ function EditProductionWeightStandard({
     productCode: '',
     companyName: '',
     formDate: '',
+    formNumber: '',
     isMachineLine1: '',
     isMachineLine2: '',
     isMachineLine3: '',
@@ -38,6 +39,7 @@ function EditProductionWeightStandard({
       productCode: selectedProductWeigth?.productCode,
       companyName: selectedProductWeigth?.companyName,
       formDate: selectedProductWeigth?.formDate,
+      formNumber: selectedProductWeigth?.formNumber,
       isMachineLine1: selectedProductWeigth?.isMachineLine1,
       isMachineLine2: selectedProductWeigth?.isMachineLine2,
       isMachineLine3: selectedProductWeigth?.isMachineLine3,
@@ -118,7 +120,7 @@ function EditProductionWeightStandard({
         onClick={closeHandler}
       />
       <div
-        className={`relative flex max-h-[90vh] max-w-[80vw] transform flex-col overflow-hidden rounded-[15px] bg-linear-to-bl from-black to-gray-600 p-6 text-white shadow-2xl transition-all duration-300 max-2xl:scale-95 max-md:h-160 max-md:overflow-auto ${
+        className={`relative flex max-h-[90vh] max-w-[80vw] transform flex-col overflow-auto rounded-[15px] bg-linear-to-bl from-black to-gray-600 p-6 text-white shadow-2xl transition-all duration-300 max-2xl:scale-95 max-md:h-160 max-md:overflow-auto ${
           openEditModal
             ? ' translate-y-0 scale-100 opacity-100'
             : '-translate-y-10 scale-0 opacity-0'

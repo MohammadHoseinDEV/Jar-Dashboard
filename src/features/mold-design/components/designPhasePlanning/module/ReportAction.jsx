@@ -83,7 +83,7 @@ function ReportAction({
               className="5xl:text-[25px] absolute top-full left-0 z-9999 flex w-fit cursor-pointer flex-col items-start space-y-1 rounded-[15px] bg-black px-3 py-2 shadow-lg"
             >
               <div className="flex w-full items-center space-x-1 border-b border-white/50 p-1 font-[AvenirLTProMedium] text-white max-2xl:text-[15px]">
-                <p>{report?.productNameOrSampleCode}</p>
+                <p>{report?.productName}</p>
               </div>
 
               {canEdit && (

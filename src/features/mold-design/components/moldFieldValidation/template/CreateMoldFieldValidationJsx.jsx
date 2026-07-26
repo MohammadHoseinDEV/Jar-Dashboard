@@ -46,7 +46,7 @@ function CreateMoldFieldValidationJsx({
       <form
         onSubmit={submitHandler}
         id="mold"
-        className="no-scrollbar flex min-h-90 flex-col overflow-x-hidden overflow-y-auto max-md:max-h-[70vh]"
+        className="no-scrollbar flex max-h-[65vh] min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto max-md:max-h-[70vh]"
       >
         <div className="grid grid-cols-4 gap-4 max-md:flex max-md:flex-col">
           <label htmlFor="formDate" className="5xl:text-[30px] flex flex-col">
@@ -192,13 +192,13 @@ function CreateMoldFieldValidationJsx({
               name="quantity"
               value={form?.quantity || ''}
               placeholder="تعداد"
-              className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
               onChange={(e) => {
                 setForm((p) => ({
                   ...p,
                   [e.target.name]: e.target.value,
                 }));
               }}
+              className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none max-2xl:text-[14px] max-md:text-[13px]"
             />
           </div>
           <p className="5xl:text-[20px] max-2xl:text-[13px]">

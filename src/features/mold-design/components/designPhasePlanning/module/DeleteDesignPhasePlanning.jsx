@@ -33,7 +33,9 @@ function DeleteDesignPhasePlanning({
         }`}
       >
         <div className="flex items-center justify-between">
-          <h2 className="font-[SamimBold] text-[20px]">حذف گزارش</h2>
+          <h2 className="5xl:text-[35px] font-[SamimBold] text-[20px]">
+            حذف گزارش
+          </h2>
 
           <button
             onClick={closeHandler}
@@ -48,10 +50,10 @@ function DeleteDesignPhasePlanning({
           </button>
         </div>
         <div>
-          <h4 className="pt-5 font-[SamimBold]">
+          <h4 className="5xl:text-[30px] pt-5 font-[SamimBold]">
             آیا از حذف محصول
             <span className="px-2 font-[AvenirLTProMedium]" dir="ltr">
-              نام محصول یا کد محصول یا هرچیز دیگه ای باید مشخص بشسه این جا
+              {selectedDesign?.productName}
             </span>
             مطمئن هستید؟
           </h4>
@@ -65,7 +67,7 @@ function DeleteDesignPhasePlanning({
               });
             }}
           >
-            <button className="cursor-pointer rounded-xl bg-linear-to-bl from-red-500 to-red-800 px-4 py-2 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-105 hover:bg-red-500/60">
+            <button className="5xl:text-[25px] cursor-pointer rounded-xl bg-linear-to-bl from-red-500 to-red-800 px-4 py-2 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-105 hover:bg-red-500/60">
               حذف
             </button>
           </div>

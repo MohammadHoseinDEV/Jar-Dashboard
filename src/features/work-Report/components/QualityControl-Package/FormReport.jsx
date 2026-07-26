@@ -11,7 +11,7 @@ import { useGetProfile } from '../../../../hooks/profile/profile';
 import {
   useCreateSignatureHandover,
   useCreateSignatureReceiver,
-} from '../../Api/QualityControl & Package/quality';
+} from '../../Api/QualityControl-Package/quality';
 
 function FormReport({
   openForm,

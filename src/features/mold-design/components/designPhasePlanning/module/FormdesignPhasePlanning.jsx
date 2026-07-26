@@ -26,7 +26,7 @@ function FormdesignPhasePlanning({
       <div
         className={`relative transform rounded-[15px] bg-white p-2 text-white shadow-2xl transition-all duration-300 max-2xl:pb-0 max-md:p-2 print:scale-86! ${
           openForm
-            ? '5xl:scale-138 translate-y-0 scale-112 opacity-100 max-2xl:scale-78 max-xl:scale-75 max-md:scale-60 print:shadow-none '
+            ? '5xl:scale-138 translate-y-0 scale-108 opacity-100 max-2xl:scale-78 max-xl:scale-75 max-md:scale-60 print:shadow-none '
             : '-translate-y-10 scale-0 opacity-0'
         }`}
       >

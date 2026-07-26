@@ -33,7 +33,10 @@ function MobilePage({
                 </p>
                 <p className="flex flex-col space-y-0.5">
                   <span className="font-[AvenirLTProMedium] text-[11px] font-bold">
-                    {e?.productNameOrSampleCode}
+                    {e?.productName}
+                  </span>
+                  <span className="font-[AvenirLTProMedium] text-[13px] text-white/60">
+                    {e?.productCode}
                   </span>
                 </p>
               </div>
@@ -74,12 +77,12 @@ function MobilePage({
               </div>
               <div className="flex items-center space-x-2">
                 <p className="text-[22px] text-white/50">
-                  <FiClock />
+                  <HiHashtag />
                 </p>
                 <p className="flex flex-col">
-                  <span className="text-white/50"> کل زمان پیش بینی</span>
+                  <span className="text-white/50">شماره فرم</span>
                   <span className="font-[AvenirLTProMedium]">
-                    {e?.estimatedTotalHours}
+                    {e?.formNumber}
                   </span>
                 </p>
               </div>

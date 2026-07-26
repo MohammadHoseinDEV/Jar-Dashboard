@@ -42,7 +42,9 @@ function ReportAction({
   );
 
   const isDesignManager = profile?.data?.companyRoles?.some(
-    (p) => p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e'
+    (p) =>
+      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e' ||
+      p.roleId === 'e8d691c5-827c-4c65-9d1a-14def8620ade'
   );
 
   const { refs, floatingStyles, context } = useFloating({
@@ -78,7 +80,7 @@ function ReportAction({
           setSelectedReport(report);
           setIsOpen(!isOpen);
         }}
-        className="cursor-pointer text-2xl text-white/60 transition-all delay-100 duration-150 hover:scale-105 hover:text-white"
+        className="5xl:text-[35px] cursor-pointer text-2xl text-white/60 transition-all delay-100 duration-150 hover:scale-105 hover:text-white"
       >
         <MdMoreVert />
       </button>

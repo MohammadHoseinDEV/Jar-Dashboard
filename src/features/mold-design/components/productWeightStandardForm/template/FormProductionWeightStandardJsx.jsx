@@ -166,12 +166,12 @@ function FormProductionWeightStandardJsx({
             ) : canSignProductionManager ? (
               <button
                 onClick={() => handleOpenSignatureModal('productionManager')}
-                className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
+                className="mt-5 mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
               >
                 ثبت امضاء
               </button>
             ) : (
-              <span className="rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
+              <span className="mt-5 rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
                 عدم دسترسی
               </span>
             )}
@@ -189,12 +189,12 @@ function FormProductionWeightStandardJsx({
             ) : canSignProductionPlanning ? (
               <button
                 onClick={() => handleOpenSignatureModal('productionPlanning')}
-                className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
+                className="mt-5 mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
               >
                 ثبت امضاء
               </button>
             ) : (
-              <span className="rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
+              <span className="mt-5 rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
                 عدم دسترسی
               </span>
             )}
@@ -212,12 +212,12 @@ function FormProductionWeightStandardJsx({
             ) : canSignDesigner ? (
               <button
                 onClick={() => handleOpenSignatureModal('designer')}
-                className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
+                className="mt-5 mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
               >
                 ثبت امضاء
               </button>
             ) : (
-              <span className="rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
+              <span className="mt-5 rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
                 عدم دسترسی
               </span>
             )}
@@ -235,12 +235,12 @@ function FormProductionWeightStandardJsx({
             ) : canSignFactoryManager ? (
               <button
                 onClick={() => handleOpenSignatureModal('factoryManager')}
-                className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
+                className="mt-5 mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-1 text-[12px] transition-all delay-75 duration-100 ease-in-out hover:scale-110"
               >
                 ثبت امضاء
               </button>
             ) : (
-              <span className="rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
+              <span className="mt-5 rounded-[10px] bg-red-500 p-1 text-[10px] print:hidden">
                 عدم دسترسی
               </span>
             )}

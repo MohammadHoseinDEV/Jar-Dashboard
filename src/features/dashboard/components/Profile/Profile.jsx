@@ -49,7 +49,7 @@ function Profile({ openProfile, setOpenProfile }) {
       <div
         className={`relative flex max-h-[90vh] w-[1000px] max-w-[95vw] transform flex-col rounded-[15px] bg-linear-to-l from-[#242b5c] to-[#1f1f4a] p-6 text-white shadow-2xl transition-all duration-300 max-2xl:scale-95 max-md:h-180 max-md:overflow-auto ${
           openProfile
-            ? ' translate-y-0 scale-100 opacity-100'
+            ? ' 5xl:scale-120 translate-y-0 scale-100 opacity-100'
             : '-translate-y-10 scale-0 opacity-0'
         }`}
       >

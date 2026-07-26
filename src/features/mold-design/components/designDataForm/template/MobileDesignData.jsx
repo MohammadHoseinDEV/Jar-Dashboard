@@ -10,13 +10,17 @@ import form from '../../../../../assets/images/form.png';
 
 function MobileDesignData({
   filteredData,
+  openEdit,
   canEdit,
+  setOpenEditModal,
   profile,
   isDesignManager,
   isSuperAdmin,
   canDelete,
+  askDelete,
+  setSelectedDesign,
+  setOpenForm,
 }) {
-  
   return (
     <div>
       {/* Mobile design */}

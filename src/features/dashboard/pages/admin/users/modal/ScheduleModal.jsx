@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { lazy, useState } from 'react';
 
 import close from '../../../../../../assets/images/close.png';
 
@@ -14,7 +14,8 @@ import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
 import { useGetScheduleShift } from '../../../../../../hooks/user/userApi';
-import MyCalendar from '../../../../../../schedule/MyCalender';
+
+const MyCalendar = lazy(() => import('../../../../../../schedule/MyCalender'));
 
 const localizer = momentLocalizer(moment);
 

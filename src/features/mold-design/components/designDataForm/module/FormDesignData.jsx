@@ -221,9 +221,9 @@ function FormDesignData({
         onClick={closeHandler}
       />
       <div
-        className={`relative transform rounded-[15px] bg-white p-2 text-white shadow-2xl transition-all duration-300 max-2xl:pb-0 print:scale-86! ${
+        className={`relative transform rounded-[15px] bg-white p-2 text-white shadow-2xl transition-all duration-300 print:scale-86! ${
           openForm
-            ? '5xl:scale-138 translate-y-0 scale-112 opacity-100 max-2xl:scale-78 max-xl:scale-75 max-md:scale-65 max-md:scale-y-90 print:shadow-none '
+            ? '5xl:scale-138 translate-y-0 scale-112 opacity-100 max-2xl:scale-78 max-xl:scale-75 max-md:scale-65 print:shadow-none '
             : '-translate-y-10 scale-0 opacity-0'
         }`}
       >

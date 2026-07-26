@@ -10,10 +10,7 @@ moment.locale('fa');
 const localizer = momentLocalizer(moment);
 
 function MyCalendar({ events }) {
-  // فرض کنید events رو از props گرفتید
-
   const renderEventContent = (eventInfo) => {
-    // eventInfo.event شامل تمام پراپرتی‌های آبجکت event شماست
     const { title, startTime, endTime, color } = events;
 
     return (
@@ -40,8 +37,6 @@ function MyCalendar({ events }) {
 
   return (
     <div style={{ height: '700px' }}>
-      {' '}
-      {/* ارتفاع رو تنظیم کن */}
       <Calendar
         localizer={localizer}
         events={events}
@@ -64,7 +59,7 @@ function MyCalendar({ events }) {
         culture="fa"
         popup
         components={{
-          event: renderEventContent, // اینجا کامپوننت سفارشی رویداد رو تعریف می‌کنی
+          event: renderEventContent,
         }}
       />
     </div>

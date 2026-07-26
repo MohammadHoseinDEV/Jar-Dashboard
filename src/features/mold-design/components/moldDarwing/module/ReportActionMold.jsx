@@ -81,7 +81,7 @@ function ReportActionMold({
           setSelectedReport(report);
           setIsOpen(!isOpen);
         }}
-        className="cursor-pointer text-2xl text-white/60 transition-all delay-100 duration-150 hover:scale-105 hover:text-white"
+        className="5xl:text-[40px] cursor-pointer text-2xl text-white/60 transition-all delay-100 duration-150 hover:scale-105 hover:text-white"
       >
         <MdMoreVert />
       </button>

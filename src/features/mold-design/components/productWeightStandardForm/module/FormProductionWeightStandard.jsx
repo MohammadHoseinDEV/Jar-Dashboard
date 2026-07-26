@@ -79,8 +79,7 @@ function FormProductionWeightStandard({
   const isSignFactoryManager = profile?.data?.companyRoles?.some(
     (p) =>
       p.roleId === '8132dd4b-2e30-458d-a9f4-7e3bb4c344db' ||
-      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e' ||
-      p.roleId === 'e8d691c5-827c-4c65-9d1a-14def8620ade'
+      p.roleId === 'fa1367da-ab36-44ef-b018-8e9911f1279e'
   );
   const canSignFactoryManager = canSign && isSignFactoryManager;
 
@@ -236,9 +235,9 @@ function FormProductionWeightStandard({
         onClick={closeHandler}
       />
       <div
-        className={`relative transform bg-white p-3 text-white shadow-2xl transition-all duration-300 max-2xl:pb-0 max-md:p-2 print:scale-85! print:p-0 ${
+        className={`relative transform bg-white p-3 text-white shadow-2xl transition-all duration-300 max-2xl:pb-0 max-md:p-2 max-sm:rotate-90 print:scale-85! print:p-0 ${
           openForm
-            ? '5xl:scale-138 translate-y-0 scale-112 opacity-100 max-2xl:scale-78 max-xl:scale-75 max-md:scale-60 max-md:rotate-90 print:shadow-none '
+            ? '5xl:scale-138 translate-y-0 scale-112 opacity-100 max-2xl:scale-78 max-xl:scale-75 max-md:scale-60 print:shadow-none '
             : '-translate-y-10 scale-0 opacity-0'
         }`}
       >

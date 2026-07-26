@@ -14,6 +14,7 @@ import EditProductionWeightStandard from '../../components/productWeightStandard
 import DeleteProductionWeight from '../../components/productWeightStandardForm/module/DeleteProductionWeight';
 import FormProductionWeightStandard from '../../components/productWeightStandardForm/module/FormProductionWeightStandard';
 import MobilePage from '../../components/productWeightStandardForm/template/MobilePage';
+import { toast } from 'react-toastify';
 
 function ProductWeightStandardForm() {
   const { menus: userMenus } = useSelector((s) => s.auth);

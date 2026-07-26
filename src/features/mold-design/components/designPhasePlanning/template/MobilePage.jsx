@@ -44,7 +44,7 @@ function MobilePage({
             <div className="mx-1 mb-2 grid grid-cols-2 gap-2">
               <div className="flex items-center space-x-2">
                 <p className="text-[22px] text-white/50">
-                  <IoTimeOutline />
+                  <HiHashtag />
                 </p>
                 <p className="flex flex-col">
                   <span className="text-white/50">کد محصول</span>
@@ -65,17 +65,6 @@ function MobilePage({
                 </p>
               </div>
 
-              <div className="flex items-center space-x-2">
-                <p className="text-[22px] text-white/50">
-                  <FiClock />
-                </p>
-                <p className="flex flex-col">
-                  <span className="text-white/50">امضاء سرپرست</span>
-                  <span className="font-[AvenirLTProMedium]">
-                    {toShamsi(e?.supervisorSignedAt)}
-                  </span>
-                </p>
-              </div>
               <div className="flex items-center space-x-2">
                 <p className="text-[22px] text-white/50">
                   <HiHashtag />

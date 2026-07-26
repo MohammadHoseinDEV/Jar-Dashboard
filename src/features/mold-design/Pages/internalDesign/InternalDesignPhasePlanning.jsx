@@ -9,6 +9,7 @@ import {
 import { HashLoader } from 'react-spinners';
 import FormDesignIntenal from '../../components/internalDesignPhasePlanning/module/FormDesignIntenal';
 import MobilePage from '../../components/internalDesignPhasePlanning/template/MobilePage';
+import { toast } from 'react-toastify';
 
 const HeaderPage = lazy(
   () =>

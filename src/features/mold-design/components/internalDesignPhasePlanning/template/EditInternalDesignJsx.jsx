@@ -53,8 +53,8 @@ function EditInternalDesignJsx({
         id="internals"
         className="no-scrollbar flex h-[70vh] flex-col overflow-x-hidden overflow-y-auto max-md:max-h-[70vh]"
       >
-        <div className="grid grid-cols-2 gap-5 max-md:grid max-md:grid-cols-1">
-          <label htmlFor="startTime" className="flex flex-col">
+        <div className="grid grid-cols-3 gap-5 max-md:grid max-md:grid-cols-1">
+          <label htmlFor="startTime" className="5xl:text-[30px] flex flex-col">
             زمان شروع
             <DatePicker
               calendar={persian}
@@ -76,7 +76,7 @@ function EditInternalDesignJsx({
               inputClass="rounded-xl w-full 5xl:text-[25px] max-2xl:text-[14px]  bg-white/10 p-3 my-2 font-[Samim] text-[18px] text-white outline-none"
             />
           </label>
-          <label htmlFor="endTime" className="flex flex-col">
+          <label htmlFor="endTime" className="5xl:text-[30px] flex flex-col">
             زمان پایان
             <DatePicker
               calendar={persian}
@@ -98,18 +98,43 @@ function EditInternalDesignJsx({
               inputClass="rounded-xl w-full 5xl:text-[25px] max-2xl:text-[14px]  bg-white/10 p-3 my-2 font-[Samim] text-[18px] text-white outline-none"
             />
           </label>
-        </div>
-        <p className="my-2 border-b-2 border-white/30"></p>
-        <div className="grid grid-cols-4 gap-4 max-md:grid max-md:grid-cols-1">
-          <label htmlFor="productNameOrSampleCode" className="5xl:text-[30px]">
+          <label
+            htmlFor="plannedStartDate"
+            className="5xl:text-[30px] flex flex-col"
+          >
+            تاریخ شروع برنامه ریزی شده
+            <DatePicker
+              calendar={persian}
+              locale={persian_fa}
+              placeholder="تاریخ ثبت "
+              name="formDate"
+              format="YYYY/MM/DD"
+              calendarPosition="bottom-center"
+              onChange={(value) =>
+                setForm({
+                  ...form,
+                  plannedStartDate: value
+                    ? value.toDate().toISOString().split('T')[0]
+                    : '',
+                })
+              }
+              value={
+                form.plannedStartDate ? new Date(form.plannedStartDate) : ''
+              }
+              className="5xl:scale-125"
+              inputClass="rounded-xl w-full 5xl:text-[25px] max-2xl:text-[14px]  bg-white/10 p-3 my-2 font-[Samim] text-[18px] text-white outline-none"
+            />
+          </label>
+          <label htmlFor="productName" className="5xl:text-[30px]">
             نام محصول
             <Combobox
               value={selectedProducts}
               onChange={(value) => {
                 setForm((prev) => ({
                   ...prev,
-                  id: value?.id || '',
-                  productNameOrSampleCode: value?.name || '',
+                  productId: value?.id || '',
+                  productName: value?.name || '',
+                  productCode: value?.code || '',
                 }));
               }}
             >
@@ -162,34 +187,17 @@ function EditInternalDesignJsx({
               )}
             </Combobox>
           </label>
-          <label
-            htmlFor="plannedStartDate"
-            className="5xl:text-[30px] flex flex-col"
-          >
-            تاریخ شروع برنامه ریزی شده
-            <DatePicker
-              calendar={persian}
-              locale={persian_fa}
-              placeholder="تاریخ ثبت "
-              name="formDate"
-              format="YYYY/MM/DD"
-              calendarPosition="bottom-center"
-              onChange={(value) =>
-                setForm({
-                  ...form,
-                  plannedStartDate: value
-                    ? value.toDate().toISOString().split('T')[0]
-                    : '',
-                })
-              }
-              value={
-                form.plannedStartDate ? new Date(form.plannedStartDate) : ''
-              }
-              className="5xl:scale-125"
-              inputClass="rounded-xl w-full 5xl:text-[25px] max-2xl:text-[14px]  bg-white/10 p-3 my-2 font-[Samim] text-[18px] text-white outline-none"
+          <label htmlFor="productCode" className="5xl:text-[30px]">
+            کدمحصول
+            <input
+              type="text"
+              value={form?.productCode || ''}
+              readOnly
+              className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 font-[AvenirLTProMedium] text-[18px] text-white outline-none max-2xl:text-[14px]"
             />
           </label>
-          <label htmlFor="estimatedTotalHours">
+
+          <label htmlFor="estimatedTotalHours" className="5xl:text-[30px]">
             کل زمان پیش بینی
             <input
               type="number"
@@ -234,26 +242,28 @@ function EditInternalDesignJsx({
           </label>
         </div>
         <p className="my-2 border-b-2 border-white/30"></p>
+        <div className="grid grid-cols-4 gap-4 max-md:grid max-md:grid-cols-1"></div>
+        <p className="my-2 border-b-2 border-white/30"></p>
         {form.items.map((item, index) => (
           <div
             key={index}
             className="my-3 grid grid-cols-1 gap-4 rounded-[10px] border p-2"
           >
             <label htmlFor="designPhase" className="flex flex-col">
-              فاز های طراحی
+              <p className="5xl:text-[30px]">فاز های طراحی</p>
               <input
                 type="text"
                 value={item.designPhase || ''}
                 readOnly
-                className="mt-1 rounded-xl bg-white/10 p-3 font-[Samim] text-white outline-none"
+                className="5xl:text-[25px] mt-1 rounded-xl bg-white/10 p-3 font-[Samim] text-white outline-none"
               />
             </label>
-            <div className="grid grid-cols-8 gap-4 max-md:grid max-md:grid-cols-1">
+            <div className="flex items-center justify-around gap-4 max-md:grid max-md:grid-cols-1">
               <label
                 onClick={() =>
                   handleItemChange(index, 'production', !item.production)
                 }
-                className={`flex cursor-pointer items-center justify-center rounded-xl border-2 px-5 py-1 ${
+                className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 max-2xl:text-[13px] ${
                   item.production
                     ? 'border-white bg-white text-black'
                     : 'border-[#2a2a2a] bg-[#141414] text-gray-300'
@@ -265,7 +275,7 @@ function EditInternalDesignJsx({
                 onClick={() =>
                   handleItemChange(index, 'designManager', !item.designManager)
                 }
-                className={`flex cursor-pointer items-center justify-center rounded-xl border-2 px-5 py-1 ${
+                className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 max-2xl:text-[13px] ${
                   item.designManager
                     ? 'border-white bg-white text-black'
                     : 'border-[#2a2a2a] bg-[#141414] text-gray-300'
@@ -281,7 +291,7 @@ function EditInternalDesignJsx({
                     !item.tehranDesignOffice
                   )
                 }
-                className={`flex cursor-pointer items-center justify-center rounded-xl border-2 px-5 py-1 ${
+                className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 max-2xl:text-[13px] ${
                   item.tehranDesignOffice
                     ? 'border-white bg-white text-black'
                     : 'border-[#2a2a2a] bg-[#141414] text-gray-300'
@@ -297,7 +307,7 @@ function EditInternalDesignJsx({
                     !item.qualityControlPackaging
                   )
                 }
-                className={`flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 text-[14px] ${
+                className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 text-[14px] max-2xl:text-[13px] ${
                   item.qualityControlPackaging
                     ? 'border-white bg-white text-black'
                     : 'border-[#2a2a2a] bg-[#141414] text-gray-300'
@@ -309,7 +319,7 @@ function EditInternalDesignJsx({
                 onClick={() =>
                   handleItemChange(index, 'machining', !item.machining)
                 }
-                className={`flex cursor-pointer items-center justify-center rounded-xl border-2 px-5 py-1 ${
+                className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 max-2xl:text-[13px] ${
                   item.machining
                     ? 'border-white bg-white text-black'
                     : 'border-[#2a2a2a] bg-[#141414] text-gray-300'
@@ -321,7 +331,7 @@ function EditInternalDesignJsx({
                 onClick={() =>
                   handleItemChange(index, 'cartonmaking', !item.cartonmaking)
                 }
-                className={`flex cursor-pointer items-center justify-center rounded-xl border-2 px-5 py-1 ${
+                className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 max-2xl:text-[13px] ${
                   item.cartonmaking
                     ? 'border-white bg-white text-black'
                     : 'border-[#2a2a2a] bg-[#141414] text-gray-300'
@@ -331,7 +341,7 @@ function EditInternalDesignJsx({
               </label>
               <label
                 onClick={() => handleItemChange(index, 'sales', !item.sales)}
-                className={`flex cursor-pointer items-center justify-center rounded-xl border-2 px-5 py-1 ${
+                className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 max-2xl:text-[13px] ${
                   item.sales
                     ? 'border-white bg-white text-black'
                     : 'border-[#2a2a2a] bg-[#141414] text-gray-300'
@@ -347,7 +357,7 @@ function EditInternalDesignJsx({
                     !item.factoryManager
                   )
                 }
-                className={`flex cursor-pointer items-center justify-center rounded-xl border-2 px-5 py-1 ${
+                className={`5xl:text-[25px] flex cursor-pointer items-center justify-center rounded-xl border-2 px-2 py-1 max-2xl:text-[13px] ${
                   item.factoryManager
                     ? 'border-white bg-white text-black'
                     : 'border-[#2a2a2a] bg-[#141414] text-gray-300'
@@ -363,7 +373,7 @@ function EditInternalDesignJsx({
         <button
           type="submit"
           form="internals"
-          className="cursor-pointer rounded-xl bg-linear-to-tl from-green-900 to-green-500 px-4 py-3 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-[1.01]"
+          className="5xl:text-[25px] cursor-pointer rounded-xl bg-linear-to-tl from-green-900 to-green-500 px-4 py-3 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-[1.01]"
         >
           ثبت گزارش
         </button>

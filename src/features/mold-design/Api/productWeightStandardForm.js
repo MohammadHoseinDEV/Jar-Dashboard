@@ -75,7 +75,9 @@ export const useUpdateProductionWeightStandard = () => {
       queryClient.invalidateQueries({ queryKey: ['standard', token] });
     },
     onError: (e) => {
-      toast.error(e.response.data.message || 'خطا در ویرایش فرم');
+      console.log('Full error response:', e.response?.data);
+      console.log('Status:', e.response?.status);
+      toast.error(e.response?.data?.message || 'خطا در ویرایش فرم');
     },
   });
   return updateReport;

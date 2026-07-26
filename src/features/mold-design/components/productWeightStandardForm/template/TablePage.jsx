@@ -22,6 +22,7 @@ function TablePage({
             </th>
             <th className="border-t border-b border-white/30">کد محصول</th>
             <th className="border-t border-b border-white/30">نام محصول</th>
+            <th className="border-t border-b border-white/30">کد فرم</th>
 
             <th className="border-t border-b border-white/30">نام شرکت</th>
             <th className="border-t border-b border-white/30">
@@ -55,7 +56,11 @@ function TablePage({
               <td className="5xl:text-[28px] border-b border-white/20 font-[AvenirLTProBook] text-white max-2xl:text-[12px]">
                 {e?.productName}
               </td>
-
+              <td className="5xl:text-[28px] border-b border-white/20 max-2xl:text-[12px]">
+                <p className="mx-1 rounded-[10px] border border-[#32a3de]/40 bg-[#182228] font-[AvenirLTProBook] text-[#32a3de]">
+                  {e?.formNumber}
+                </p>
+              </td>
               <td className="5xl:text-[28px] border-b border-white/20 max-2xl:text-[12px]">
                 <p className="mx-1 rounded-[10px]">{e?.companyName}</p>
               </td>
@@ -88,7 +93,7 @@ function TablePage({
                   }
                   if (e?.isProductionSupervisorSigned === false) {
                     return (
-                      <p className="5xl:py-2 5xl:text-[20px] rounded-[10px] bg-[#262627]/70 py-1 text-[#f9e2af]">
+                      <p className="5xl:py-2 5xl:text-[20px] rounded-[10px] border bg-[#262627]/70 py-1 text-[#f9e2af]">
                         درانتظار امضاء مدیر تولید
                       </p>
                     );

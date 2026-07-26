@@ -83,7 +83,7 @@ function TableMoldDarwing({
                 {(() => {
                   if (e?.isFactoryManagerSigned === true) {
                     return (
-                      <p className="rounded-[10px] bg-[#1b4025]/50 py-1 text-[#3cbb30]">
+                      <p className="5xl:text-[20px] rounded-[10px] bg-[#1b4025]/50 py-1 text-[#3cbb30]">
                         تکمیل شده
                       </p>
                     );

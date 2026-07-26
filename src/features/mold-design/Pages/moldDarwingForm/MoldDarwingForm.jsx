@@ -15,6 +15,7 @@ import CreateMoldDarwing from '../../components/moldDarwing/module/CreateMoldDar
 import EditMoldDarwing from '../../components/moldDarwing/module/EditMoldDarwing';
 import DeleteMoldDarwing from '../../components/moldDarwing/module/DeleteMoldDarwing';
 import FormMoldDarwing from '../../components/moldDarwing/module/FormMoldDarwing';
+import { toast } from 'react-toastify';
 
 function MoldDarwingForm() {
   const { menus: userMenus } = useSelector((s) => s.auth);

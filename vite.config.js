@@ -6,9 +6,17 @@ import { visualizer } from 'rollup-plugin-visualizer';
 export default defineConfig({
   server: {
     port: 5256,
+
     http: {
       headers: {
         'Access-Control-Allow-Origin': '*',
+      },
+    },
+
+    proxy: {
+      '/uploads': {
+        target: 'http://172.16.68.238:5277',
+        changeOrigin: true,
       },
     },
   },
@@ -20,8 +28,13 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+
     visualizer({
-      open: true,
+      filename: './dist/stats.html',
+      open: false,
+      gzipSize: true,
+      brotliSize: true,
+      template: 'treemap',
     }),
   ],
 });

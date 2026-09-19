@@ -11,13 +11,21 @@ import unit from '../assets/images/office.png';
 import { FaBolt } from 'react-icons/fa';
 import { FaClipboardList } from 'react-icons/fa';
 import { FaCogs } from 'react-icons/fa';
-import { GiLaserPrecision, GiSolarSystem } from 'react-icons/gi';
+import { GiLaserPrecision } from 'react-icons/gi';
 import { GiBrokenBottle } from 'react-icons/gi';
 import { FaWrench } from 'react-icons/fa';
 import { GiPipes } from 'react-icons/gi';
-import { MdCheckCircle } from 'react-icons/md';
-import { MonitorCog } from 'lucide-react';
+import {
+  MdCheckCircle,
+  MdProductionQuantityLimits,
+  MdWarehouse,
+} from 'react-icons/md';
 import { SiAltiumdesigner } from 'react-icons/si';
+import { PiCertificate } from 'react-icons/pi';
+import { LuNotebookPen } from 'react-icons/lu';
+import { SlPrinter } from 'react-icons/sl';
+import { RiCustomerService2Fill } from 'react-icons/ri';
+import { GrDocumentTransfer } from 'react-icons/gr';
 
 export const MENU_ICON_MAP = {
   system,
@@ -39,6 +47,13 @@ export const MENU_ICON_MAP = {
   facility: GiPipes,
   QC: MdCheckCircle,
   Design: SiAltiumdesigner,
+  warehouse: MdWarehouse,
+  certificate: PiCertificate,
+  planning: LuNotebookPen,
+  print: SlPrinter,
+  productCost: MdProductionQuantityLimits,
+  customerManagement: RiCustomerService2Fill,
+  salesTransfer: GrDocumentTransfer,
 };
 
 export const MENU_ICON_OPTIONS = [
@@ -62,4 +77,11 @@ export const MENU_ICON_OPTIONS = [
   { key: 'facility', label: 'تاسیسات' },
   { key: 'QC', label: 'کنترل کیفیت و بسته بندی' },
   { key: 'Design', label: 'طراحی قالب' },
+  { key: 'warehouse', label: 'انبار محصول' },
+  { key: 'certificate', label: 'شناسنامه محصولات' },
+  { key: 'planning', label: 'برنامه ریزی تولید' },
+  { key: 'print', label: 'چاپ لیبل' },
+  { key: 'productCost', label: 'خروج محصول' },
+  { key: 'customerManagement', label: 'مدیریت مشتری ها' },
+  { key: 'salesTransfer', label: 'ثبت حواله' },
 ];

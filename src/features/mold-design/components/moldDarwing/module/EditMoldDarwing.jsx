@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import EditMoldDarwingJsx from '../template/EditMoldDarwingJsx';
 import { useUpdateMoldDarwing } from '../../../Api/moldDarwing';
+import { toast } from 'react-toastify';
 
 function EditMoldDarwing({
   openEditModal,
@@ -96,6 +97,11 @@ function EditMoldDarwing({
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
 
     updateReport.mutate(
       { id: selectedMoldDarwing?.id, form },

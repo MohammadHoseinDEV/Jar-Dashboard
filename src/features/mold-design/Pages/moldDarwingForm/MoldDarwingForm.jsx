@@ -1,21 +1,41 @@
-import React, { useMemo, useState } from 'react';
+import React, { lazy, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { can, getPerm } from '../../../../utils/rbac';
+import { useGetAllMoldDarwing, useGetMoldDarwing } from '../../Api/moldDarwing';
+import { useGetProfile } from '../../../../hooks/profile/profile';
+
 import { FaClipboardList, FaDownload, FaFilter } from 'react-icons/fa';
 import { FiBell, FiCalendar } from 'react-icons/fi';
 import { MdNoteAdd } from 'react-icons/md';
-import { useSelector } from 'react-redux';
-import { can, getPerm } from '../../../../utils/rbac';
-import HeaderPage from '../../components/moldDarwing/template/HeaderPage';
-import { useGetAllMoldDarwing, useGetMoldDarwing } from '../../Api/moldDarwing';
-import TableMoldDarwing from '../../components/moldDarwing/template/TableMoldDarwing';
 import { HashLoader } from 'react-spinners';
-import MobileMoldDarwing from '../../components/moldDarwing/template/MobileMoldDarwing';
-import { useGetProfile } from '../../../../hooks/profile/profile';
-import Pagination from '../../../../pagination/Pagination';
-import CreateMoldDarwing from '../../components/moldDarwing/module/CreateMoldDarwing';
-import EditMoldDarwing from '../../components/moldDarwing/module/EditMoldDarwing';
-import DeleteMoldDarwing from '../../components/moldDarwing/module/DeleteMoldDarwing';
-import FormMoldDarwing from '../../components/moldDarwing/module/FormMoldDarwing';
 import { toast } from 'react-toastify';
+
+const CreateMoldDarwing = lazy(
+  () => import('../../components/moldDarwing/module/CreateMoldDarwing')
+);
+const EditMoldDarwing = lazy(
+  () => import('../../components/moldDarwing/module/EditMoldDarwing')
+);
+
+const DeleteMoldDarwing = lazy(
+  () => import('../../components/moldDarwing/module/DeleteMoldDarwing')
+);
+
+const FormMoldDarwing = lazy(
+  () => import('../../components/moldDarwing/module/FormMoldDarwing')
+);
+
+const HeaderPage = lazy(
+  () => import('../../components/moldDarwing/template/HeaderPage')
+);
+const TableMoldDarwing = lazy(
+  () => import('../../components/moldDarwing/template/TableMoldDarwing')
+);
+const MobileMoldDarwing = lazy(
+  () => import('../../components/moldDarwing/template/MobileMoldDarwing')
+);
+const Pagination = lazy(() => import('../../../../pagination/Pagination'));
 
 function MoldDarwingForm() {
   const { menus: userMenus } = useSelector((s) => s.auth);

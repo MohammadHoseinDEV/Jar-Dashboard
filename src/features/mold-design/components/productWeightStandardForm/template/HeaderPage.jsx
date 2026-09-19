@@ -319,6 +319,7 @@ function HeaderPage({
           </div>
         </div>
       </div>
+      {/* Mobile */}
       <div className="mx-2 hidden max-md:block">
         <div className="my-3 rounded-[10px] border border-[#3a35a0] bg-linear-to-l from-[#201c66] to-[#1d1952] p-2">
           {/* Logo & Title Mobile */}

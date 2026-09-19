@@ -79,9 +79,12 @@ const useImageProducts = () => {
   const queryClient = useQueryClient();
 
   const postImage = useMutation({
-    queryFn: async (id) => {
-      const res = await axios.put(`${BASE_API}/${id}/images`, {
-        headers: { Authorization: `Bearer ${token}` },
+    mutationFn: async ({ id, formData }) => {
+      const res = await axios.put(`${BASE_API}/${id}/images`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
       });
       return res.data;
     },
@@ -90,9 +93,10 @@ const useImageProducts = () => {
       queryClient.invalidateQueries({ queryKey: ['products', token] });
     },
     onError: (e) => {
-      toast.error(e.response.data || 'خطا در آپلود عکس');
+      toast.error(e?.response?.data?.message || 'خطا در آپلود عکس');
     },
   });
+
   return postImage;
 };
 
@@ -112,7 +116,7 @@ const useDeleteProducts = () => {
       queryClient.invalidateQueries({ queryKey: ['products', token] });
     },
     onError: (e) => {
-      toast.error(e.response.data || 'خطا در حذف محصول');
+      toast.error(e.response.data.message || 'خطا در حذف محصول');
     },
   });
   return deleteProducts;

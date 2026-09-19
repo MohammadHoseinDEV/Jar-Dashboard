@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useCreateDesignPhasePlanning } from '../../../Api/designPhasePlanning';
 import CreateDesignPhasePlanningJsx from '../template/CreateDesignPhasePlanningJsx';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
+import { toast } from 'react-toastify';
 
 const designPhase = [
   {
@@ -99,6 +100,11 @@ function CreateDesignPhasePlanning({ openCreateModal, setOpenCreateModal }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
     createReport.mutate(form, {
       onSuccess: () => {
         closeHandler();

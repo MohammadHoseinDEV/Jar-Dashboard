@@ -12,6 +12,8 @@ function TablePage({
   askDelete,
   setOpenFormReport,
 }) {
+  
+  
   return (
     <div>
       <table className="w-full border-separate border-spacing-y-0 max-md:hidden">
@@ -35,6 +37,7 @@ function TablePage({
             <th className="5xl:w-70 w-55 border-t border-b border-white/30 max-2xl:w-50">
               وضعیت
             </th>
+
             <th className="rounded-tl-[10px] border-t border-b border-l border-white/30">
               عملیات
             </th>
@@ -135,9 +138,11 @@ function TablePage({
             </tr>
           ))}
         </tbody>
+        
       </table>
     </div>
   );
 }
+
 
 export default TablePage;

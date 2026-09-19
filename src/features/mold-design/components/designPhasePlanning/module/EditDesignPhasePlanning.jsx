@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import EditDesignPhasePlanningJsx from '../template/EditDesignPhasePlanningJsx';
 import { useUpdateDesignPhasePlanning } from '../../../Api/designPhasePlanning';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
+import { toast } from 'react-toastify';
 
 const designPhase = [
   {
@@ -151,6 +152,11 @@ function EditDesignPhasePlanning({
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
 
     updateReport.mutate(
       {

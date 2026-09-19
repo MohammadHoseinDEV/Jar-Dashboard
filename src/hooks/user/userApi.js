@@ -28,7 +28,7 @@ const useCreateUser = () => {
   return createUser;
 };
 
-const getUser = ({ page, pageSize, search, unitName }) => {
+const getUser = ({ page, pageSize, search, unitName } = {}) => {
   const { token } = useSelector((state) => state.auth);
 
   const getUsers = useQuery({

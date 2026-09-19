@@ -66,6 +66,18 @@ function CreateDesignWorkRequestJsx({
               inputClass="w-full  rounded-xl 5xl:text-[25px] max-2xl:text-[14px]  bg-white/10 p-3 my-2 font-[Samim] text-[18px] text-white outline-none"
             />
           </label>
+          <label htmlFor="requestTime">
+            <p className="pb-2"> ساعت ثبت درخواست</p>
+            <TimePickerInput
+              value={form.requestTime || ''}
+              onChange={(e) => {
+                setForm((p) => ({
+                  ...p,
+                  requestTime: e,
+                }));
+              }}
+            />
+          </label>
           <label
             htmlFor="requestingUnit"
             className="5xl:text-[30px] flex flex-col"
@@ -77,18 +89,6 @@ function CreateDesignWorkRequestJsx({
               readOnly
               value={profile?.data?.units?.[0]?.unitName || 'بدون واحد'}
               className="5xl:text-[25px] my-2 w-full rounded-xl bg-white/10 p-3 text-[18px] text-white outline-none max-2xl:text-[14px]"
-            />
-          </label>
-          <label htmlFor="requestTime">
-            <p className="pb-2"> ساعت ثبت درخواست</p>
-            <TimePickerInput
-              value={form.requestTime || ''}
-              onChange={(e) => {
-                setForm((p) => ({
-                  ...p,
-                  requestTime: e,
-                }));
-              }}
             />
           </label>
         </div>

@@ -20,6 +20,8 @@ function MobilePage({
   askDelete,
   setSelectedProductWeigth,
 }) {
+  
+  
   return (
     <div>
       <div className="hidden max-md:block print:hidden">

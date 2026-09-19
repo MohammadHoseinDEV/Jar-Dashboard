@@ -26,6 +26,7 @@ function DeleteProductionWeight({
         className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"
         onClick={closeHandler}
       />
+      
       <div
         className={`relative transform rounded-[15px] bg-linear-to-bl from-black to-gray-600 p-6 text-white shadow-2xl transition-all duration-300 ${
           openDeleteModal
@@ -50,6 +51,7 @@ function DeleteProductionWeight({
             />
           </button>
         </div>
+        
         <div>
           <div className="flex flex-wrap items-center gap-x-1 text-start">
             <span>آیا از حذف فرم</span>
@@ -72,6 +74,7 @@ function DeleteProductionWeight({
               });
             }}
           >
+            
             <button className="5xl:text-[20px] cursor-pointer rounded-xl bg-linear-to-bl from-red-500 to-red-800 px-4 py-2 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-105 hover:bg-red-500/60">
               حذف
             </button>

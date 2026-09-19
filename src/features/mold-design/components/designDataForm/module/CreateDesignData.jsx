@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useMemo, useState } from 'react';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import { useCreateDesignData } from '../../../Api/designData';
+import { toast } from 'react-toastify';
 
 const CreateDesignDataJsx = lazy(
   () => import('../template/CreateDesignDataJsx')
@@ -77,6 +78,16 @@ function CreateDesignData({ openCreateModal, setOpenCreateModal }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ ثبت فرم را انتخاب کنید');
+      return;
+    }
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
     const { id, ...payload } = form;
     createDesign.mutate(payload, {
       onSuccess: () => {

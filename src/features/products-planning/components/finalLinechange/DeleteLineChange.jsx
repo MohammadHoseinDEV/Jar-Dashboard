@@ -1,5 +1,6 @@
 import React from 'react';
-import close from '../../../assets/images/close.png';
+import close from '../../../../assets/images/close.png';
+import { useDeleteLineChange } from '../../Api/planing';
 
 function DeleteLineChange({
   selectedLine,
@@ -7,7 +8,15 @@ function DeleteLineChange({
   openDeleteModal,
   setOpenDeleteModal,
 }) {
-  const deleteHandler = () => {};
+  const deleteReport = useDeleteLineChange();
+
+  const deleteHandler = () => {
+    deleteReport.mutate(selectedLine?.id, {
+      onSuccess: () => {
+        setOpenDeleteModal(false);
+      },
+    });
+  };
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 ${
@@ -40,7 +49,7 @@ function DeleteLineChange({
         </div>
 
         <h2 className="pt-6 font-[SamimBold] text-[15px]">
-          آیا از حذف فرم اعلان قطعی تعویض خط اطمینان دارید؟
+          آیا از حذف فرم گزارش اطمینان دارید؟
         </h2>
 
         <div>

@@ -31,6 +31,11 @@ function CreateDesignWorkRequest({ openCreateModal, setOpenCreateModal }) {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
+
     if (profileLoading || !profile?.data) {
       toast.warning('اطلاعات پروفایل هنوز بارگذاری نشده، لطفاً صبر کنید.');
       return;

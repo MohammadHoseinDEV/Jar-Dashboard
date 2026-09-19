@@ -180,6 +180,11 @@ function EditdesignMeeting({
   const submitHandler = (e) => {
     e.preventDefault();
 
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
+
     updateReport.mutate(
       {
         id: selectedDesignMeeting?.id,

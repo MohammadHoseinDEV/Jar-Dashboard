@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import CreateMoldDarwingJsx from '../template/CreateMoldDarwingJsx';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import { useCreateMoldDarwing } from '../../../Api/moldDarwing';
+import { toast } from 'react-toastify';
 
 function CreateMoldDarwing({ openCreateModal, setOpenCreateModal }) {
   const [form, setForm] = useState({
@@ -57,6 +58,10 @@ function CreateMoldDarwing({ openCreateModal, setOpenCreateModal }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
     createReport.mutate(form, {
       onSuccess: () => {
         setOpenCreateModal(false);

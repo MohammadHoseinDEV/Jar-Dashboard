@@ -20,6 +20,8 @@ function FormProductionWeightStandardJsx({
   selectedSignFactoryManager,
   canSignFactoryManager,
 }) {
+  
+  
   return (
     <div>
       {/* Header */}
@@ -222,6 +224,7 @@ function FormProductionWeightStandardJsx({
               </span>
             )}
           </p>
+          
         </div>
         <div className="h-24 pr-1">
           <p className="font-bold">امضاء مدیر کارخانه :</p>

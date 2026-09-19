@@ -83,6 +83,7 @@ export const useUpdateProductionWeightStandard = () => {
   return updateReport;
 };
 
+
 export const useDeleteProductionWeightStandard = () => {
   const { token } = useSelector((state) => state.auth);
   const queryClient = useQueryClient();

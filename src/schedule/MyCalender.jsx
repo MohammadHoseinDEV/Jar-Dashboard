@@ -1,45 +1,61 @@
 import React from 'react';
+
 import { Calendar, momentLocalizer } from 'react-big-calendar';
+
 import moment from 'moment';
 import 'moment/locale/fa';
-import persian from 'react-date-object/calendars/persian';
-import persian_fa from 'react-date-object/locales/persian_fa';
+
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 moment.locale('fa');
 
 const localizer = momentLocalizer(moment);
 
-function MyCalendar({ events }) {
-  const renderEventContent = (eventInfo) => {
-    const { title, startTime, endTime, color } = events;
+const Views = {
+  month: true,
+  week: true,
+  day: true,
+  agenda: true,
+};
 
+function MyCalendar({ events }) {
+  const renderEventContent = ({ event }) => {
     return (
       <div
-        style={{ backgroundColor: color, padding: '5px', borderRadius: '3px' }}
+        style={{
+          backgroundColor: event.color,
+          padding: '5px',
+          borderRadius: '3px',
+        }}
       >
-        <strong>{title}</strong>
-        <div>
-          <small>زمان شروع: {startTime}</small>
-        </div>
-        <div>
-          <small>زمان پایان: {endTime}</small>
-        </div>
+        <strong>{event.title}</strong>
+
+        {event.workDayTypeName && (
+          <div>
+            <small>{event.workDayTypeName}</small>
+          </div>
+        )}
+
+        {event.startTime && (
+          <div>
+            <small>زمان شروع: {event.startTime}</small>
+          </div>
+        )}
+
+        {event.endTime && (
+          <div>
+            <small>زمان پایان: {event.endTime}</small>
+          </div>
+        )}
       </div>
     );
-  };
-
-  const Views = {
-    month: true,
-    week: true,
-    day: true,
-    agenda: true,
   };
 
   return (
     <div style={{ height: '700px' }}>
       <Calendar
         localizer={localizer}
-        events={events}
+        events={events || []}
         startAccessor="start"
         endAccessor="end"
         views={Views}

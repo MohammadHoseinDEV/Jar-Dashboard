@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { lazy, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { can, getPerm } from '../../../../utils/rbac';
 import { useGetProfile } from '../../../../hooks/profile/profile';
@@ -6,14 +6,34 @@ import {
   useGetAllProductWeightStandard,
   useGetProductWeightStandard,
 } from '../../Api/productWeightStandardForm';
-import HeaderPage from '../../components/productWeightStandardForm/template/HeaderPage';
-import TablePage from '../../components/productWeightStandardForm/template/TablePage';
 import { HashLoader } from 'react-spinners';
-import CreateProductWeightStandard from '../../components/productWeightStandardForm/module/CreateProductWeightStandard';
-import EditProductionWeightStandard from '../../components/productWeightStandardForm/module/EditProductionWeightStandard';
-import DeleteProductionWeight from '../../components/productWeightStandardForm/module/DeleteProductionWeight';
-import FormProductionWeightStandard from '../../components/productWeightStandardForm/module/FormProductionWeightStandard';
-import MobilePage from '../../components/productWeightStandardForm/template/MobilePage';
+
+const HeaderPage = lazy(
+  () => import('../../components/productWeightStandardForm/template/HeaderPage')
+);
+const TablePage = lazy(
+  () => import('../../components/productWeightStandardForm/template/TablePage')
+);
+const CreateProductWeightStandard = lazy(
+  () =>
+    import('../../components/productWeightStandardForm/module/CreateProductWeightStandard')
+);
+
+const EditProductionWeightStandard = lazy(
+  () =>
+    import('../../components/productWeightStandardForm/module/EditProductionWeightStandard')
+);
+const DeleteProductionWeight = lazy(
+  () =>
+    import('../../components/productWeightStandardForm/module/DeleteProductionWeight')
+);
+const FormProductionWeightStandard = lazy(
+  () =>
+    import('../../components/productWeightStandardForm/module/FormProductionWeightStandard')
+);
+const MobilePage = lazy(
+  () => import('../../components/productWeightStandardForm/template/MobilePage')
+);
 import { toast } from 'react-toastify';
 
 function ProductWeightStandardForm() {
@@ -200,6 +220,7 @@ function ProductWeightStandardForm() {
           </div>
         )}
       </div>
+
       <CreateProductWeightStandard
         openCreateModal={openCreateModal}
         setOpenCreateModal={setOpenCreateModal}

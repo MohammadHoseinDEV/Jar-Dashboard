@@ -1,23 +1,14 @@
-import React, { lazy, useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 
 import close from '../../../../../../assets/images/close.png';
-
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-
-import moment from 'moment';
-
-import 'moment/locale/fa';
-
-moment.locale('fa');
 
 import DatePicker from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
 import persian_fa from 'react-date-object/locales/persian_fa';
+
 import { useGetScheduleShift } from '../../../../../../hooks/user/userApi';
 
 const MyCalendar = lazy(() => import('../../../../../../schedule/MyCalender'));
-
-const localizer = momentLocalizer(moment);
 
 function ScheduleModal({
   openSchedule,
@@ -45,35 +36,6 @@ function ScheduleModal({
     endTime: s?.endTime,
     color: s?.color || '#a85117',
   }));
-
-  const CustomEvent = ({ event }) => {
-    return (
-      <div
-        className="space-y-1"
-        style={{ padding: '2px 4px', lineHeight: '1.4' }}
-      >
-        <div style={{ fontWeight: 'bold', fontSize: '12px' }}>
-          {event.shiftName || event.title}
-        </div>
-
-        {event?.workDayTypeName && (
-          <div style={{ fontSize: '11px' }}>{event?.workDayTypeName}</div>
-        )}
-
-        {(event.startTime || event.endTime) && (
-          <div style={{ fontSize: '10px', opacity: 0.9 }}>
-            {event.startTime} - {event.endTime}
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  const Views = {
-    month: true,
-    week: true,
-    day: true,
-  };
 
   const closeHandler = () => {
     setOpenSchedule(false);
@@ -149,38 +111,15 @@ function ScheduleModal({
         </div>
         <div className="h-[700px] overflow-auto rounded-lg bg-white p-6 text-black shadow-md">
           {/* استایل‌های Tailwind برای کانتینر */}
-          <Calendar
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            views={Views}
-            messages={{
-              today: 'امروز',
-              previous: 'قبلی',
-              next: 'بعدی',
-              month: 'ماه',
-              week: 'هفته',
-              day: 'روز',
-              agenda: 'دستور جلسه',
-              date: 'تاریخ',
-              time: 'زمان',
-              event: 'رویداد',
-              noEventsInRange: 'رویدادی در این بازه وجود ندارد',
-            }}
-            culture="fa"
-            popup
-            eventPropGetter={(event) => ({
-              style: {
-                backgroundColor: '#f86700',
-                color: '#fff',
-                borderColor: event.color,
-              },
-            })}
-            components={{
-              event: CustomEvent,
-            }}
-          />
+          <Suspense
+            fallback={
+              <div className="flex h-[700px] items-center justify-center">
+                در حال بارگذاری تقویم...
+              </div>
+            }
+          >
+            <MyCalendar events={events || []} />
+          </Suspense>
         </div>
       </div>
     </div>

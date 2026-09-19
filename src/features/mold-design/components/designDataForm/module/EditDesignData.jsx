@@ -3,6 +3,7 @@ import React, { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 const EditDesignDataJsx = lazy(() => import('../template/EditDesignDataJsx'));
 import { useUpdateDesignData } from '../../../Api/designData';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
+import { toast } from 'react-toastify';
 
 function EditDesignData({
   openEditModal,
@@ -47,7 +48,6 @@ function EditDesignData({
     drawingNotes: '',
   });
 
-  
   useEffect(() => {
     if (!selectedDesign) return;
     setForm({
@@ -130,6 +130,11 @@ function EditDesignData({
   const updateReport = useUpdateDesignData();
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
     updateReport.mutate(
       { id: selectedDesign?.id, form },
       {

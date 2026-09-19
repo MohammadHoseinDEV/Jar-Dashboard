@@ -23,10 +23,10 @@ function DeleteProducts({
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
 
       <div
-        className={`relative transform rounded-[15px] bg-linear-to-bl from-black to-gray-600 p-6 text-white shadow-2xl transition-all duration-300 ${
+        className={`5xl:scale-170 relative transform rounded-[15px] bg-linear-to-bl from-black to-gray-600 p-6 text-white shadow-2xl transition-all duration-300 ${
           openDeleteProducts
             ? 'translate-y-0 scale-100 opacity-100'
-            : '-translate-y-10 scale-95 opacity-0'
+            : '-translate-y-10 scale-0 opacity-0'
         }`}
       >
         <div className="flex items-center justify-between">

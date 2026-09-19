@@ -1,8 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import CreateProductWeightStandardJsx from '../template/CreateProductWeightStandardJsx';
+import React, { lazy, useEffect, useMemo, useState } from 'react';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import { useGetProfile } from '../../../../../hooks/profile/profile';
 import { useCreateProductionWeightStandard } from '../../../Api/productWeightStandardForm';
+
+const CreateProductWeightStandardJsx = lazy(
+  () => import('../template/CreateProductWeightStandardJsx')
+);
 
 function CreateProductWeightStandard({ openCreateModal, setOpenCreateModal }) {
   const [form, setForm] = useState({
@@ -73,6 +76,11 @@ function CreateProductWeightStandard({ openCreateModal, setOpenCreateModal }) {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
+
     createReport.mutate(form, {
       onSuccess: () => {
         setOpenCreateModal(false);
@@ -111,6 +119,7 @@ function CreateProductWeightStandard({ openCreateModal, setOpenCreateModal }) {
           filterProducts={filterProducts}
           selectedProducts={selectedProducts}
         />
+        
       </div>
     </div>
   );

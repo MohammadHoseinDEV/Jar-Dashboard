@@ -50,14 +50,14 @@ function ForgetPasswordJsx({ formData, setFormData, submitHandler, loading }) {
               </div>
             </div>
             <div className="mx-15">
-              <p className="space-y-2 pt-8 text-center">
+              <div className="space-y-2 pt-8 text-center">
                 <h1 className="font-[SamimBold] text-[20px] font-bold text-white">
                   به سامانه کاویان جار ساچی خوش آمدید
                 </h1>
                 <span className="font-[VazirLight] text-[18px] text-white/30">
                   برای دسترسی به پنل پرسنلی، وارد شوید یا ثبت نام کنید
                 </span>
-              </p>
+              </div>
             </div>
             <div className="rigth-0 absolute bottom-5 h-35 w-35 rounded-full bg-[#4e2b1f] blur-[60px]"></div>
           </div>

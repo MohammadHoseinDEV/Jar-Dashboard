@@ -51,6 +51,7 @@ const ElectericalDeleteReports = lazy(
 );
 import Pagination from '../../../../pagination/Pagination';
 import { ReportActionElectrical } from '../../components/Electrical/ReportActionElectrical';
+import FilterData from '../../components/Electrical/FilterData';
 
 function ElectricalReport() {
   const { menus: userMenus } = useSelector((s) => s.auth);
@@ -60,11 +61,19 @@ function ElectricalReport() {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-  const [search, setSearch] = useState('');
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
   const [filterStatus, setFilterStatus] = useState('all');
   const [openFilterMobile, setOpenFilterMobile] = useState(false);
+  const [search, setSearch] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [shiftName, setShiftName] = useState('');
+  const [shiftSupervisorName, setShiftSupervisorName] = useState('');
+  const [personnelName, setPersonnelName] = useState('');
+  const [dayOfWeek, setDayOfWeek] = useState('');
+  const [hasWorkTasks, setHasWorkTasks] = useState('');
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [openFilter, setOpenFilter] = useState(false);
 
   const perm = useMemo(
     () => getPerm(userMenus, 'electrical-report'),
@@ -99,7 +108,18 @@ function ElectricalReport() {
     data: electrical,
     isLoading,
     isError,
-  } = useGetElectricalReports({ search, page, pageSize });
+  } = useGetElectricalReports({
+    search,
+    startDate,
+    endDate,
+    shiftName,
+    shiftSupervisorName,
+    personnelName,
+    dayOfWeek,
+    hasWorkTasks,
+    page,
+    pageSize,
+  });
 
   const { data: electericalAll } = useGetElectericalReportAll();
 
@@ -130,9 +150,7 @@ function ElectricalReport() {
 
   const allUnSign = electericalAll?.data?.filter(
     (a) =>
-      a.isShiftHandOverSigned === false &&
-      a.isSupervisorSigned === false &&
-      a.isShiftReceiverSigned === false
+      a.isShiftHandOverSigned === false || a.isShiftReceiverSigned === false
   ).length;
 
   const filteredData = useMemo(() => {
@@ -146,7 +164,10 @@ function ElectricalReport() {
           e.isShiftHandOverSigned !== false &&
           e.isShiftReceiverSigned !== false
         );
-      if (filterStatus === 'unSign') return e.isShiftHandOverSigned === false;
+      if (filterStatus === 'unSign')
+        return (
+          e.isShiftHandOverSigned === false || e.isShiftReceiverSigned === false
+        );
       return true;
     });
   }, [filterStatus, electrical, electericalAll]);
@@ -217,12 +238,17 @@ function ElectricalReport() {
                 </p>
               </button>
             </div>
-            <div className="flex items-center justify-end space-x-2 pt-2 pl-5 opacity-0">
-              <button className="flex items-center justify-center rounded-[10px] bg-[#0e1117] px-4 py-2 text-[13px] text-white/70">
+            <div className="flex items-center justify-end space-x-2 pt-2 pl-5">
+              <button className="flex items-center justify-center rounded-[10px] bg-[#0e1117] px-4 py-2 text-[13px] text-white/70 opacity-0">
                 <FaDownload />
                 <span className="pr-2">خروجی اکسل</span>
               </button>
-              <button className="flex items-center justify-center rounded-[10px] bg-[#f35714] px-4 py-2 text-[13px] text-white">
+              <button
+                onClick={() => {
+                  setOpenFilter(true);
+                }}
+                className="flex cursor-pointer items-center justify-center rounded-[10px] bg-[#f35714] px-4 py-2 text-[13px] text-white"
+              >
                 <FaFilter />
                 <span className="pr-2">فیلتر پیشرفته</span>
               </button>
@@ -768,6 +794,7 @@ function ElectricalReport() {
         setSelectedElectrical={setSelectedElectrical}
         electrical={electrical}
       />
+      <FilterData openFilter={openFilter} setOpenFilter={setOpenFilter} />
     </div>
   );
 }

@@ -51,19 +51,64 @@ export const useUpdateElectericalReports = () => {
   return updateReports;
 };
 
-export const useGetElectricalReports = ({ search, page, pageSize }) => {
+export const useGetElectricalReports = ({
+  search,
+  startDate,
+  endDate,
+  shiftName,
+  shiftSupervisorName,
+  personnelName,
+  dayOfWeek,
+  hasWorkTasks,
+  page,
+  pageSize,
+}) => {
   const { token } = useSelector((state) => state.auth);
 
   const getElectrical = useQuery({
-    queryKey: ['electrical', token, search, page, pageSize],
+    queryKey: [
+      'electrical',
+      token,
+      search,
+      startDate,
+      endDate,
+      shiftName,
+      shiftSupervisorName,
+      personnelName,
+      dayOfWeek,
+      hasWorkTasks,
+      page,
+      pageSize,
+    ],
     queryFn: async () => {
+      const params = {
+        search,
+        startDate,
+        endDate,
+        shiftName,
+        shiftSupervisorName,
+        personnelName,
+        dayOfWeek,
+        hasWorkTasks,
+        page,
+        pageSize,
+      };
+
+      const cleanParams = Object.fromEntries(
+        Object.entries(params).filter(
+          ([, v]) => v !== undefined && v !== null && v !== ''
+        )
+      );
+
       const res = await axios.get(`${BASE_API}`, {
         headers: { Authorization: `Bearer ${token}` },
-        params: { search, page, pageSize },
+        params: cleanParams,
       });
       return res.data;
     },
+    keepPreviousData: true,
   });
+
   return getElectrical;
 };
 
@@ -72,11 +117,9 @@ export const useGetElectericalReportAll = () => {
   const getElectericalAll = useQuery({
     queryKey: ['electrical', token],
     queryFn: async () => {
-      const res = await axios.get(
-        `${BASE_API}/all
-`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await axios.get(`${BASE_API}/all`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       return res.data;
     },
   });

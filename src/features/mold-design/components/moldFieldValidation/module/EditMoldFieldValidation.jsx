@@ -3,6 +3,7 @@ import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import EditMoldFieldvalidationJsx from '../template/EditMoldFieldvalidationJsx';
 import { useUpdateMoldFileValidation } from '../../../Api/moldFieldValidation';
 import { FaS } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 
 const initialState = {
   id: '',
@@ -101,6 +102,11 @@ function EditMoldFieldValidation({
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
 
     updateReport.mutate(
       {

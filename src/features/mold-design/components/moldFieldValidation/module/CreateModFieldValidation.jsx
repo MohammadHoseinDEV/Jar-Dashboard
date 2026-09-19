@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import CreateMoldFieldValidationJsx from '../template/CreateMoldFieldValidationJsx';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import { useCreateMoldFieldValidation } from '../../../Api/moldFieldValidation';
+import { toast } from 'react-toastify';
 
 const initialState = {
   formDate: '',
@@ -60,6 +61,11 @@ function CreateModFieldValidation({ openCreateModal, setOpenCreateModal }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
 
     createReport.mutate(form, {
       onSuccess: () => {

@@ -101,7 +101,6 @@ function CreateDesignMeeting({ openCreateModal, setOpenCreateModal }) {
     ];
   }, [product]);
 
-  
   const filterProducts = useMemo(() => {
     const q = searchProducts.trim().toLowerCase();
     if (!q) return getProducts;
@@ -122,6 +121,11 @@ function CreateDesignMeeting({ openCreateModal, setOpenCreateModal }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
 
     createReport.mutate(form, {
       onSuccess: () => {

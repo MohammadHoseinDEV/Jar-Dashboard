@@ -120,7 +120,7 @@ export const useCreateSignatureHandover = (id) => {
       return res.data;
     },
     onSuccess: () => {
-      toast.success('امضاء تحویل دهنده شیفت با موفقیت ثبت شد');
+      toast.success('امضاء تهیه کننده با موفقیت ثبت شد');
       queryClient.invalidateQueries({ queryKey: ['facility', token] });
     },
     onError: (e) => {
@@ -144,7 +144,7 @@ export const useCreateSignatureReceiver = (id) => {
       return res.data;
     },
     onSuccess: () => {
-      toast.success('امضاء تحویل گیرنده شیفت با موفقیت ثبت شد');
+      toast.success('امضاء سرپرست با موفقیت ثبت شد');
       queryClient.invalidateQueries({ queryKey: ['facility', token] });
     },
     onError: (e) => {
@@ -168,7 +168,7 @@ export const useCreateSignatureSupervisor = (id) => {
       return res.data;
     },
     onSuccess: () => {
-      toast.success('امضاء سرپرست با موفقیت ثبت شد');
+      toast.success('امضاء تایید کننده با موفقیت ثبت شد');
       queryClient.invalidateQueries({ queryKey: ['facility', token] });
     },
     onError: (e) => {

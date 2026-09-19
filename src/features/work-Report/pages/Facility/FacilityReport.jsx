@@ -91,7 +91,6 @@ function FacilityReport() {
     isError,
   } = useGetFacilityReports({ search, page, pageSize });
   const { data: facilityAll } = useGetAllFacilityReport();
-  console.log(facility);
 
   const allReport = facility?.data?.totalCount;
 
@@ -107,9 +106,7 @@ function FacilityReport() {
 
   const allUnSign = facilityAll?.data?.filter(
     (d) =>
-      d.isSupervisorSigned === false &&
-      d.isShiftHandOverSigned === false &&
-      d.isShiftReceiverSigned === false
+      d.isShiftHandOverSigned === false || d.isShiftReceiverSigned === false
   ).length;
 
   const filteredData = useMemo(() => {
@@ -517,7 +514,7 @@ function FacilityReport() {
                     تاریخ ثبت گزارش
                   </th>
                   <th className="border-t border-b border-white/30">
-                    تاریخ امضاء سرپرست
+                    تاریخ امضاء تایید کننده
                   </th>
                   <th className="w-25 border-t border-b border-white/30">
                     وضعیت

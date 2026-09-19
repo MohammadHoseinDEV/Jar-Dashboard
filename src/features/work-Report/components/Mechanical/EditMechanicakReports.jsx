@@ -131,6 +131,12 @@ function EditMechanicakReports({
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.reportDate) {
+      toast.warning('لطفا تاریخ گزارش را انتخاب کنید');
+      return;
+    }
+
     updateReports.mutate(
       {
         id: selectedMechanical?.id,
@@ -160,7 +166,7 @@ function EditMechanicakReports({
         className={`relative flex max-h-[90vh] w-[1000px] max-w-[95vw] flex-col gap-4 overflow-hidden rounded-[15px] bg-linear-to-tl from-black to-gray-600 p-6 text-white shadow-2xl transition-all duration-300 max-2xl:w-[900px] max-xl:w-[800px] ${
           openEditReport
             ? 'translate-y-0 scale-100 opacity-100'
-            : '-translate-y-10 scale-95 opacity-0'
+            : '-translate-y-10 scale-0 opacity-0'
         }`}
       >
         <div className="flex shrink-0 items-center justify-between">
@@ -198,7 +204,7 @@ function EditMechanicakReports({
                       : '',
                   });
                 }}
-                value={form.reportDate ? new Date(form.reportDate) : null}
+                value={form.reportDate ? new Date(form.reportDate) : ''}
                 inputClass="w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none"
               />
             </label>

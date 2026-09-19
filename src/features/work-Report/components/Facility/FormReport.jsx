@@ -83,6 +83,14 @@ function FormReport({
   );
   const canSignSupervisor = canSign && isSupervisor;
 
+  const isConfirmer = profile?.data?.companyRoles?.some(
+    (p) =>
+      p.roleId === '602a6179-8ba6-4101-b5f5-bb2d40af251b' ||
+      p.roleId === 'e8d691c5-827c-4c65-9d1a-14def8620ade'
+  );
+
+  const canSignConfirmer = canSign && isConfirmer;
+
   // -------------------------------------------------------------------
 
   useEffect(() => {
@@ -148,7 +156,6 @@ function FormReport({
         }
       );
     }
-
     if (signatureType === 'receiver') {
       createSignatureReceiver.mutate(
         { signaturePassword: password },
@@ -201,7 +208,7 @@ function FormReport({
       />
 
       <div
-        className={`h-lenovo:scale-70 relative transform rounded-[15px] bg-white p-6 text-white shadow-2xl transition-all duration-300 max-2xl:scale-85 max-xl:scale-80 print:scale-90 ${
+        className={`relative transform rounded-[15px] bg-white p-6 text-white shadow-2xl transition-all duration-300 max-2xl:scale-70 max-xl:scale-80 print:scale-90 ${
           openFormReport
             ? 'translate-y-0 scale-100 opacity-100'
             : '-translate-y-10 scale-0 opacity-0'
@@ -364,15 +371,15 @@ function FormReport({
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-around pt-6 pr-2">
-            <p>
-              <span>تحویل دهنده شیفت :</span>
+          <div className="grid grid-cols-3 pt-6 pr-2">
+            <p className="text-center">
+              <span>امضاء تهیه کننده :</span>
               <span>
                 {selectedSignatureHandover ? (
                   <img
                     src={`data:image/png;base64,${selectedSignatureHandover}`}
                     alt="signature"
-                    className="fixed top-172 right-70 h-25 w-35"
+                    className="fixed top-172 right-60 h-25 w-35"
                   />
                 ) : canSignHandover ? (
                   <button
@@ -388,8 +395,8 @@ function FormReport({
                 )}
               </span>
             </p>
-            <p>
-              <span>تحویل گیرنده :</span>
+            <p className="text-center">
+              <span> سرپرست واحد :</span>
               <span>
                 {selectedSignatureReceiver ? (
                   <img
@@ -397,7 +404,7 @@ function FormReport({
                     alt="signature"
                     className="fixed top-172 right-150 h-25 w-35"
                   />
-                ) : canSign ? (
+                ) : canSignSupervisor ? (
                   <button
                     onClick={() => handleOpenSignatureModal('receiver')}
                     className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-2 transition-all delay-75 duration-100 ease-in-out hover:scale-110"
@@ -411,16 +418,16 @@ function FormReport({
                 )}
               </span>
             </p>
-            <p>
-              <span>سرپرست واحد :</span>
+            <p className="text-center">
+              <span> امضاء تایید کننده :</span>
               <span>
                 {selectedSignatureSupervisor ? (
                   <img
                     src={`data:image/png;base64,${selectedSignatureSupervisor}`}
                     alt="signature"
-                    className="fixed top-172 left-0 h-25 w-35"
+                    className="fixed top-172 left-1 h-25 w-35"
                   />
-                ) : canSignSupervisor ? (
+                ) : canSignConfirmer ? (
                   <button
                     onClick={() => handleOpenSignatureModal('supervisor')}
                     className="mr-3 cursor-pointer rounded-[10px] bg-linear-to-br from-cyan-400 to-black/10 p-2 transition-all delay-75 duration-100 ease-in-out hover:scale-110"

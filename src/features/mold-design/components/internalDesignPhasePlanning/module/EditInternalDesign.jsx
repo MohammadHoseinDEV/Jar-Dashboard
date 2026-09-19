@@ -4,6 +4,7 @@ import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import close from '../../../../../assets/images/close.png';
 
 import { useUpdateInternalDesignPhasePlanning } from '../../../Api/internalDesignPhasePlanning';
+import { toast } from 'react-toastify';
 const EditInternalDesignJsx = lazy(
   () => import('../template/EditInternalDesignJsx')
 );
@@ -166,6 +167,11 @@ function EditInternalDesign({
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
     updateReport.mutate(
       {
         id: selectedInternal?.id,

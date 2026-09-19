@@ -1,10 +1,10 @@
-import { useSignatureVerify } from '../../../hooks/Signature/Signature';
-import { toShamsi } from '../../../Time/date';
+import { useSignatureVerify } from '../../../../hooks/Signature/Signature';
+import { toShamsi } from '../../../../Time/date';
 
-import logo from '../../../assets/images/logo.png';
-import close from '../../../assets/images/close.png';
+import logo from '../../../../assets/images/logo.png';
+import close from '../../../../assets/images/close.png';
 import React, { useState } from 'react';
-import { useGetProfile } from '../../../hooks/profile/profile';
+import { useGetProfile } from '../../../../hooks/profile/profile';
 
 function FormFinalLineChange({ openForm, setOpenForm, selectedLine }) {
   const [selectedSignature, setSelectedSignature] = useState(null);
@@ -47,9 +47,9 @@ function FormFinalLineChange({ openForm, setOpenForm, selectedLine }) {
       />
 
       <div
-        className={`relative transform rounded-[15px] bg-white p-6 text-white shadow-2xl transition-all duration-300 print:scale-125 ${
+        className={`relative transform rounded-[15px] bg-white p-6 text-white shadow-none transition-all duration-300 print:mt-10 print:scale-80 ${
           openForm
-            ? 'translate-y-0 scale-120 opacity-100 print:mt-10 print:scale-120 print:scale-x-140'
+            ? 'translate-y-0 scale-120 opacity-100 '
             : '-translate-y-10 scale-0 opacity-0'
         }`}
       >

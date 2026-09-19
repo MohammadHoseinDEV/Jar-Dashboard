@@ -27,6 +27,8 @@ function EditProductionWeightStandardJsx({
   selectedProducts,
   selectedProductWeigth,
 }) {
+  
+  
   return (
     <div>
       <div className="flex shrink-0 items-center justify-between">

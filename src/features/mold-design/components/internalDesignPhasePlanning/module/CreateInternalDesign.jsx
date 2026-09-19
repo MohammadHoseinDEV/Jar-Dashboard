@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import CreateInternalDesignJsx from '../template/CreateInternalDesignJsx';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import { useCreateInternalDesignPhasePlanning } from '../../../Api/internalDesignPhasePlanning';
+import { toast } from 'react-toastify';
 
 const DesignPhase = [
   {
@@ -110,6 +111,11 @@ function CreateInternalDesign({ openCreateModal, setOpenCreateModal }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
 
     createReport.mutate(form, {
       onSuccess: () => {

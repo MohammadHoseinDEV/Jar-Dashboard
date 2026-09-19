@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useGetProducts } from '../../../../product_wareHouse/Api/productsApi';
 import EditProductionWeightStandardJsx from '../template/EditProductionWeightStandardJsx';
 import { useUpdateProductionWeightStandard } from '../../../Api/productWeightStandardForm';
+import { toast } from 'react-toastify';
 
 function EditProductionWeightStandard({
   openEditModal,
@@ -56,6 +57,10 @@ function EditProductionWeightStandard({
     });
   }, [selectedProductWeigth, openEditModal]);
 
+
+
+
+
   const closeHandler = () => {
     setOpenEditModal(false);
     setSelectedProductWeigth(null);
@@ -96,6 +101,10 @@ function EditProductionWeightStandard({
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!form.formDate) {
+      toast.warning('لطفا تاریخ را انتخاب کنید');
+      return;
+    }
     updateReport.mutate(
       { id: selectedProductWeigth?.id, form },
       {
@@ -144,5 +153,7 @@ function EditProductionWeightStandard({
     </div>
   );
 }
+
+
 
 export default EditProductionWeightStandard;

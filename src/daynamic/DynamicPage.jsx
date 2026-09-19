@@ -35,7 +35,8 @@ const CreateProducts = lazy(
 
 // Products Planing
 const FinalLineChange = lazy(
-  () => import('../features/products-planning/pages/FinalLineChange')
+  () =>
+    import('../features/products-planning/pages/finalLineChange/FinalLineChange')
 );
 
 // Work Reports
@@ -94,6 +95,11 @@ const WeeklyAmpReport = lazy(
 const BiWeeklyAmpReport = lazy(
   () => import('../features/electricity/Pages/BiWeeklyAmp/BiWeeklyAmpReport')
 );
+
+const LineChangeChecklist = lazy(
+  () =>
+    import('../features/electricity/Pages/lineChangeChecklist/LineChangeChecklist')
+);
 // 5271
 const DesignDataForm = lazy(
   () => import('../features/mold-design/Pages/designDataForm/DesignDataForm')
@@ -127,6 +133,34 @@ const MoldFieldValidation = lazy(
     import('../features/mold-design/Pages/moldFieldValidation/MoldFieldValidation')
 );
 
+const BachFormulationChange = lazy(
+  () =>
+    import('../features/bachPlant/pages/bachFormulationChange/BachFormulationChange')
+);
+
+// 5258
+const ReportProducts = lazy(
+  () =>
+    import('../features/product_wareHouse/pages/reportProducts/ReportProducts')
+);
+const PrintLabels = lazy(
+  () => import('../features/product_wareHouse/pages/labels/PrintLabels')
+);
+
+const CustomerManagment = lazy(
+  () =>
+    import('../features/products-cost/Pages/customerManagment/CustomerManagment')
+);
+
+const SalesTransfer = lazy(
+  () => import('../features/products-cost/Pages/salesTansfer/SalesTransfer')
+);
+
+const LoadingProducts = lazy(
+  () =>
+    import('../features/products-cost/Pages/loadingProducts/LoadingProducts')
+);
+
 const pagesMap = {
   'admin-menus': AdminMenus,
   'admin-units': AdminUnits,
@@ -155,6 +189,7 @@ const pagesMap = {
   'visit-earthWell': EarthWellReport,
   'weekly-amp': WeeklyAmpReport,
   'biweekly-amp': BiWeeklyAmpReport,
+  'line-change-checklist': LineChangeChecklist,
 
   // ProductsPage
   'definition-of-product': CreateProducts,
@@ -174,6 +209,16 @@ const pagesMap = {
   'design-work-request-form': DesignWorkRequest,
   'design-meeting': DesignMeeting,
   'mold-field-validation-form': MoldFieldValidation,
+  // 5274
+  'batch-formulation-change-report': BachFormulationChange,
+  // 5258
+  'report-products': ReportProducts,
+  'print-labels': PrintLabels,
+  'customer-management': CustomerManagment,
+  'sales-transfer': SalesTransfer,
+
+  // 5277
+  'loading-products': LoadingProducts,
 };
 
 export default function DynamicPage() {

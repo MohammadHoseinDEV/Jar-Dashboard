@@ -19,12 +19,9 @@
   --breakpoint-11xl: 5000px;
   /* ------------- */
   /* heigth */
-  /* ------------- */
-  --breakpoint-h-lenovo: 610px;
-  --breakpoint-h-sam: 720px;
+
 }
-@custom-variant h-lenovo (@media (min-height: 600px) and (max-height: 610px));
-@custom-variant h-sam (@media (min-height: 700px) and (max-height: 720px));
+
 
 /* Chrome, Edge, Safari */
 .no-scrollbar::-webkit-scrollbar {
@@ -40,4 +37,30 @@
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+
+@layer components{
+  .input-text{
+@apply 5xl:text-[20px] 5xl:placeholder:text-[20px] w-full rounded-xl bg-white/10 p-3 font-[Samim] text-[18px] text-white outline-none placeholder:font-[SamimBold] focus:font-[Samim]
+  }
+  .input-number{
+@apply 5xl:text-[20px] 5xl:placeholder:text-[20px] w-full rounded-xl bg-white/10 p-3 font-[AvenirLTProMedium] text-[18px] text-white outline-none placeholder:font-[AvenirLTProMedium] focus:font-[AvenirLTProMedium]
+   
+  }
+   .input-date{
+      @apply  w-full rounded-xl 5xl:text-[20px] 5xl:placeholder:text-[20px] bg-white/10 p-3 text-[18px]  text-white outline-none placeholder:font-[SamimBold] 
+    }
+
+    .btn-submit{
+      @apply 5xl:text-[25px] col-span-4 my-2 cursor-pointer rounded-lg bg-linear-to-tl from-green-900 to-green-500 px-10 py-3 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-105 hover:rounded-xl
+    }
+
+    .add-line{
+      @apply 5xl:text-[20px] w-fit cursor-pointer rounded-xl bg-linear-to-tl from-green-900 to-green-500 px-4 py-2 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-105
+    }
+    .remove-line{
+      @apply  5xl:text-[20px] cursor-pointer rounded-xl bg-linear-to-bl from-red-500 to-red-800 px-4 py-2 font-[Samim] transition-all delay-100 duration-150 ease-in-out hover:scale-105 hover:bg-red-500/60
+    }
+  
 }

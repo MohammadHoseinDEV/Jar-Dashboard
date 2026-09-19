@@ -200,10 +200,10 @@ const validationInputsForgetPassword = (formData) => {
     return false;
   }
 
-  if (!phoneNumberRegex.test(formData.mobileNumber)) {
-    toast.warning('لطفا شماره همراه خود را به درستی وارد کنید');
-    return false;
-  }
+  // if (!phoneNumberRegex.test(formData.mobileNumber)) {
+  //   toast.warning('لطفا شماره همراه خود را به درستی وارد کنید');
+  //   return false;
+  // }
   return true;
 };
 

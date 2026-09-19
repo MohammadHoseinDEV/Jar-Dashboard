@@ -20,6 +20,7 @@ import {
 import { FiBell, FiCalendar } from 'react-icons/fi';
 import { MdNoteAdd, MdNumbers } from 'react-icons/md';
 import { FaXmark } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 
 const AddProducts = lazy(() => import('../../components/products/AddProducts'));
 const DeleteProducts = lazy(
@@ -34,30 +35,24 @@ const FormProducts = lazy(
 const DetailsProducts = lazy(
   () => import('../../components/products/DetailsProducts')
 );
+const TableProducts = lazy(
+  () => import('../../components/products/TableProducts')
+);
+const Pagination = lazy(() => import('../../../../pagination/Pagination'));
 
 function CreateProducts() {
   const { menus: userMenus } = useSelector((s) => s.auth);
-
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-
-  const [addProducts, setAddProuducts] = useState(false);
-
-  const [seledtedProducts, setSelectedProducts] = useState(null);
-  const [openDetails, setOpenDetails] = useState(false);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-
-  const [openDeleteProducts, setOpenDeleteProducts] = useState(false);
-
-  const [openEditProducts, setOpenEditProducts] = useState(false);
-
-  // Get Products
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useGetProducts({ page, pageSize, search });
+  const [openDetails, setOpenDetails] = useState(false);
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [openFilterMobile, setOpenFilterMobile] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState(null);
 
   useEffect(() => {
     setPage(1);
@@ -74,30 +69,42 @@ function CreateProducts() {
   const canDelete = can(perm, 'delete');
 
   const openCreate = () => {
-    if (!canCreate) return toast.error('دسترسی ایجاد کاربر ندارید');
-    setAddProuducts(true);
+    if (!canCreate) return toast.error('دسترسی ایجاد شناسنامه  ندارید');
+    setOpenCreateModal(true);
   };
 
   const openEdit = (products) => {
-    if (!canEdit) return toast.error('دسترسی ویرایش کاربر ندارید');
+    if (!canEdit) return toast.error('دسترسی ویرایش شناسنامه ندارید');
 
-    setOpenEditProducts(true);
+    setOpenEditModal(true);
     setSelectedProducts(products);
   };
 
   const askDelete = (p) => {
-    if (!canDelete) return toast.error('دسترسی حذف کاربر ندارید');
+    if (!canDelete) return toast.error('دسترسی حذف شناسنامه ندارید');
 
-    setOpenDeleteProducts(true);
+    setOpenDeleteModal(true);
     setSelectedProducts(p);
   };
 
   const openInfo = (p) => {
     if (!canCreate)
-      return toast.error('شما دسترسی دیدن جزئیات کاربر را ندارید');
+      return toast.error('شما دسترسی دیدن جزئیات شناسنامه را ندارید');
     setOpenDetails(true);
     setSelectedProducts(p);
   };
+  
+
+  // Get Products
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useGetProducts({ page, pageSize, search });
+
+  const totalPages = products?.data?.totalPages ?? 1;
+
+  const filteredData = products;
 
   return (
     <div className="h-screen overflow-hidden rounded-[15px] bg-[#0F090C]/30 text-white">
@@ -176,7 +183,7 @@ function CreateProducts() {
           </div>
         </div>
         {/* data reports */}
-        <div className="mx-2 mt-1 flex items-center justify-around space-x-2 max-md:hidden">
+        <div className="mx-2 mt-1 flex items-center space-x-2 max-md:hidden">
           <div
             onClick={() => setFilterStatus('all')}
             className="col-span-1 flex w-80 cursor-pointer rounded-[10px] border border-[#be4615]/50 transition-all delay-100 duration-200 ease-in-out hover:scale-105"
@@ -189,85 +196,61 @@ function CreateProducts() {
             <p className="my-auto h-13 border-l-2 border-[#f35714]/70"></p>
             <div className="my-auto px-5">
               <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
-                {/* {allReport} */}
+                {products?.length}
               </p>
               <p className="text-white/60 max-2xl:text-[15px] max-lg:pb-2 max-lg:text-[10px]">
-                کل گزارشات
-              </p>
-            </div>
-          </div>
-          <div
-            onClick={() => setFilterStatus('confirmed')}
-            className="flex w-80 cursor-pointer rounded-[10px] border border-[#a6e3a1]/50 transition-all delay-100 duration-200 ease-in-out hover:scale-105"
-          >
-            <div className="my-auto p-5 text-[20px] max-lg:p-2 max-lg:text-[15px]">
-              <p className="flex size-11 items-center justify-center rounded-[10px] bg-[#1e2625]/25 text-[#a6e3a1] max-lg:size-8">
-                <FaCheck />
-              </p>
-            </div>
-            <p className="my-auto h-13 border-l-2 border-[#a6e3a1]"></p>
-            <div className="my-auto px-5">
-              <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
-                {/* {allConfirmed} */}
-              </p>
-              <p className="text-white/60 max-2xl:text-[15px] max-lg:pb-2 max-lg:text-[10px]">
-                گزارش های تایید شده
-              </p>
-            </div>
-          </div>
-          <div
-            onClick={() => setFilterStatus('pending')}
-            className="flex w-80 cursor-pointer rounded-[10px] border border-[#f10033]/50 transition-all delay-100 duration-200 ease-in-out hover:scale-105"
-          >
-            <div className="my-auto p-5 text-[20px] max-lg:p-2 max-lg:text-[15px]">
-              <p className="flex size-11 items-center justify-center rounded-[10px] bg-[#262627]/25 text-[#f10033] max-lg:size-8">
-                <FaXmark />
-              </p>
-            </div>
-            <p className="my-auto h-13 border-l-2 border-[#f10033]"></p>
-            <div className="my-auto px-5">
-              <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
-                {/* {allReject} */}
-              </p>
-              <p className="text-white/60 max-2xl:text-[14px] max-lg:pb-2 max-lg:text-[10px]">
-                گزارش های تایید نشده
-              </p>
-            </div>
-          </div>
-          <div
-            onClick={() => setFilterStatus('unSign')}
-            className="flex w-80 cursor-pointer rounded-[10px] border border-white transition-all delay-100 duration-200 ease-in-out hover:scale-105"
-          >
-            <div className="my-auto p-5 text-[20px] max-lg:p-2 max-lg:text-[15px]">
-              <p className="flex size-11 items-center justify-center rounded-[10px] bg-[#251d26]/25 text-white max-lg:size-8">
-                <FaExclamationCircle />
-              </p>
-            </div>
-            <p className="my-auto h-13 border-l-2 border-white"></p>
-            <div className="my-auto px-5">
-              <p className="font-[AvenirLTProHeavy] text-[25px] font-extrabold text-white">
-                {/* {allUnSign} */}
-              </p>
-              <p className="text-white/60 max-2xl:text-[14px] max-lg:pb-2 max-lg:text-[10px]">
-                گزارش های بدون امضاء
+                کل شناسنامه ها
               </p>
             </div>
           </div>
         </div>
+        {isLoading ? (
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center space-y-5">
+            <HashLoader color="#ffffff" size={80} speedMultiplier={1.5} />
+            <p className="pt-10 text-[20px]">لطفا منتظر بمانید😎</p>
+          </div>
+        ) : isError ? (
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center space-y-5 text-[30px]">
+            خطا در دریافت اطلاعات 😟
+          </div>
+        ) : (
+          
+          <div className="no-scrollbar 5xl:mt-5 flex min-h-0 w-full overflow-x-hidden overflow-y-auto">
+            <div className="mx-3 w-full max-md:hidden">
+              <TableProducts
+                filteredData={filteredData}
+                canEdit={canEdit}
+                canDelete={canDelete}
+                openEdit={openEdit}
+                askDelete={askDelete}
+                setOpenFormReport={setOpenForm}
+                setSelectedProducts={setSelectedProducts}
+              />
+            </div>
+          </div>
+        )}
+        <div
+          className={`w-full shrink-0 ${filterStatus === 'confirmed' || filterStatus === 'pending' || filterStatus === 'pendingDesigner' || filterStatus === 'factoryManager' ? 'opacity-0' : ''}`}
+        >
+          <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+        </div>
       </div>
-      <AddProducts addProduct={addProducts} setAddProuducts={setAddProuducts} />
+      <AddProducts
+        openCreateModal={openCreateModal}
+        setOpenCreateModal={setOpenCreateModal}
+      />
 
       <EditProducts
-        openEditProducts={openEditProducts}
-        setOpenEditProducts={setOpenEditProducts}
-        seledtedProducts={seledtedProducts}
+        openEditModal={openEditModal}
+        setOpenEditModal={setOpenEditModal}
+        selectedProducts={selectedProducts}
         setSelectedProducts={setSelectedProducts}
       />
 
       <DetailsProducts
         openDetails={openDetails}
         setOpenDetails={setOpenDetails}
-        seledtedProducts={seledtedProducts}
+        seledtedProducts={selectedProducts}
         setSelectedProducts={setSelectedProducts}
       />
 
@@ -275,13 +258,13 @@ function CreateProducts() {
         openForm={openForm}
         setOpenForm={setOpenForm}
         setSelectedProducts={setSelectedProducts}
-        seledtedProducts={seledtedProducts}
+        seledtedProducts={selectedProducts}
       />
 
       <DeleteProducts
-        openDeleteProducts={openDeleteProducts}
-        setOpenDeleteProducts={setOpenDeleteProducts}
-        seledtedProducts={seledtedProducts}
+        openDeleteProducts={openDeleteModal}
+        setOpenDeleteProducts={setOpenDeleteModal}
+        seledtedProducts={selectedProducts}
         setSelectedProducts={setSelectedProducts}
       />
     </div>

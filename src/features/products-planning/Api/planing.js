@@ -6,6 +6,39 @@ import API_HOST from '../../../../API/api';
 
 const BASE_API = `${API_HOST}:5259/api/LineChangeAnnouncementForms`;
 
+const useGetLineChange = ({ search, page, pageSize }) => {
+  const { token } = useSelector((state) => state.auth);
+
+  const getLineChange = useQuery({
+    queryKey: ['lineChange', token, search, page, pageSize],
+    queryFn: async () => {
+      const res = await axios.get(`${BASE_API}`, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { search, page, pageSize },
+      });
+      return res.data;
+    },
+  });
+
+  return getLineChange;
+};
+
+export const useGetAllLineChange = () => {
+  const { token } = useSelector((state) => state.auth);
+
+  const getLineChange = useQuery({
+    queryKey: ['lineChange', token],
+    queryFn: async () => {
+      const res = await axios.get(`${BASE_API}/all`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return res.data;
+    },
+  });
+
+  return getLineChange;
+};
+
 const useCreateLineChange = () => {
   const { token } = useSelector((state) => state.auth);
 
@@ -13,7 +46,7 @@ const useCreateLineChange = () => {
 
   const createLine = useMutation({
     mutationFn: async (data) => {
-      const res = axios.post(`${BASE_API}`, data, {
+      const res = await axios.post(`${BASE_API}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
       return res.data;
@@ -29,20 +62,26 @@ const useCreateLineChange = () => {
   return createLine;
 };
 
-
-const useGetLineChange = () => {
+export const useUpdateLineChange = () => {
   const { token } = useSelector((state) => state.auth);
+  const queryClient = useQueryClient();
 
-  const getLineChange = useQuery({
-    queryKey: ['lineChange', token],
-    queryFn: async () => {
-      const res = await axios.get(`${BASE_API}`, {
+  const updateReport = useMutation({
+    mutationFn: async ({ id, form }) => {
+      const res = await axios.put(`${BASE_API}/${id}`, form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       return res.data;
     },
+    onSuccess: () => {
+      toast.success('گزارش با موفقیت ویرایش شد');
+      queryClient.invalidateQueries({ queryKey: ['lineChange', token] });
+    },
+    onError: (e) => {
+      toast.error(e.response.data.message || 'خطا در ویرایش گزارش');
+    },
   });
-  return getLineChange;
+  return updateReport;
 };
 
 const useDeleteLineChange = () => {

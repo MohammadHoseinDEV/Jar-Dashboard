@@ -17,32 +17,33 @@ import {
 } from '@floating-ui/react';
 import { MdMoreVert } from 'react-icons/md';
 
-import edit from '../../../assets/images/edit.png';
-import deleteIcon from '../../../assets/images/delete.png';
-import form from '../../../assets/images/form.png';
-import { useGetProfile } from '../../../hooks/profile/profile';
+import edit from '../../../../../assets/images/edit.png';
+import deleteIcon from '../../../../../assets/images/delete.png';
+import form from '../../../../../assets/images/form.png';
+import { useGetProfile } from '../../../../../hooks/profile/profile';
 
-function ReportActions({
+function ReportActionFurmolation({
   report,
   canEdit,
   canDelete,
   openEdit,
   askDelete,
-  setOpenForm,
-  setSelectedLine,
+  setOpenFormReport,
+  setSelectedFormulation,
+  profile,
 }) {
   if (!report) return null;
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: profile } = useGetProfile();
-
   const isSuperAdmin = profile?.data?.identityRoles?.some(
     (p) => p.roleId === 'cfa79204-d797-4241-8630-55fcc1b2f721'
   );
 
-  const isSupervisor = profile?.data?.companyRoles?.some(
-    (p) => p.roleId === '5e6bcab8-bb18-482f-9805-477ac64fa209'
+  const isProductionEnginnering = profile?.data?.companyRoles?.some(
+    (p) =>
+      p.roleId === 'c508d303-ac3c-45ba-b755-702dfe9a5ff6' ||
+      p.roleId === 'e8d691c5-827c-4c65-9d1a-14def8620ade'
   );
 
   const { refs, floatingStyles, context } = useFloating({
@@ -62,8 +63,8 @@ function ReportActions({
   );
 
   const handleOpenForm = () => {
-    setSelectedLine(report);
-    setOpenForm(true);
+    setSelectedFormulation(report);
+    setOpenFormReport(true);
     setIsOpen(false);
   };
 
@@ -75,7 +76,7 @@ function ReportActions({
         onClick={(e) => {
           e.stopPropagation();
 
-          setSelectedLine(report);
+          setSelectedFormulation(report);
           setIsOpen(!isOpen);
         }}
         className="cursor-pointer text-2xl text-white/60 transition-all delay-100 duration-150 hover:scale-105 hover:text-white"
@@ -90,14 +91,16 @@ function ReportActions({
               ref={refs.setFloating}
               style={floatingStyles}
               {...getFloatingProps()}
-              className="absolute top-full left-0 z-9999 flex w-[200px] cursor-pointer flex-col items-start space-y-1 rounded-[15px] bg-black p-3 shadow-lg"
+              className="5xl:text-[25px] absolute top-full left-0 z-9999 flex w-fit cursor-pointer flex-col items-start space-y-1 rounded-[15px] bg-black px-3 py-2 shadow-lg"
             >
-              <div className="w-full border-b border-white/50 pr-1 pb-1 font-[SamimBold] text-white">
-                {report?.personnelName}
+              <div className="flex w-full items-center space-x-1 border-b border-white/50 p-1 font-[AvenirLTProMedium] text-white max-2xl:text-[15px]">
+                <p>{report?.reportNumber}</p>
               </div>
 
-              {((canEdit && profile?.data?.id === report?.createdBy) ||
-                (canEdit && isSupervisor) ||
+              {((canEdit &&
+                profile?.data?.id === report?.createdBy &&
+                report?.isFactoryManagerSigned === false) ||
+                (canEdit && isProductionEnginnering) ||
                 isSuperAdmin) && (
                 <div
                   {...getItemProps({
@@ -167,4 +170,4 @@ function ReportActions({
   );
 }
 
-export { ReportActions };
+export default ReportActionFurmolation;
